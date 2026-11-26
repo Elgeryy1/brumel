@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brumel Browser — Less noise. More control.</title>
+  <meta name="description" content="Brumel is an open-source Chromium-based browser designed around performance, privacy, reliability, and user control. Currently in pre-development.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F4F6FA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11151C" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Brumel Browser">
+  <meta property="og:description" content="An open-source Chromium-based browser designed around performance, privacy, reliability, and user control. Pre-development.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elgeryy1.github.io/brumel/">
+  <meta property="og:image" content="https://elgeryy1.github.io/brumel/assets/social-preview.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon-180.png">
+  <style>
+    :root {
+      --graphite: #11151C; --mist: #9AB9E8; --slate: #56677F; --cloud: #F4F6FA;
+      --bg: var(--cloud); --surface: #FFFFFF; --text: var(--graphite); --muted: var(--slate);
+      --accent: #3B5F95; --border: #DCE2EB; --chip-bg: #E7ECF4;
+      --radius: 12px; --maxw: 68rem;
+      --font: Inter, Geist, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: var(--graphite); --surface: #1A202A; --text: var(--cloud); --muted: #8C9BB0;
+              --accent: var(--mist); --border: #262E3A; --chip-bg: #222A36; }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1rem; }
+    .skip { position: absolute; left: -999px; top: 0; padding: .5rem 1rem; background: var(--surface); color: var(--text); }
+    .skip:focus { left: 1rem; top: 1rem; z-index: 10; }
+    header.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; }
+    .brand { display: flex; align-items: center; gap: .6rem; font-weight: 600; font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .brand img { width: 28px; height: 28px; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: 0; padding: 0; font-size: .95rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--text); }
+    .status { display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .8rem; border: 1px solid var(--border); border-radius: 999px; font-size: .85rem; color: var(--muted); background: var(--surface); }
+    .dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); }
+    .hero { padding: 4.5rem 1rem 3.5rem; text-align: center; }
+    .hero img.mark { width: 96px; height: 96px; margin-bottom: 1.5rem; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.1; letter-spacing: -0.02em; margin: .75rem 0 .5rem; font-weight: 650; }
+    .slogan { font-size: clamp(1.2rem, 3vw, 1.5rem); color: var(--accent); margin: 0 0 1rem; }
+    .lead { max-width: 40rem; margin: 0 auto 2rem; color: var(--muted); font-size: 1.1rem; }
+    .cta { display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; }
+    .btn { display: inline-block; padding: .7rem 1.2rem; border-radius: 10px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+    .btn.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+    section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+    h2 { font-size: 1.75rem; letter-spacing: -0.01em; margin: 0 0 .75rem; font-weight: 650; }
+    h3 { font-size: 1.1rem; margin: 0 0 .35rem; }
+    .sub { color: var(--muted); max-width: 44rem; margin: 0 0 2rem; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .97rem; }
+    .chip { display: inline-block; font-size: .75rem; font-weight: 600; padding: .1rem .55rem; border-radius: 999px; background: var(--chip-bg); color: var(--muted); margin-bottom: .6rem; letter-spacing: .02em; }
+    ol.phases { list-style: none; padding: 0; margin: 0; display: grid; gap: .75rem; }
+    ol.phases li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+    ol.phases b { display: block; }
+    ol.phases span { color: var(--muted); }
+    .now { border-color: var(--accent) !important; }
+    @media (max-width: 36rem) { ol.phases li { grid-template-columns: 1fr; gap: .25rem; } header.top { flex-direction: column; align-items: flex-start; } }
+    ul.plain { padding-left: 1.1rem; margin: 0; }
+    ul.plain li { margin: .35rem 0; }
+    .note { font-size: .9rem; color: var(--muted); }
+    footer { border-top: 1px solid var(--border); padding: 2rem 0 3rem; color: var(--muted); font-size: .9rem; }
+    footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./" aria-label="Brumel home">
+        <picture>
+          <source srcset="assets/mark-dark.svg" media="(prefers-color-scheme: dark)">
+          <img src="assets/mark.svg" alt="" width="28" height="28">
+        </picture>
+        Brumel
+      </a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#pillars">Pillars</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#roadmap">Roadmap</a></li>
+          <li><a href="#trust">Privacy &amp; security</a></li>
+          <li><a href="https://github.com/Elgeryy1/brumel">GitHub</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <main id="main">
+    <div class="wrap hero">
+      <picture>
+        <source srcset="assets/mark-dark.svg" media="(prefers-color-scheme: dark)">
+        <img class="mark" src="assets/mark.svg" alt="Brumel logo (provisional)" width="96" height="96">
+      </picture>
+      <div><span class="status"><span class="dot" aria-hidden="true"></span>Pre-development · no public release yet</span></div>
+      <h1>Brumel Browser</h1>
+      <p class="slogan">Less noise. More control.</p>
+      <p class="lead">An open-source Chromium-based browser designed around performance, privacy, reliability, and user control. We are building it in public, starting with the plan.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/Elgeryy1/brumel">View on GitHub</a>
+        <a class="btn" href="https://github.com/Elgeryy1/brumel/blob/main/ROADMAP.md">Read the roadmap</a>
+        <a class="btn" href="https://github.com/Elgeryy1/brumel/discussions">Join the discussion</a>
+      </div>
+    </div>
+
+    <section id="philosophy">
+      <div class="wrap">
+        <h2>Philosophy</h2>
+        <p class="sub">A browser can offer hundreds of features without running all of them all the time. Anything optional can be switched off completely, and when it is off it should cost nothing.</p>
+        <div class="grid">
+          <div class="card"><h3>Chromium compatibility</h3><p>Built on Chromium for maximum web and extension compatibility, with no Electron shell and no shortcuts on sandboxing or site isolation.</p></div>
+          <div class="card"><h3>Local-first and optional</h3><p>No mandatory account, telemetry or subscription for essential features. Your data stays on your device unless you choose otherwise.</p></div>
+          <div class="card"><h3>Verifiable, not promised</h3><p>Performance claims only come with reproducible benchmarks and raw data. Plans are labelled as plans.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pillars">
+      <div class="wrap">
+        <h2>Five pillars</h2>
+        <p class="sub">Brumel is organised around five everyday promises. Optional local AI (Brumel Nano) runs across them and is never required.</p>
+        <div class="grid">
+          <div class="card"><h3>Efficiency</h3><p>Use fewer resources when your computer needs them: on battery, while gaming, on low-memory machines.</p></div>
+          <div class="card"><h3>Memory</h3><p>Never lose tabs, sessions, drafts or the context of what you were doing.</p></div>
+          <div class="card"><h3>Clean Web</h3><p>Native blocking of ads, trackers and web annoyances, with no advertising of our own.</p></div>
+          <div class="card"><h3>Trust</h3><p>Privacy by design, a transparent log of the browser's own connections, security first.</p></div>
+          <div class="card"><h3>Everyday Tools</h3><p>Small tools for common problems: compress a file while uploading it, export tables, search inside videos.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2>Planned features</h2>
+        <p class="sub">None of these exist yet. Each one has a stable ID and an honest status in the <a href="https://github.com/Elgeryy1/brumel/blob/main/docs/product/FEATURES.md">feature catalog</a>.</p>
+        <div class="grid">
+          <div class="card"><span class="chip">PLANNED</span><h3>Smart Optimize</h3><p>Review open tabs, propose optimisations and undo them with one click.</p></div>
+          <div class="card"><span class="chip">PLANNED</span><h3>Infinite Tabs</h3><p>Keep hundreds of tabs without keeping them loaded.</p></div>
+          <div class="card"><span class="chip">PLANNED</span><h3>Browser Time Machine</h3><p>Recover past sessions and windows, not just the last one.</p></div>
+          <div class="card"><span class="chip">PLANNED</span><h3>Clean Web</h3><p>A native content blocker for ads, trackers, pop-ups and cookie nags.</p></div>
+          <div class="card"><span class="chip">PLANNED</span><h3>Glass Box</h3><p>See every connection the browser itself initiates, and why.</p></div>
+          <div class="card"><span class="chip">PLANNED</span><h3>Vertical tabs &amp; workspaces</h3><p>Organise by project, identity or context, with tabs horizontal or vertical as you prefer.</p></div>
+          <div class="card"><span class="chip">RESEARCH</span><h3>Brumel Nano</h3><p>Free, optional, on-device AI for grouping tabs and semantic search. Offline by default.</p></div>
+          <div class="card"><span class="chip">RESEARCH</span><h3>Brumel Connect</h3><p>Local-first, end-to-end encrypted sync between your devices, with a self-hosting option.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="wrap">
+        <h2>Roadmap</h2>
+        <p class="sub">Phases are driven by dependencies, not dates. We will not promise release dates before we know our real development capacity.</p>
+        <ol class="phases">
+          <li class="now"><b>Phase 0 · now</b><span><b>Pre-development.</b> Identity, repository, documentation, research, feature catalog, architecture, licensing, security model.</span></li>
+          <li><b>Phase 1</b><span><b>Technical Foundation.</b> Reproducible upstream fetch, first test build, branding, minimal patches, signed updater.</span></li>
+          <li><b>Phase 2</b><span><b>Internal Alpha.</b> Basic browsing, initial UI, extensions, vertical tabs, Clean Web, memory management, session restore, measurements.</span></li>
+          <li><b>Phase 3</b><span><b>Public Alpha.</b> First public, verifiable builds with Smart Optimize, Infinite Tabs, Time Machine, Glass Box and more.</span></li>
+          <li><b>Phase 4</b><span><b>Public Beta.</b> Brumel Nano, workspaces, encrypted sync, accessibility, security audits, public benchmarks.</span></li>
+          <li><b>Phase 5</b><span><b>Version 1.0.</b> Proven stability, reliable security updates, sustainable infrastructure.</span></li>
+          <li><b>Phase 6</b><span><b>Future.</b> Android, more platforms, developer tools, isolated agents, community ecosystem.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="trust">
+      <div class="wrap">
+        <h2>Privacy &amp; security</h2>
+        <p class="sub">The Chromium security architecture (sandboxing, site isolation, fast security updates) is non-negotiable. We will never weaken it to win a benchmark.</p>
+        <div class="grid">
+          <div class="card"><h3>Privacy by design</h3><p>No mandatory telemetry, no account required, local-first data, opt-in only for anything that leaves your device. <a href="https://github.com/Elgeryy1/brumel/blob/main/docs/privacy/PRIVACY.md">Privacy principles</a></p></div>
+          <div class="card"><h3>Security model</h3><p>Pinned upstream, signed builds and updates, SBOMs, private vulnerability reporting. <a href="https://github.com/Elgeryy1/brumel/blob/main/SECURITY.md">Security policy</a></p></div>
+          <div class="card"><h3>AI treats the web as untrusted</h3><p>Local models run isolated, offline by default, and can never execute privileged actions because a web page asked them to.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contribute">
+      <div class="wrap">
+        <h2>Contribute</h2>
+        <p class="sub">There is no code to compile yet, but there is real work: reviewing the plan, bringing evidence, security and privacy review, design feedback, and Chromium expertise.</p>
+        <ul class="plain">
+          <li><a href="https://github.com/Elgeryy1/brumel/blob/main/CONTRIBUTING.md">Contributing guide</a></li>
+          <li><a href="https://github.com/Elgeryy1/brumel/discussions">GitHub Discussions</a> for ideas and questions</li>
+          <li><a href="https://github.com/Elgeryy1/brumel/issues">Issues</a>, including <a href="https://github.com/Elgeryy1/brumel/labels/good%20first%20issue">good first issues</a></li>
+          <li><a href="https://github.com/Elgeryy1/brumel/tree/main/docs">Documentation</a>: vision, architecture, threat model, benchmarks methodology</li>
+          <li><a href="https://github.com/Elgeryy1/brumel/blob/main/CHANGELOG.md">Changelog</a></li>
+        </ul>
+        <p class="note">Downloads will appear here once signed, verifiable builds exist. Until then, any site offering a Brumel download is not official.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap row">
+      <span>Brumel Browser · an independent open-source project by Gerard Alvear · <a href="https://github.com/Elgeryy1/brumel">GitHub</a></span>
+      <span>Code under MPL-2.0 / BSD-3-Clause · Not affiliated with Google or the Chromium project · Provisional identity · No cookies, no analytics.</span>
+    </div>
+  </footer>
+</body>
+</html>
