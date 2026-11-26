@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MPL-2.0
+# dev: fast local iteration. Component build, DCHECKs on, light symbols.
+# brumel-inherit: _common
+
+is_debug = false
+is_component_build = true
+symbol_level = 1
+blink_symbol_level = 0
+dcheck_always_on = true

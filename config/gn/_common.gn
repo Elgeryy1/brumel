@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MPL-2.0
+# GN arguments shared by every Brumel build profile. Not buildable on its own.
+# Profiles inherit files with "# brumel-inherit: <name>" lines; later values win.
+# scripts/build.py composes the final args.gn and rejects settings that would
+# add Google API keys or turn off security hardening (see docs/development/BUILDING.md).
+
+# Brumel builds use no Google API keys (docs/privacy/PRIVACY.md).
+use_official_google_api_keys = false
+
+# Do not apply Chrome's built-in field-trial testing configuration.
+disable_fieldtrial_testing_config = true
+
+# Codecs (proprietary_codecs, ffmpeg_branding) and Widevine are decided per
+# docs/architecture/COMPATIBILITY.md and docs/legal/LICENSING.md; they are not
+# set here until that decision is recorded.

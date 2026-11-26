@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MPL-2.0
+# release: the configuration Brumel ships. Official, static, all upstream
+# security hardening left at its defaults (never turned off; see SECURITY.md).
+# brumel-inherit: _common
+
+is_official_build = true
+is_debug = false
+is_component_build = false
+symbol_level = 1
+dcheck_always_on = false
+
+# PGO needs upstream profile data (gclient custom var checkout_pgo_profiles).
+# Disabled until the build spike (issue #61) evaluates it; Research.
+chrome_pgo_phase = 0

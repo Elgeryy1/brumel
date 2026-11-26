@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: MPL-2.0
+# minimal: measures the idle cost of the browser without optional Brumel modules.
+# Identical to release until the module system (CORE-005) adds its build flags.
+# brumel-inherit: release
