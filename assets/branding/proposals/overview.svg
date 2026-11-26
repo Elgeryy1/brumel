@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" aria-label="Brumel logo proposals overview">
+  <title>Brumel logo proposals overview</title>
+  <rect width="1200" height="520" fill="#F4F6FA"/>
+  <rect y="290" width="1200" height="230" fill="#11151C"/>
+  <text x="24" y="38" font-family="Inter, Geist, system-ui, sans-serif" font-size="18" font-weight="600" fill="#11151C">Brumel — provisional logo proposals (not final)</text>
+  <svg x="24" y="76" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#11151C" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#56677F" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#56677F"/>
+  </g></svg>
+  <svg x="168" y="76" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#11151C" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#56677F" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#56677F"/>
+  </g></svg>
+  <svg x="168" y="124" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#11151C" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#56677F" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#56677F"/>
+  </g></svg>
+  <text x="24" y="236" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#11151C">01 Drift</text>
+  <text x="24" y="258" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#56677F">abstract symbol</text>
+  <svg x="24" y="306" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#F4F6FA" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#9AB9E8" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#9AB9E8"/>
+  </g></svg>
+  <svg x="168" y="306" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#F4F6FA" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#9AB9E8" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#9AB9E8"/>
+  </g></svg>
+  <svg x="168" y="354" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#F4F6FA" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#9AB9E8" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#9AB9E8"/>
+  </g></svg>
+  <text x="24" y="466" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#F4F6FA">01 Drift</text>
+  <text x="24" y="488" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#9AB9E8">abstract symbol</text>
+  <svg x="264" y="76" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <svg x="408" y="76" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <svg x="408" y="124" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#11151C"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <text x="264" y="236" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#11151C">02 Monogram</text>
+  <text x="264" y="258" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#56677F">B monogram</text>
+  <svg x="264" y="306" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <svg x="408" y="306" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <svg x="408" y="354" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="M21 11.5V52.5H38.5a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M21 32H35a10.25 10.25 0 0 0 0-20.5H21" stroke="#F4F6FA"/>
+    <path d="M5.5 32H11" stroke="#9AB9E8"/>
+  </g></svg>
+  <text x="264" y="466" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#F4F6FA">02 Monogram</text>
+  <text x="264" y="488" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#9AB9E8">B monogram</text>
+  <svg x="504" y="76" width="128" height="128" viewBox="0 0 64 64">  <defs><clipPath id="d20"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#11151C" clip-path="url(#d20)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#d20)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#d20)"/></g></svg>
+  <svg x="648" y="76" width="32" height="32" viewBox="0 0 64 64">  <defs><clipPath id="e20"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#11151C" clip-path="url(#e20)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#e20)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#e20)"/></g></svg>
+  <svg x="648" y="124" width="16" height="16" viewBox="0 0 64 64">  <defs><clipPath id="f20"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#11151C" clip-path="url(#f20)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#f20)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#f20)"/></g></svg>
+  <text x="504" y="236" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#11151C">03 Haze</text>
+  <text x="504" y="258" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#56677F">mist-inspired</text>
+  <svg x="504" y="306" width="128" height="128" viewBox="0 0 64 64">  <defs><clipPath id="d21"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#F4F6FA" clip-path="url(#d21)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#d21)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#d21)"/></g></svg>
+  <svg x="648" y="306" width="32" height="32" viewBox="0 0 64 64">  <defs><clipPath id="e21"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#F4F6FA" clip-path="url(#e21)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#e21)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#e21)"/></g></svg>
+  <svg x="648" y="354" width="16" height="16" viewBox="0 0 64 64">  <defs><clipPath id="f21"><circle cx="32" cy="32" r="23"/></clipPath></defs>
+  <rect x="0" y="9" width="64" height="21" fill="#F4F6FA" clip-path="url(#f21)"/>
+  <g transform="translate(5 0)"><rect x="0" y="35" width="64" height="7" fill="#9AB9E8" clip-path="url(#f21)"/></g>
+  <g transform="translate(-4 0)"><rect x="0" y="47" width="64" height="7" fill="#56677F" clip-path="url(#f21)"/></g></svg>
+  <text x="504" y="466" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#F4F6FA">03 Haze</text>
+  <text x="504" y="488" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#9AB9E8">mist-inspired</text>
+  <svg x="744" y="76" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#11151C"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <svg x="888" y="76" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#11151C"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <svg x="888" y="124" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#11151C"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <text x="744" y="236" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#11151C">04 Wake</text>
+  <text x="744" y="258" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#56677F">movement-inspired</text>
+  <svg x="744" y="306" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#F4F6FA"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <svg x="888" y="306" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#F4F6FA"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <svg x="888" y="354" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-width="7">
+    <path d="M8 14C26 14 40 20 52 32" stroke="#F4F6FA"/>
+    <path d="M8 50C26 50 40 44 52 32" stroke="#9AB9E8"/>
+    <path d="M22 32H34" stroke="#56677F"/>
+  </g></svg>
+  <text x="744" y="466" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#F4F6FA">04 Wake</text>
+  <text x="744" y="488" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#9AB9E8">movement-inspired</text>
+  <svg x="984" y="76" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#11151C"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#11151C"/></svg>
+  <svg x="1128" y="76" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#11151C"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#11151C"/></svg>
+  <svg x="1128" y="124" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#11151C"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#11151C"/></svg>
+  <text x="984" y="236" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#11151C">05 Settle</text>
+  <text x="984" y="258" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#56677F">original concept</text>
+  <svg x="984" y="306" width="128" height="128" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#F4F6FA"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#F4F6FA"/></svg>
+  <svg x="1128" y="306" width="32" height="32" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#F4F6FA"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#F4F6FA"/></svg>
+  <svg x="1128" y="354" width="16" height="16" viewBox="0 0 64 64">  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#F4F6FA"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#F4F6FA"/></svg>
+  <text x="984" y="466" font-family="Inter, Geist, system-ui, sans-serif" font-size="15" font-weight="600" fill="#F4F6FA">05 Settle</text>
+  <text x="984" y="488" font-family="Inter, Geist, system-ui, sans-serif" font-size="13" fill="#9AB9E8">original concept</text>
+</svg>

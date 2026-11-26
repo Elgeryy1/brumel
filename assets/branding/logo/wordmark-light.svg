@@ -1,0 +1,5 @@
+<!-- Brumel provisional identity (proposal 03 Haze). Not final. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 64" role="img" aria-label="Brumel">
+  <title>Brumel</title>
+  <defs><clipPath id="w"><circle cx="28" cy="32" r="22"/></clipPath></defs><rect x="-10.26086956521739" y="10.0" width="76.52173913043478" height="20.086956521739133" fill="#11151C" clip-path="url(#w)"/><g transform="translate(4.782608695652174 0)"><rect x="-15.04347826086957" y="34.869565217391305" width="86.08695652173914" height="6.695652173913044" fill="#9AB9E8" clip-path="url(#w)"/></g><g transform="translate(-3.8260869565217392 0)"><rect x="-15.04347826086957" y="46.34782608695652" width="86.08695652173914" height="6.695652173913044" fill="#56677F" clip-path="url(#w)"/></g><text x="64" y="44" font-family="Inter, Geist, 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#11151C">Brumel</text>
+</svg>

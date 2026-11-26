@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Brumel proposal Settle (dark)">
+  <title>Brumel proposal Settle (dark)</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <path d="M6 32C9 20 12 20 15 32S21 44 24 32" stroke="#9AB9E8"/>
+    <path d="M24 32H46" stroke="#F4F6FA"/>
+  </g>
+  <circle cx="53" cy="32" r="6" fill="#F4F6FA"/>
+</svg>

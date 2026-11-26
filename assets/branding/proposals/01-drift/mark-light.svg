@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Brumel proposal Drift (light)">
+  <title>Brumel proposal Drift (light)</title>
+  <g fill="none" stroke-linecap="round">
+    <path d="M30 18H55" stroke="#9AB9E8" stroke-width="6"/>
+    <path d="M17 32H49" stroke="#11151C" stroke-width="9"/>
+    <path d="M9 46H34" stroke="#56677F" stroke-width="6"/>
+    <circle cx="44" cy="46" r="3" fill="#56677F"/>
+  </g>
+</svg>
