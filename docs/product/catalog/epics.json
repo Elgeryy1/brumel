@@ -1,0 +1,873 @@
+{
+  "schema_version": 1,
+  "updated": "2026-11-26",
+  "epics": [
+    {
+      "id": "EP-CORE-01",
+      "title": "[EPIC] Reproducible build, upstream tracking and supply chain",
+      "module": "CORE",
+      "summary": "Fetch pinned Chromium reproducibly, manage the patch series, automate upstream tracking, de-Google, sign and publish SBOMs.",
+      "phase": 1,
+      "priority": "P0",
+      "features": [
+        "CORE-001",
+        "CORE-002",
+        "CORE-003",
+        "CORE-006",
+        "CORE-007",
+        "CORE-008"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "EP-CORE-02",
+      "title": "[EPIC] Branding, packaging and signed updates",
+      "module": "CORE",
+      "summary": "Brumel branding, Windows/Linux packages and a signed automatic update channel.",
+      "phase": 1,
+      "priority": "P0",
+      "features": [
+        "CORE-004",
+        "CORE-009",
+        "CORE-010",
+        "CORE-051"
+      ],
+      "depends_on": [
+        "EP-CORE-01"
+      ]
+    },
+    {
+      "id": "EP-CORE-03",
+      "title": "[EPIC] Module system and feature registry",
+      "module": "CORE",
+      "summary": "Registry that guarantees disabled modules create no services, timers or processes.",
+      "phase": 1,
+      "priority": "P0",
+      "features": [
+        "CORE-005",
+        "CORE-056",
+        "CON-025"
+      ],
+      "depends_on": [
+        "EP-CORE-01"
+      ]
+    },
+    {
+      "id": "EP-CORE-04",
+      "title": "[EPIC] Chromium feature parity",
+      "module": "CORE",
+      "summary": "Keep every essential Chromium capability working after Brumel patches.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "CORE-020",
+        "CORE-021",
+        "CORE-022",
+        "CORE-023",
+        "CORE-024",
+        "CORE-025",
+        "CORE-026",
+        "CORE-027",
+        "CORE-028",
+        "CORE-029",
+        "CORE-030",
+        "CORE-031",
+        "CORE-032",
+        "CORE-033",
+        "CORE-035",
+        "CORE-036",
+        "CORE-037",
+        "CORE-038",
+        "CORE-040",
+        "CORE-041",
+        "CORE-042",
+        "CORE-043",
+        "CORE-044",
+        "CORE-045",
+        "DEV-007",
+        "DEV-009"
+      ],
+      "depends_on": [
+        "EP-CORE-01",
+        "EP-CORE-02"
+      ]
+    },
+    {
+      "id": "EP-CORE-05",
+      "title": "[EPIC] Google-service replacements, DRM, codecs and Cast",
+      "module": "CORE",
+      "summary": "Replace or license Safe Browsing, translation, spellcheck, crash reporting; evaluate Widevine, codecs and Cast.",
+      "phase": 2,
+      "priority": "P1",
+      "features": [
+        "CORE-011",
+        "CORE-012",
+        "CORE-013",
+        "CORE-014",
+        "CORE-034",
+        "CORE-039",
+        "CORE-050",
+        "CORE-052",
+        "CORE-053",
+        "CORE-054",
+        "SHD-026"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-CORE-06",
+      "title": "[EPIC] Security baseline: sandbox, site isolation, HTTPS and DNS",
+      "module": "CORE",
+      "summary": "Non-negotiable security baseline enforced by CI.",
+      "phase": 1,
+      "priority": "P0",
+      "features": [
+        "CORE-046",
+        "CORE-047",
+        "CORE-048",
+        "CORE-049",
+        "CORE-055",
+        "SHD-023",
+        "SHD-024"
+      ],
+      "depends_on": [
+        "EP-CORE-01"
+      ]
+    },
+    {
+      "id": "EP-ENG-01",
+      "title": "[EPIC] Tab lifecycle and memory management",
+      "module": "ENG",
+      "summary": "Suspension, throttling, prioritization and low-end defaults.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "ENG-008",
+        "ENG-011",
+        "ENG-019",
+        "ENG-020",
+        "ENG-022",
+        "ENG-023",
+        "ENG-024",
+        "ENG-026",
+        "ENG-029"
+      ],
+      "depends_on": [
+        "EP-CORE-03",
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-ENG-02",
+      "title": "[EPIC] Adaptive engine, budgets and performance profiles",
+      "module": "ENG",
+      "summary": "Smart Performance policy engine, RAM/CPU budgets, profiles, rules and the Idle Scheduler.",
+      "phase": 2,
+      "priority": "P1",
+      "features": [
+        "ENG-001",
+        "ENG-002",
+        "ENG-003",
+        "ENG-004",
+        "ENG-005",
+        "ENG-006",
+        "ENG-007",
+        "ENG-009",
+        "ENG-010",
+        "ENG-017",
+        "ENG-025",
+        "ENG-027",
+        "ENG-032",
+        "ENG-033",
+        "ENG-034",
+        "ENG-035",
+        "ENG-036",
+        "ENG-037",
+        "ENG-038",
+        "ENG-039",
+        "ENG-040",
+        "ENG-041",
+        "ENG-042",
+        "ENG-045",
+        "UI-004"
+      ],
+      "depends_on": [
+        "EP-ENG-01",
+        "EP-ENG-04"
+      ]
+    },
+    {
+      "id": "EP-ENG-03",
+      "title": "[EPIC] Fast startup and on-demand extensions",
+      "module": "ENG",
+      "summary": "Instant Startup and extension efficiency (On-Demand Extensions, Extension Doctor).",
+      "phase": 2,
+      "priority": "P1",
+      "features": [
+        "ENG-013",
+        "ENG-021",
+        "ENG-028",
+        "ENG-030",
+        "ENG-043",
+        "ENG-044"
+      ],
+      "depends_on": [
+        "EP-ENG-01"
+      ]
+    },
+    {
+      "id": "EP-ENG-04",
+      "title": "[EPIC] Diagnostics: resource monitor, Browser Health and benchmark",
+      "module": "ENG",
+      "summary": "Measure before optimizing: monitor, history, Browser Health, Crash Shield, Smart Optimize and the public benchmark.",
+      "phase": 2,
+      "priority": "P1",
+      "features": [
+        "ENG-012",
+        "ENG-014",
+        "ENG-015",
+        "ENG-016",
+        "ENG-018",
+        "ENG-031",
+        "ENG-046",
+        "SHD-018"
+      ],
+      "depends_on": [
+        "EP-CORE-03"
+      ]
+    },
+    {
+      "id": "EP-WRK-01",
+      "title": "[EPIC] Tab strip: vertical tabs, trees and folders",
+      "module": "WRK",
+      "summary": "Native vertical tabs, trees, folders, temporary tabs and duplicates.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "WRK-001",
+        "WRK-002",
+        "WRK-003",
+        "WRK-005",
+        "WRK-013",
+        "WRK-014"
+      ],
+      "depends_on": [
+        "EP-UI-01"
+      ]
+    },
+    {
+      "id": "EP-WRK-02",
+      "title": "[EPIC] Workspaces, identities and routing",
+      "module": "WRK",
+      "summary": "Workspaces, Multi/Temporary Identity, Private Spaces and Smart Router.",
+      "phase": 4,
+      "priority": "P1",
+      "features": [
+        "WRK-004",
+        "WRK-009",
+        "WRK-010",
+        "WRK-011",
+        "WRK-012",
+        "SHD-025"
+      ],
+      "depends_on": [
+        "EP-WRK-01",
+        "EP-MEM-01"
+      ]
+    },
+    {
+      "id": "EP-WRK-03",
+      "title": "[EPIC] Infinite Tabs, archiving and session recovery",
+      "module": "WRK",
+      "summary": "Never lose tabs: session recovery, archive, Infinite Tabs, Reading Queue.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "WRK-008",
+        "WRK-021",
+        "WRK-022",
+        "WRK-023",
+        "WRK-024",
+        "WRK-032"
+      ],
+      "depends_on": [
+        "EP-ENG-01",
+        "EP-MEM-01"
+      ]
+    },
+    {
+      "id": "EP-WRK-04",
+      "title": "[EPIC] Universal search, quick actions, split view and panels",
+      "module": "WRK",
+      "summary": "Find and act quickly; work with several pages and web apps.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "WRK-006",
+        "WRK-007",
+        "WRK-017",
+        "WRK-018",
+        "WRK-019",
+        "WRK-025",
+        "WRK-037",
+        "WRK-038",
+        "UI-016"
+      ],
+      "depends_on": [
+        "EP-MEM-01",
+        "EP-UI-01"
+      ]
+    },
+    {
+      "id": "EP-WRK-05",
+      "title": "[EPIC] Attention tools, collections and rules engine",
+      "module": "WRK",
+      "summary": "Focus, snooze, quiet notifications, collections, highlights and the shared rules engine.",
+      "phase": 3,
+      "priority": "P2",
+      "features": [
+        "WRK-015",
+        "WRK-016",
+        "WRK-020",
+        "WRK-026",
+        "WRK-027",
+        "WRK-028",
+        "WRK-029",
+        "WRK-030",
+        "WRK-031",
+        "WRK-033",
+        "WRK-034",
+        "WRK-035",
+        "WRK-036",
+        "NANO-008"
+      ],
+      "depends_on": [
+        "EP-WRK-02"
+      ]
+    },
+    {
+      "id": "EP-MEM-01",
+      "title": "[EPIC] Brumel Store and local index",
+      "module": "MEM",
+      "summary": "Shared encrypted per-profile store with full-text index and strict exclusions.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "MEM-014",
+        "MEM-018"
+      ],
+      "depends_on": [
+        "EP-CORE-03"
+      ]
+    },
+    {
+      "id": "EP-MEM-02",
+      "title": "[EPIC] Browser Time Machine, Zero Loss and data portability",
+      "module": "MEM",
+      "summary": "Timeline restore, universal undo, backups, settings history and Exit Freedom.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "MEM-001",
+        "MEM-006",
+        "MEM-007",
+        "MEM-008",
+        "MEM-009",
+        "MEM-010",
+        "MEM-011",
+        "MEM-012",
+        "MEM-013",
+        "MEM-016",
+        "MEM-020",
+        "MEM-030"
+      ],
+      "depends_on": [
+        "EP-MEM-01",
+        "EP-WRK-03"
+      ]
+    },
+    {
+      "id": "EP-MEM-03",
+      "title": "[EPIC] Draft, form and login protection",
+      "module": "MEM",
+      "summary": "Draft Protection, Session Guardian and Login Memory.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "MEM-004",
+        "MEM-028",
+        "MEM-029"
+      ],
+      "depends_on": [
+        "EP-MEM-01"
+      ]
+    },
+    {
+      "id": "EP-MEM-04",
+      "title": "[EPIC] Recall, vaults and page history",
+      "module": "MEM",
+      "summary": "Smart Memory, Resume Cards, vaults, watchers and page history.",
+      "phase": 3,
+      "priority": "P2",
+      "features": [
+        "MEM-002",
+        "MEM-003",
+        "MEM-005",
+        "MEM-015",
+        "MEM-017",
+        "MEM-019",
+        "MEM-021",
+        "MEM-022",
+        "MEM-023",
+        "MEM-024",
+        "MEM-025",
+        "MEM-026",
+        "MEM-027",
+        "NANO-012",
+        "NANO-013"
+      ],
+      "depends_on": [
+        "EP-MEM-01",
+        "EP-NANO-01"
+      ]
+    },
+    {
+      "id": "EP-SHD-01",
+      "title": "[EPIC] Native content blocking (Clean Web)",
+      "module": "SHD",
+      "summary": "Ads, trackers, pop-ups, autoplay, cookie banners, fingerprinting and page annoyances.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "SHD-001",
+        "SHD-002",
+        "SHD-003",
+        "SHD-004",
+        "SHD-005",
+        "SHD-006",
+        "SHD-007",
+        "SHD-031",
+        "SHD-032"
+      ],
+      "depends_on": [
+        "EP-CORE-03"
+      ]
+    },
+    {
+      "id": "EP-SHD-02",
+      "title": "[EPIC] Permissions and extension control",
+      "module": "SHD",
+      "summary": "One-time permissions, Permission Timeline, Extension Firewall and Extension Passport.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "SHD-011",
+        "SHD-012",
+        "SHD-013",
+        "SHD-035"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-SHD-03",
+      "title": "[EPIC] Transparency: Glass Box, Privacy Receipt and telemetry",
+      "module": "SHD",
+      "summary": "Make every browser-initiated connection and metric verifiable.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "SHD-014",
+        "SHD-027",
+        "SHD-034"
+      ],
+      "depends_on": [
+        "EP-CORE-03"
+      ]
+    },
+    {
+      "id": "EP-SHD-04",
+      "title": "[EPIC] Local data, credential and session protection",
+      "module": "SHD",
+      "summary": "Encryption at rest, biometric lock, credential hardening, Hardened Sessions, Clipboard Guard, Screen Share Shield.",
+      "phase": 2,
+      "priority": "P1",
+      "features": [
+        "SHD-017",
+        "SHD-019",
+        "SHD-020",
+        "SHD-022",
+        "SHD-033",
+        "SHD-036",
+        "SHD-039"
+      ],
+      "depends_on": [
+        "EP-MEM-01"
+      ]
+    },
+    {
+      "id": "EP-SHD-05",
+      "title": "[EPIC] Web safety tools and advanced privacy",
+      "module": "SHD",
+      "summary": "Link Inspector, Smart Back, Self Repair, Smart Cleanup, Dark Pattern Radar, Verified Downloads, advanced private mode and long-term research (Tor, Agent Clean Room).",
+      "phase": 3,
+      "priority": "P2",
+      "features": [
+        "SHD-008",
+        "SHD-009",
+        "SHD-010",
+        "SHD-015",
+        "SHD-016",
+        "SHD-028",
+        "SHD-029",
+        "SHD-030",
+        "SHD-037",
+        "SHD-038"
+      ],
+      "depends_on": [
+        "EP-SHD-01"
+      ]
+    },
+    {
+      "id": "EP-NANO-01",
+      "title": "[EPIC] Nano runtime, model management and safety boundaries",
+      "module": "NANO",
+      "summary": "Sandboxed local inference, model components, hardware backends, evaluation and the untrusted-content rule.",
+      "phase": 4,
+      "priority": "P1",
+      "features": [
+        "NANO-001",
+        "NANO-002",
+        "NANO-003",
+        "NANO-004",
+        "NANO-005",
+        "NANO-006",
+        "NANO-007",
+        "NANO-028",
+        "NANO-029",
+        "NANO-030"
+      ],
+      "depends_on": [
+        "EP-CORE-03",
+        "EP-ENG-02"
+      ]
+    },
+    {
+      "id": "EP-NANO-02",
+      "title": "[EPIC] Nano organization and classification",
+      "module": "NANO",
+      "summary": "Classification, naming, tagging, extraction and command routing.",
+      "phase": 4,
+      "priority": "P2",
+      "features": [
+        "NANO-009",
+        "NANO-010",
+        "NANO-011",
+        "NANO-014",
+        "NANO-015",
+        "NANO-016",
+        "NANO-017"
+      ],
+      "depends_on": [
+        "EP-NANO-01"
+      ]
+    },
+    {
+      "id": "EP-NANO-03",
+      "title": "[EPIC] Nano language, speech and vision",
+      "module": "NANO",
+      "summary": "Translation, OCR, speech recognition, correction and summaries.",
+      "phase": 4,
+      "priority": "P2",
+      "features": [
+        "NANO-018",
+        "NANO-019",
+        "NANO-020",
+        "NANO-021",
+        "NANO-023",
+        "NANO-024"
+      ],
+      "depends_on": [
+        "EP-NANO-01"
+      ]
+    },
+    {
+      "id": "EP-NANO-04",
+      "title": "[EPIC] Optional cloud and BYOK providers",
+      "module": "NANO",
+      "summary": "Opt-in external providers with full disclosure.",
+      "phase": 4,
+      "priority": "P3",
+      "features": [
+        "NANO-025",
+        "NANO-026",
+        "NANO-027"
+      ],
+      "depends_on": [
+        "EP-NANO-01"
+      ]
+    },
+    {
+      "id": "EP-CON-01",
+      "title": "[EPIC] E2EE sync core and infrastructure",
+      "module": "CON",
+      "summary": "Client-side encryption, incremental sync, conflicts, relay, self-hosting and backups.",
+      "phase": 4,
+      "priority": "P1",
+      "features": [
+        "SHD-021",
+        "CON-001",
+        "CON-014",
+        "CON-015",
+        "CON-016",
+        "CON-017",
+        "CON-018",
+        "CON-020",
+        "CON-021",
+        "CON-023",
+        "CON-024",
+        "CON-027"
+      ],
+      "depends_on": [
+        "EP-MEM-01",
+        "EP-SHD-04"
+      ]
+    },
+    {
+      "id": "EP-CON-02",
+      "title": "[EPIC] Synced data types",
+      "module": "CON",
+      "summary": "Bookmarks, workspaces, preferences, rules, history, extensions; password sync deferred.",
+      "phase": 4,
+      "priority": "P1",
+      "features": [
+        "CON-005",
+        "CON-006",
+        "CON-007",
+        "CON-008",
+        "CON-009",
+        "CON-010",
+        "CON-012",
+        "CON-019"
+      ],
+      "depends_on": [
+        "EP-CON-01"
+      ]
+    },
+    {
+      "id": "EP-CON-03",
+      "title": "[EPIC] Device mesh, sharing and pairing",
+      "module": "CON",
+      "summary": "QR pairing, send tab, Quick Share, Mobile Upload, WebRTC mesh and remote help.",
+      "phase": 4,
+      "priority": "P2",
+      "features": [
+        "CON-002",
+        "CON-003",
+        "CON-004",
+        "CON-011",
+        "CON-013",
+        "CON-022",
+        "CON-026",
+        "CON-028"
+      ],
+      "depends_on": [
+        "EP-CON-01"
+      ]
+    },
+    {
+      "id": "EP-TLS-01",
+      "title": "[EPIC] Downloads",
+      "module": "TLS",
+      "summary": "Smart and advanced downloads.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "TLS-001",
+        "TLS-002",
+        "TLS-003",
+        "TLS-004",
+        "TLS-005"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-TLS-02",
+      "title": "[EPIC] Media controls and Meeting Mode",
+      "module": "TLS",
+      "summary": "PiP, audio mixer, speed, cinema mode and meetings.",
+      "phase": 4,
+      "priority": "P2",
+      "features": [
+        "TLS-006",
+        "TLS-007",
+        "TLS-008",
+        "TLS-009",
+        "TLS-010",
+        "TLS-011",
+        "TLS-012",
+        "TLS-026"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-TLS-03",
+      "title": "[EPIC] Capture, reading and accessibility",
+      "module": "TLS",
+      "summary": "Captions, recording, screenshots, reader, TTS, Accessibility Studio, Live Text and dictation.",
+      "phase": 3,
+      "priority": "P2",
+      "features": [
+        "NANO-022",
+        "TLS-013",
+        "TLS-014",
+        "TLS-015",
+        "TLS-016",
+        "TLS-018",
+        "TLS-019",
+        "TLS-020",
+        "TLS-021",
+        "TLS-022",
+        "TLS-023",
+        "TLS-024",
+        "TLS-025",
+        "TLS-035",
+        "TLS-036",
+        "TLS-039"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-TLS-04",
+      "title": "[EPIC] Everyday web and file utilities",
+      "module": "TLS",
+      "summary": "Smart Upload, File Workshop, Tables to Data, Selection Actions, search results, subscriptions, PDF editing.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "TLS-017",
+        "TLS-029",
+        "TLS-030",
+        "TLS-031",
+        "TLS-032",
+        "TLS-033",
+        "TLS-034",
+        "TLS-038"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-TLS-05",
+      "title": "[EPIC] Migration and coexistence",
+      "module": "TLS",
+      "summary": "Migration Assistant, Chrome Coexistence, gestures for switchers.",
+      "phase": 3,
+      "priority": "P1",
+      "features": [
+        "TLS-027",
+        "TLS-028",
+        "TLS-037"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-UI-01",
+      "title": "[EPIC] UI shell, design system and progressive discovery",
+      "module": "UI",
+      "summary": "Native minimalist UI, themes, density, accessibility of chrome and progressive disclosure.",
+      "phase": 2,
+      "priority": "P0",
+      "features": [
+        "UI-001",
+        "UI-003",
+        "UI-011",
+        "UI-012",
+        "UI-013",
+        "UI-014",
+        "UI-017",
+        "UI-018",
+        "UI-019",
+        "UI-020"
+      ],
+      "depends_on": [
+        "EP-CORE-02"
+      ]
+    },
+    {
+      "id": "EP-UI-02",
+      "title": "[EPIC] Themes and customization",
+      "module": "UI",
+      "summary": "Accent colors, dynamic themes, theme editor, sidebar, shortcuts, recipes and community themes.",
+      "phase": 3,
+      "priority": "P2",
+      "features": [
+        "UI-002",
+        "UI-005",
+        "UI-006",
+        "UI-007",
+        "UI-008",
+        "UI-009",
+        "UI-010",
+        "UI-015",
+        "UI-021"
+      ],
+      "depends_on": [
+        "EP-UI-01"
+      ]
+    },
+    {
+      "id": "EP-DEV-01",
+      "title": "[EPIC] Developer tools",
+      "module": "DEV",
+      "summary": "Optional developer utilities beyond DevTools.",
+      "phase": 4,
+      "priority": "P3",
+      "features": [
+        "DEV-001",
+        "DEV-002",
+        "DEV-003",
+        "DEV-004",
+        "DEV-005",
+        "DEV-006",
+        "DEV-008",
+        "DEV-011",
+        "DEV-016"
+      ],
+      "depends_on": [
+        "EP-CORE-04"
+      ]
+    },
+    {
+      "id": "EP-DEV-02",
+      "title": "[EPIC] Automation and privileged integrations (deferred)",
+      "module": "DEV",
+      "summary": "Userscripts, Playwright, MCP, terminal, homelab — gated on the Agent Clean Room capability model.",
+      "phase": 6,
+      "priority": "P3",
+      "features": [
+        "DEV-010",
+        "DEV-012",
+        "DEV-013",
+        "DEV-014",
+        "DEV-015",
+        "DEV-017"
+      ],
+      "depends_on": [
+        "EP-SHD-05"
+      ]
+    }
+  ]
+}
