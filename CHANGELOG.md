@@ -11,6 +11,17 @@ follow the Chromium milestone it is based on.
 
 Phase 0 — Pre-development. No browser code or binaries exist yet.
 
+### Added (Phase 1 — Technical Foundation, in progress)
+
+- Build tooling, not yet validated against a real Chromium checkout:
+  `scripts/fetch.py` (pinned fetch with depot_tools), `scripts/patches.py`
+  (series check, stats, apply and refresh; ADR-0013) and `scripts/build.py`
+  (GN profiles with a security guard). All of them print a plan unless run with
+  `--execute`.
+- GN argument profiles `dev`, `release` and `minimal` in `config/gn/`.
+- Phase 1 plan: `docs/development/PHASE1_PLAN.md`.
+- CI checks for the patch series and the GN profiles.
+
 ### Added
 
 - Public repository, project identity and provisional slogan ("Less noise. More control.").
