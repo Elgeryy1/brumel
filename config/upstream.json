@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "note": "Pinned upstream versions for Brumel builds. Candidate pin recorded during pre-development (2026-11-26); not yet built or validated. Update only through a reviewed pull request. See docs/architecture/UPSTREAM_STRATEGY.md. On 2026-11-26 Chromium Dash reported 158.0.8127.88 as Linux stable and 159.0.8154.34 as Windows stable; the pin stays on 158 because it is the newest version with a matching ungoogled-chromium tag. Run scripts/upstream/check_upstream.py for the current state.",
+  "chromium": {
+    "version": "158.0.8127.88",
+    "channel": "stable",
+    "repository": "https://chromium.googlesource.com/chromium/src.git",
+    "status": "candidate — validate in Phase 1"
+  },
+  "ungoogled_chromium": {
+    "tag": "158.0.8127.88-1",
+    "repository": "https://github.com/ungoogled-software/ungoogled-chromium",
+    "usage": "selected patches only (see ADR-0002)"
+  },
+  "platforms": ["Windows", "Linux"]
+}
