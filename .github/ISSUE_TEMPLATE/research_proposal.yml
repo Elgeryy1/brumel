@@ -1,0 +1,44 @@
+name: Research proposal
+description: Propose an investigation, share evidence or challenge an assumption.
+title: "[Research] "
+labels: ["type:research", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Research issues gather evidence for decisions such as ADRs, feature priority, base selection or model choice.
+        Please separate **facts with sources** from **hypotheses**.
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question
+      placeholder: "Can tab discarding plus FPS throttling measurably reduce idle CPU on Windows without breaking web apps?"
+    validations:
+      required: true
+  - type: input
+    id: related
+    attributes:
+      label: Related catalog IDs, ADRs or documents
+      placeholder: "ENG-012, ADR-0006, docs/benchmarks/BENCHMARKS.md"
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Method
+      description: How will this be verified? Data sources, experiments, code reading, measurements.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence collected so far
+      description: Links with access dates. Mark each item as fact, estimate or opinion.
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision this informs

@@ -1,0 +1,42 @@
+name: Website compatibility
+description: A website that does not work correctly in Brumel (once builds exist).
+title: "[Compat] "
+labels: ["type:compat", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Brumel has no builds yet. Once it does, use this form when a site works in Chrome or Chromium but breaks in Brumel.
+        If it also breaks in unmodified Chromium, please report it to the site owner or to https://issues.chromium.org.
+  - type: input
+    id: url
+    attributes:
+      label: Site URL
+      description: Avoid URLs that contain personal tokens or session IDs.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is broken?
+    validations:
+      required: true
+  - type: checkboxes
+    id: isolation
+    attributes:
+      label: Isolation steps
+      options:
+        - label: It works in Google Chrome (same version range).
+        - label: It still breaks with Clean Web (content blocking) disabled for this site.
+        - label: It still breaks in a new profile without extensions.
+  - type: input
+    id: version
+    attributes:
+      label: Brumel version and OS
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors or screenshots
+      render: shell

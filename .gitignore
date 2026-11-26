@@ -1,0 +1,54 @@
+# --- Chromium checkout and build outputs (never committed; see docs/architecture/UPSTREAM_STRATEGY.md) ---
+/src/
+/chromium/
+/chromium-src/
+/depot_tools/
+/out/
+/build/
+/.gclient
+/.gclient_entries
+/.gclient_previous_*
+/.cipd/
+*.ninja_log
+/third_party_cache/
+
+# Downloaded toolchains, archives and model files
+/downloads/
+/cache/
+*.tar.xz
+*.tar.gz
+*.zip
+*.gguf
+*.onnx
+*.safetensors
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node (future WebUI tooling)
+node_modules/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.claude/settings.local.json
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Operating systems
+.DS_Store
+Thumbs.db
+desktop.ini

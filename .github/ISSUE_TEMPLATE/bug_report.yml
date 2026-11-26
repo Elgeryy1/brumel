@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a problem with Brumel, its tooling or this repository.
+title: "[Bug] "
+labels: ["type:bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Brumel is in Pre-development and has no builds or releases yet.**
+        Until the first build exists, bug reports are about this repository (scripts, CI, website, docs rendering).
+        Report security problems privately: see [SECURITY.md](https://github.com/Elgeryy1/brumel/blob/main/SECURITY.md).
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Repository scripts or CI
+        - Website (GitHub Pages)
+        - Documentation rendering or links
+        - Browser build (once builds exist)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `python3 scripts/validate_docs.py`
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Brumel version (from brumel://version, once it exists) or the repository commit SHA.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "Windows 11 x64 / Ubuntu 24.04 x64, Python 3.12"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove personal data before pasting.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: This is not a security vulnerability (those go through private reporting).
+          required: true

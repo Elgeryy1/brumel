@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and open-ended ideas
+    url: https://github.com/Elgeryy1/brumel/discussions
+    about: Ask questions, share early ideas and discuss the roadmap in GitHub Discussions.
+  - name: Report a security vulnerability (private)
+    url: https://github.com/Elgeryy1/brumel/security/advisories/new
+    about: Never report vulnerabilities in public issues. Use private vulnerability reporting (see SECURITY.md).
+  - name: Bugs in Chromium itself
+    url: https://issues.chromium.org
+    about: Issues that also reproduce in an unmodified Chromium build belong in the Chromium issue tracker.

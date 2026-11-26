@@ -1,0 +1,37 @@
+name: Docs CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate docs, catalog and scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python version
+        run: python3 --version
+
+      - name: Validate links and feature catalog
+        run: python3 scripts/validate_docs.py
+
+      - name: Check generated FEATURES.md is up to date
+        run: python3 scripts/catalog/render_features.py --check
+
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -v

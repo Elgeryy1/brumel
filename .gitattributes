@@ -1,0 +1,31 @@
+# Normalize line endings: store LF in the repository, check out natively per tool.
+* text=auto eol=lf
+
+# Patches against Chromium must apply byte-exact on every platform.
+# They are text (so diffs stay reviewable) but are always LF, and Git must not
+# warn about or "fix" trailing whitespace, which is often meaningful context in a hunk.
+*.patch text eol=lf whitespace=-trailing-space,-space-before-tab,-indent-with-non-tab
+*.diff  text eol=lf whitespace=-trailing-space,-space-before-tab,-indent-with-non-tab
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Vector artwork is text and diffable.
+*.svg text eol=lf
+
+# Binary assets.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.ico  binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.pdf  binary
+
+# Generated documentation: collapse in diffs, regenerate instead of editing by hand.
+docs/product/FEATURES.md linguist-generated=true

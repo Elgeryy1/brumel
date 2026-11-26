@@ -1,0 +1,13 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome to the Brumel community. Please be kind and constructive and follow the
+        [Code of Conduct](https://github.com/Elgeryy1/brumel/blob/main/CODE_OF_CONDUCT.md).
+        Security vulnerabilities must **not** be posted here: see [SECURITY.md](https://github.com/Elgeryy1/brumel/blob/main/SECURITY.md).
+  - type: textarea
+    id: message
+    attributes:
+      label: Message
+    validations:
+      required: true

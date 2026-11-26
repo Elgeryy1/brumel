@@ -1,0 +1,47 @@
+name: Performance report
+description: Report a performance measurement, regression or methodology issue.
+title: "[Perf] "
+labels: ["type:performance", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Brumel has no builds yet, so there are **no Brumel measurements** to report.
+        Until then, use this form for benchmark methodology feedback, or for baseline measurements of other browsers that follow
+        [BENCHMARKS.md](https://github.com/Elgeryy1/brumel/blob/main/docs/benchmarks/BENCHMARKS.md).
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Report type
+      options:
+        - Methodology feedback
+        - Baseline measurement (other browsers)
+        - Brumel regression (once builds exist)
+        - Brumel measurement (once builds exist)
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: Page set, number of tabs, extensions, duration, idle or active.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Hardware and software
+      description: CPU, GPU, RAM, OS and version, power plan, AC or battery, browser versions and flags.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results
+      description: Raw numbers, number of runs, variance. Attach traces or CSV where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes and caveats

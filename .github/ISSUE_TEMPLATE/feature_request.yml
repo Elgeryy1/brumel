@@ -1,0 +1,81 @@
+name: Feature request
+description: Propose a new feature or a change to an existing catalog entry.
+title: "[Feature] "
+labels: ["type:feature", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping shape Brumel. Please check the [feature catalog](https://github.com/Elgeryy1/brumel/blob/main/docs/product/FEATURES.md) first: your idea may already have an ID.
+        Strong proposals describe a **real problem** and **who has it** before describing a solution.
+  - type: input
+    id: catalog-id
+    attributes:
+      label: Related catalog ID(s)
+      description: For example `ENG-001` or `WRK-012`. Leave empty if this is a new idea.
+      placeholder: "MEM-004"
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What goes wrong today, how often, and what does it cost the user (time, data, money, attention, privacy)?
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Concrete use case
+      placeholder: "As a student with 80 tabs open during exam week, I ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: segment
+    attributes:
+      label: Primary user segment
+      options:
+        - Everyday users
+        - Power users and tab hoarders
+        - Students and researchers
+        - Developers
+        - Gamers and streamers
+        - Privacy-conscious users
+        - Users on low-end hardware
+        - Users with accessibility needs
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: pillar
+    attributes:
+      label: Pillar
+      options:
+        - Efficiency
+        - Memory
+        - Clean Web
+        - Trust
+        - Everyday Tools
+        - Foundation (Chromium parity / core)
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How could Brumel solve this? Mention whether it needs AI, network services or new permissions.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and prior art
+      description: Extensions, other browsers or workarounds that exist today, and why they fall short.
+  - type: textarea
+    id: risks
+    attributes:
+      label: Privacy, security or performance concerns
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the catalog and existing issues.
+          required: true

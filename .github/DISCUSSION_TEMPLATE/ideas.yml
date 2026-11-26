@@ -1,0 +1,31 @@
+title: "[Idea] "
+labels: ["needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideas start here before they become catalog entries or issues.
+        Please check the [feature catalog](https://github.com/Elgeryy1/brumel/blob/main/docs/product/FEATURES.md) first.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What annoys you, slows you down or puts your data at risk while browsing today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+    validations:
+      required: true
+  - type: input
+    id: related
+    attributes:
+      label: Related catalog IDs (optional)
+      placeholder: "WRK-003"
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Prior art
+      description: Browsers, extensions or apps that already do something similar.
