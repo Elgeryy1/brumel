@@ -28,7 +28,7 @@ the [Code of Conduct](../../CODE_OF_CONDUCT.md) and the [launch plan](LAUNCH_PLA
 |---|---|---|
 | [GitHub Issues](https://github.com/Elgeryy1/brumel/issues) | Bugs (once there is software), concrete tasks, epics, feature proposals tied to the catalog | Active |
 | [GitHub Discussions](https://github.com/Elgeryy1/brumel/discussions) | Ideas, questions, design feedback, polls, show-and-tell | Active |
-| [GitHub Projects](https://github.com/users/Elgeryy1/projects) — "Brumel — Development" | Public board: roadmap, backlog, research, release planning | Active |
+| [GitHub Projects](https://github.com/users/Elgeryy1/projects/2) — "Brumel — Development" | Public board: roadmap, backlog, research, release planning | Active |
 | [Security advisories](https://github.com/Elgeryy1/brumel/security) | **Private** vulnerability reports (see [SECURITY.md](../../SECURITY.md)) | Active |
 | Devlogs ([`docs/community/devlog/`](devlog/)) | Long-form progress notes | Active |
 | Reddit (r/browsers, r/chromium, r/privacy when relevant) | Announcements of real milestones, feedback threads | Planned |

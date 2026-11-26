@@ -7,7 +7,7 @@
 The roadmap is the human-readable view of the [feature catalog](docs/product/FEATURES.md).
 Every item below references stable catalog IDs (`ENG-018`, `EP-SHD-01`, …) so progress can be
 traced from this document to the catalog, to GitHub Issues and to the
-[GitHub Project](https://github.com/users/Elgeryy1/projects).
+[GitHub Project](https://github.com/users/Elgeryy1/projects/2).
 
 Phases map 1:1 to GitHub milestones:
 

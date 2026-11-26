@@ -199,7 +199,7 @@ Where:
 - **[Discussions](https://github.com/Elgeryy1/brumel/discussions)** — ideas, questions, feedback.
 - **[Issues](https://github.com/Elgeryy1/brumel/issues)** — epics, tasks and research items, using
   the issue forms.
-- **[Project board](https://github.com/users/Elgeryy1/projects)** — "Brumel — Development",
+- **[Project board](https://github.com/users/Elgeryy1/projects/2)** — "Brumel — Development",
   the planning view of the backlog.
 
 Start with [CONTRIBUTING.md](CONTRIBUTING.md). Contributions use a
