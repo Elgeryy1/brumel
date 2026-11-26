@@ -49,7 +49,8 @@ Public documentation is written in English. Corrections are welcome through pull
 
 | Document | Purpose |
 |---|---|
-| [BUILDING.md](development/BUILDING.md) | Build strategy and requirements to validate |
+| [PHASE1_PLAN.md](development/PHASE1_PLAN.md) | Step-by-step plan for Phase 1 — Technical Foundation |
+| [BUILDING.md](development/BUILDING.md) | Build strategy, tooling and requirements to validate |
 | [INFRASTRUCTURE.md](development/INFRASTRUCTURE.md) | Services, runners, signing, costs and alternatives |
 | [BENCHMARKS.md](benchmarks/BENCHMARKS.md) | Reproducible performance methodology |
 | [GOOD_FIRST_ISSUES.md](development/GOOD_FIRST_ISSUES.md) | Starter contributions |

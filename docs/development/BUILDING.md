@@ -1,6 +1,6 @@
 # Building Brumel
 
-Status: **Planned** — Brumel cannot be built yet. This document describes the intended build strategy and the requirements that must be validated in **Phase 1 — Technical Foundation**. It does not describe working scripts: the only script that exists today is [`scripts/upstream/check_upstream.py`](../../scripts/upstream/check_upstream.py), which checks the pinned upstream version.
+Status: **In Development** — Brumel cannot be built yet. The fetch, patch and build scripts exist (step 1 of the [Phase 1 plan](PHASE1_PLAN.md)), but they have **not yet been run against a real Chromium checkout**. The resource figures below are planning assumptions until the build spike ([#61](https://github.com/Elgeryy1/brumel/issues/61)) replaces them with measurements.
 
 Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003](../architecture/adr/0003-patch-based-repository.md) · [Infrastructure](INFRASTRUCTURE.md) · [`patches/README.md`](../../patches/README.md)
 
@@ -11,10 +11,11 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 | Pinned upstream version (`config/upstream.json`) | Available (candidate pin, not yet built) |
 | Upstream version check (`scripts/upstream/check_upstream.py`) | Available |
 | Patch series conventions (`patches/README.md`) | Available (no patches yet) |
-| Fetch script (pinned Chromium + dependencies) | Planned |
-| Patch apply / refresh tooling | Planned |
-| GN argument profiles | Planned |
-| Build wrapper | Planned |
+| Fetch script (`scripts/fetch.py`) | In Development — written and unit-tested, not yet run against Chromium |
+| Patch apply / refresh / check tooling (`scripts/patches.py`, [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)) | In Development — tested on small repositories; `check` runs in CI |
+| GN argument profiles ([`config/gn/`](../../config/gn/dev.gn)) | In Development — guard runs in CI; arguments not yet validated by a build |
+| Build wrapper (`scripts/build.py`) | In Development — not yet run against Chromium |
+| Brumel source overlay (`//brumel`) | Planned (module system, CORE-005) |
 | Packaging (Windows installer, Linux packages) | Planned |
 | CI build pipeline | Planned |
 
@@ -66,23 +67,49 @@ flowchart LR
   H --> I[package + sign<br/>release only]
 ```
 
-Planned commands (illustrative; **they do not exist yet**):
+### Commands
+
+Every command that downloads, changes a checkout or builds **prints its plan and stops** unless `--execute` is given. Run it once without `--execute` and read the plan first.
 
 ```text
-scripts/fetch.py      --config config/upstream.json --out <checkout dir>
-scripts/patches.py    apply   --checkout <checkout dir>
-scripts/patches.py    refresh --checkout <checkout dir>   # after resolving conflicts
-scripts/build.py      --profile dev|release|minimal --target brumel
-scripts/package.py    --platform win|linux
+# 1. Fetch the pinned Chromium tag and its dependencies (many GB, long).
+python3 scripts/fetch.py --checkout <checkout dir> [--execute]
+
+# 2. Apply patches/series, one Git commit per patch (resumable).
+python3 scripts/patches.py apply --checkout <checkout dir> [--3way] [--execute]
+
+# 3. Write out/<Profile>/args.gn, run gn gen, then autoninja.
+python3 scripts/build.py build --checkout <checkout dir> --profile dev|release|minimal [--target chrome] [--execute]
+
+# After resolving conflicts in the checkout: export the commits back to patches/.
+python3 scripts/patches.py refresh --checkout <checkout dir> [--execute]
+
+# No checkout needed (these run in CI):
+python3 scripts/patches.py check     # series and header rules
+python3 scripts/patches.py stats     # patch budget
+python3 scripts/build.py check       # GN profile guard
+python3 scripts/build.py args --profile release
 ```
 
-### GN argument profiles (planned)
+`<checkout dir>` must live **outside** this repository, on a path without spaces. On Windows keep it short (for example `C:\src\brumel`) and enable long-path support. `fetch.py` checks free disk space (default minimum 100 GB, a planning assumption), the required tools and the path. If `config/upstream.json` records a `revision`, it also checks that the tag still points to it. It records the resolved commit and source tree in `<checkout dir>/.brumel/fetch.json`, so two machines can compare their checkouts.
+
+On Windows the scripts set `DEPOT_TOOLS_WIN_TOOLCHAIN=0`, so depot_tools uses the locally installed Visual Studio instead of Google's internal toolchain package.
+
+Packaging (`scripts/package.py`) is Planned (CORE-009, CORE-010).
+
+### GN argument profiles
+
+Profiles live in [`config/gn/`](../../config/gn/dev.gn). `_common.gn` holds arguments shared by every profile, and a profile inherits another with a `# brumel-inherit: <name>` line. `scripts/build.py` composes the final `args.gn` and **refuses** any profile that:
+
+- sets Google API keys or leaves `use_official_google_api_keys` enabled;
+- sets security hardening arguments (`is_cfi`, `use_cfi_icall`, `v8_enable_sandbox`, `v8_enable_pointer_compression`, `use_partition_alloc`) to `false`;
+- makes an official build a debug or component build.
 
 | Profile | Purpose | Key characteristics (to be finalized) |
 | --- | --- | --- |
 | `dev` | Fast iteration | `is_debug=false`, `is_component_build=true`, `symbol_level=1`, DCHECKs on |
-| `release` | Shipping builds | `is_official_build=true`, `is_component_build=false`, LTO/PGO per upstream official config where feasible, `chrome_pgo_phase` as supported, CFI and all upstream security hardening unchanged |
-| `minimal` | Measure idle cost / low-end | Optional Brumel modules compiled out via build flags |
+| `release` | Shipping builds | `is_official_build=true`, `is_component_build=false`, LTO per upstream official config, `chrome_pgo_phase=0` until PGO profiles are evaluated (Research), CFI and all upstream security hardening unchanged |
+| `minimal` | Measure idle cost / low-end | Identical to `release` for now; optional Brumel modules will be compiled out via build flags once the module system exists |
 
 Security-relevant arguments (sandbox, CFI, V8 sandbox, hardening) are **never** turned off in `release`.
 
@@ -101,6 +128,7 @@ Brand and service arguments: Brumel builds use no Google API keys. Codec and Wid
 
 ## 7. Phase 1 validation checklist
 
+- [x] Write fetch, patch and build tooling with unit tests ([Phase 1 plan](PHASE1_PLAN.md), step 1).
 - [ ] Fetch pinned tag and measure download size and time.
 - [ ] Build unmodified Chromium at the pin on Windows and Linux reference machines; record disk, peak RAM and wall time.
 - [ ] Apply a minimal ungoogled subset and branding; build and smoke-test.

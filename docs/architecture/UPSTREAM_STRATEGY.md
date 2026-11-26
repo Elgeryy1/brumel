@@ -1,6 +1,6 @@
 # Upstream Strategy
 
-Status: **Planned** — process defined during pre-development; tooling does not exist yet except [`scripts/upstream/check_upstream.py`](../../scripts/upstream/check_upstream.py), which reports whether the pinned version in [`config/upstream.json`](../../config/upstream.json) matches the current Chromium stable release.
+Status: **Planned** — process defined during pre-development. [`scripts/upstream/check_upstream.py`](../../scripts/upstream/check_upstream.py) reports whether the pinned version in [`config/upstream.json`](../../config/upstream.json) matches the current Chromium stable release (Available). [`scripts/fetch.py`](../../scripts/fetch.py) and [`scripts/patches.py`](../../scripts/patches.py) fetch the pin and manage the patch series ([ADR-0013](adr/0013-git-backed-patch-tooling.md)). They are In Development and not yet validated against a real checkout.
 
 Related: [ADR-0002](adr/0002-chromium-base-selection.md) · [ADR-0003](adr/0003-patch-based-repository.md) · [Chromium Bases](../research/CHROMIUM_BASES.md) · [Building](../development/BUILDING.md) · [`patches/README.md`](../../patches/README.md)
 
@@ -58,7 +58,7 @@ Licensing follows [ADR-0004](adr/0004-licensing.md).
 
 ### Series file
 
-A quilt-style `patches/series` file lists patches in application order, one per line, grouped by category with comments. Tooling applies them with `git apply --3way` (or `quilt push -a`) and fails loudly on the first conflict.
+A quilt-style `patches/series` file lists patches in application order, one per line, grouped by category with comments. `scripts/patches.py apply` applies them with `git apply --index` (optionally `--3way`), one commit per patch, and stops at the first conflict. `refresh` exports resolved commits back to patch files ([ADR-0013](adr/0013-git-backed-patch-tooling.md)). The file stays usable with `quilt push -a`.
 
 ### Naming and headers
 
