@@ -8,7 +8,7 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 
 | Component | Status |
 | --- | --- |
-| Pinned upstream version (`config/upstream.json`) | Available (candidate pin, not yet built) |
+| Pinned upstream version (`config/upstream.json`) | Available (candidate pin; commit recorded after the first verified fetch, not yet built) |
 | Upstream version check (`scripts/upstream/check_upstream.py`) | Available |
 | Patch series conventions (`patches/README.md`) | Available (no patches yet) |
 | Fetch script (`scripts/fetch.py`) | In Development — written and unit-tested, not yet run against Chromium |

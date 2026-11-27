@@ -25,6 +25,8 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   into a checkout as `//brumel`.
 - Prototype benchmark harness `scripts/bench/harness.py` for stock browsers
   (startup, tab load, memory, idle CPU). It produces no Brumel results.
+- `config/upstream.json` records the Chromium commit of the pin
+  (`chromium.revision`), taken from the first verified fetch (ADR-0014, point 7).
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
