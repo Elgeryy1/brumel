@@ -25,7 +25,8 @@ flowchart LR
 ```
 
 - **Pinned upstream.** Brumel builds an exact Chromium stable tag (e.g. `158.0.8127.88`) recorded in `config/upstream.json`, never a moving branch.
-- **ungoogled-chromium alignment.** De-Googling patches are imported from the ungoogled-chromium tag that matches the pinned Chromium version (their tags use `<chromium version>-<revision>`). When ungoogled-chromium lags, Brumel either waits or carries the previous patch set forward with fixes — decided per release based on severity.
+- **ungoogled-chromium alignment.** De-Googling patches are imported from the ungoogled-chromium tag that matches the pinned Chromium version (their tags use `<chromium version>-<revision>`). When ungoogled-chromium lags, Brumel waits at most 7 days for a security respin and 14 days for a new major, and does not wait at all for exploited vulnerabilities. It then carries the previous patch set forward with fixes ([ADR-0014](adr/0014-upstream-pin-policy.md)).
+- **One pin for every platform.** The target is the newest version that is stable on at least one Brumel platform ([ADR-0014](adr/0014-upstream-pin-policy.md)).
 - **Patch series on top.** Brumel's changes are an ordered series of patches plus added files ([ADR-0003](adr/0003-patch-based-repository.md)).
 
 ## 3. Release rhythm
