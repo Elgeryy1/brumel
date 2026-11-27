@@ -82,7 +82,8 @@ The catalog holds **339 entries** grouped in **40 epics**. **33** of them are te
 
 | Status | Entries |
 | --- | ---: |
-| Planned | 195 |
+| In Development | 2 |
+| Planned | 193 |
 | Research | 125 |
 | Deferred | 14 |
 | Rejected | 5 |
@@ -241,9 +242,9 @@ Each of the 52 proposals from the product research appears exactly once in the c
 | [CORE-001](features/core.md#core-001) | Reproducible upstream fetch | CORE | Essential | Planned | P0 | 1 |
 | [CORE-002](features/core.md#core-002) | Patch series system | CORE | Essential | Planned | P0 | 1 |
 | [CORE-003](features/core.md#core-003) | Upstream release tracking automation | CORE | Essential | Planned | P0 | 1 |
-| [CORE-004](features/core.md#core-004) | Brumel branding | CORE | Essential | Planned | P0 | 1 |
+| [CORE-004](features/core.md#core-004) | Brumel branding | CORE | Essential | In Development | P0 | 1 |
 | [CORE-005](features/core.md#core-005) | Module system and feature registry | CORE | Essential | Planned | P0 | 1 |
-| [CORE-006](features/core.md#core-006) | De-Googling and Google API audit | CORE | Essential | Planned | P0 | 1 |
+| [CORE-006](features/core.md#core-006) | De-Googling and Google API audit | CORE | Essential | In Development | P0 | 1 |
 | [CORE-007](features/core.md#core-007) | CI build and release signing pipeline | CORE | Essential | Planned | P0 | 1 |
 | [CORE-008](features/core.md#core-008) | SBOM and dependency governance | CORE | Essential | Planned | P1 | 1 |
 | [CORE-009](features/core.md#core-009) | Windows installer packaging | CORE | Essential | Planned | P0 | 1 |

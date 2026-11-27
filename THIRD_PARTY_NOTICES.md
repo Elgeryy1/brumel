@@ -29,7 +29,8 @@ first fetched, patched or redistributed.
 | Component | Role in Brumel | License | Status |
 |---|---|---|---|
 | [Chromium](https://www.chromium.org/) | Browser engine and base application | BSD-3-Clause, plus hundreds of `third_party/` components under their own licenses (MIT, Apache-2.0, LGPL, MPL, ICU, zlib, others) | Planned (Phase 1) |
-| [ungoogled-chromium](https://github.com/ungoogled-software/ungoogled-chromium) patches | Selected patches that remove Google services | BSD-3-Clause | Planned (Phase 1), patch by patch |
+| [ungoogled-chromium](https://github.com/ungoogled-software/ungoogled-chromium) patches | Selected patches that remove Google services (`patches/upstream-ungoogled/core/ungoogled-chromium/`) | BSD-3-Clause | In Development: 12 patches in the series, not yet built ([audit](docs/privacy/DEGOOGLING_AUDIT.md)) |
+| [inox-patchset](https://github.com/gcarq/inox-patchset) patches, as carried by ungoogled-chromium | Selected patches that remove Google services (`patches/upstream-ungoogled/core/inox-patchset/`) | BSD-2-Clause | In Development: 3 patches in the series, not yet built |
 | [adblock-rust](https://github.com/brave/adblock-rust) | Candidate native content-blocking engine | MPL-2.0 | Research ([ADR-0011](docs/architecture/adr/README.md)) |
 | Filter lists (for example EasyList, EasyPrivacy, uBlock filters) | Clean Web rule sets | Varies per list (CC BY-SA 3.0, GPL-3.0, others) | Research. Each list is checked before we ship it. |
 | [llama.cpp](https://github.com/ggml-org/llama.cpp) | Candidate local generative inference runtime | MIT | Research ([ADR-0008](docs/architecture/adr/README.md)) |
