@@ -15,7 +15,8 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 | Patch apply / refresh / check tooling (`scripts/patches.py`, [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)) | In Development — tested on small repositories; `check` runs in CI |
 | GN argument profiles ([`config/gn/`](../../config/gn/dev.gn)) | In Development — guard runs in CI; arguments not yet validated by a build |
 | Build wrapper (`scripts/build.py`) | In Development — not yet run against Chromium |
-| Brumel source overlay (`scripts/overlay.py`: `src/` → `//brumel`) | In Development — tested; `src/` holds no browser code yet |
+| Brumel source overlay (`scripts/overlay.py`: `src/` → `//brumel`) | In Development — tested; `src/` holds the `BRANDING` file and no browser code yet |
+| Branding: `BRANDING` through `branding_file_path`, strings through `scripts/rebrand.py` ([ADR-0015](../architecture/adr/0015-branding-without-string-patches.md)) | In Development — dry run against the pinned checkout; not yet built |
 | Packaging (Windows installer, Linux packages) | Planned |
 | CI build pipeline | Planned |
 
@@ -79,7 +80,12 @@ python3 scripts/fetch.py --checkout <checkout dir> [--execute]
 python3 scripts/patches.py apply --checkout <checkout dir> [--3way] [--execute]
 
 # 2b. Mirror Brumel's own sources (src/) into the checkout as //brumel.
+#     Required before gen: the profiles read //brumel/branding/BRANDING.
 python3 scripts/overlay.py sync --checkout <checkout dir> [--execute]
+
+# 2c. Rebrand the user-visible strings and their translations (ADR-0015).
+#     Leaves uncommitted changes; undo with 'rebrand.py revert' before re-applying patches.
+python3 scripts/rebrand.py apply --checkout <checkout dir> [--execute]
 
 # 3. Write out/<Profile>/args.gn, run gn gen, then autoninja.
 python3 scripts/build.py build --checkout <checkout dir> --profile dev|release|minimal [--target chrome] [--execute]

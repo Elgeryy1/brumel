@@ -406,6 +406,21 @@ class BuildProfileTests(unittest.TestCase):
         written = (self.dir / "out" / "Dev" / "args.gn").read_text(encoding="utf-8")
         self.assertIn("is_component_build = true", written)
 
+    def test_profiles_that_use_the_overlay_need_it_in_the_checkout(self):
+        profile = build.load_profile("release")
+        self.assertEqual(build.overlay_files(profile), ["//brumel/branding/BRANDING"])
+        self.assertEqual(build.missing_overlay_files(self.dir, profile), ["//brumel/branding/BRANDING"])
+        (self.dir / "brumel" / "branding").mkdir(parents=True)
+        (self.dir / "brumel" / "branding" / "BRANDING").write_text("PRODUCT_FULLNAME=Brumel\n", encoding="utf-8")
+        self.assertEqual(build.missing_overlay_files(self.dir, profile), [])
+
+    def test_repository_branding_file_is_valid(self):
+        # Chromium's build/util/version.py accepts only KEY=VALUE lines.
+        lines = (ROOT / "src" / "branding" / "BRANDING").read_text(encoding="utf-8").splitlines()
+        values = dict(line.split("=", 1) for line in lines)
+        self.assertEqual(values["PRODUCT_FULLNAME"], "Brumel")
+        self.assertIn("The Chromium Authors", values["COPYRIGHT"])
+
 
 if __name__ == "__main__":
     unittest.main()

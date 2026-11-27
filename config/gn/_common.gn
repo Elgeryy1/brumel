@@ -7,6 +7,11 @@
 # Brumel builds use no Google API keys (docs/privacy/PRIVACY.md).
 use_official_google_api_keys = false
 
+# Product name, company and copyright for version resources and installers.
+# The file lives in src/branding/ and reaches the checkout as //brumel through
+# scripts/overlay.py sync, which must run before gen (ADR-0015).
+branding_file_path = "//brumel/branding/BRANDING"
+
 # Do not apply Chrome's built-in field-trial testing configuration.
 disable_fieldtrial_testing_config = true
 
