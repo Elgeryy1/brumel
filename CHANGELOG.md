@@ -42,6 +42,9 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   reliability, network time, Google host detection, autofill server, RLZ,
   update pings and others. Safe Browsing is kept; a GPL-3.0 Bromite patch is
   left out. Applies to the pin; not yet built.
+- Build fix `brumel/fixes/0001-limit-blink-bindings-parallelism.patch`: Blink's
+  bindings generators run one at a time with at most 8 workers each. Unlimited,
+  they exhausted 32 GB of RAM and hung the spike machine. Build-only.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
