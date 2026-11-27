@@ -75,6 +75,28 @@ Every run records and controls:
 | `perf`, `smaps_rollup`, `powertop` | CPU, memory, wake-ups on Linux |
 | PresentMon, MangoHud | Game frame timing |
 
+### 6.1 Prototype harness (In Development)
+
+[`scripts/bench/harness.py`](../../scripts/bench/harness.py) is a first, standard-library-only harness used to validate this methodology on **stock** browsers (Chrome, Edge, Brave, Chromium) before Brumel exists (issue [#71](https://github.com/Elgeryy1/brumel/issues/71), `ENG-031`).
+
+| What it measures | How |
+|---|---|
+| Startup | Launch → first contentful paint of the first tab, reported by the page with `PerformanceObserver` |
+| All tabs loaded | Launch → last `load` event across N tabs |
+| Memory | Private bytes (Windows) or PSS (Linux), summed over every process of that browser instance, median of 3 samples after a settle period |
+| Idle CPU | CPU time of all browser processes during an idle window, as % of one logical core |
+
+- **Corpus.** A small synthetic corpus (`synthetic-1`: article, table, images, script app, canvas animation) is generated at run time. It is license-free and served on `127.0.0.1` only. Web Page Replay archives of real pages remain the target corpus (§5).
+- **Each run.** Every run uses a fresh temporary profile that is deleted afterwards. The run order is randomized with a recorded seed. The only flags are `--no-first-run --no-default-browser-check`, and no security setting is changed.
+- **Output.** A JSON file with the manifest, exact browser versions, settings, every run (including failed ones) and per-configuration median, IQR and bootstrap 95 % CI.
+
+Known limitations of the prototype:
+- **Fresh profiles.** A fresh profile does first-run background work, so short settle and idle windows overstate idle CPU. Use the defaults (20 s settle, 20 s idle) or longer.
+- **Paint before load.** On a fast local page, `load` can fire before the first paint is reported, so startup can be later than all-tabs-loaded.
+- **Not yet measured.** Energy, GPU, ETW traces and variance on reference hardware are not covered yet.
+
+A one-run smoke test on 2026-11-27 confirmed that the harness works with Chrome and Edge. Its numbers are **not results**: there was one run and other work was running on the machine. Measured variance with the methodology above is the acceptance criterion of #71.
+
 ## 7. Reference hardware
 
 Described generically (exact models are recorded in each raw-data bundle when results are published):
