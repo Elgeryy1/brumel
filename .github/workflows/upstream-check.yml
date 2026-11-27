@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: MPL-2.0
+# Scheduled upstream tracking (CORE-003, issue #64): compares config/upstream.json
+# with the latest Chromium stable release and keeps a single tracking issue.
+name: Upstream check
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: upstream-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Compare the pin with Chromium stable
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check upstream
+        id: check
+        run: |
+          set +e
+          python3 scripts/upstream/check_upstream.py --json > "$RUNNER_TEMP/check.json"
+          code=$?
+          set -e
+          cat "$RUNNER_TEMP/check.json"
+          case "$code" in
+            0) echo "outdated=false" >> "$GITHUB_OUTPUT" ;;
+            1) echo "outdated=true" >> "$GITHUB_OUTPUT" ;;
+            *) echo "::error::check_upstream.py failed with exit status $code"; exit 1 ;;
+          esac
+
+      - name: Fetch ungoogled-chromium tags
+        if: steps.check.outputs.outdated == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/ungoogled-software/ungoogled-chromium/tags?per_page=50" > "$RUNNER_TEMP/tags.json" \
+            || echo "::warning::could not list ungoogled-chromium tags"
+
+      - name: Open or update the tracking issue
+        if: steps.check.outputs.outdated == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python3 scripts/upstream/render_issue.py "$RUNNER_TEMP/check.json" \
+            --ungoogled-tags "$RUNNER_TEMP/tags.json" > "$RUNNER_TEMP/body.md"
+          number=$(gh issue list --label upstream --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file "$RUNNER_TEMP/body.md"
+            echo "Updated issue #$number"
+          else
+            gh issue create --title "Upstream update available" --label upstream \
+              --label module:core --label phase:1 --body-file "$RUNNER_TEMP/body.md"
+          fi
+
+      - name: Close the tracking issue when up to date
+        if: steps.check.outputs.outdated == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          number=$(gh issue list --label upstream --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh issue close "$number" --comment "The pin matches the latest Chromium stable release on every target platform."
+          fi

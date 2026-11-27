@@ -21,6 +21,8 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
 - GN argument profiles `dev`, `release` and `minimal` in `config/gn/`.
 - Phase 1 plan: `docs/development/PHASE1_PLAN.md`.
 - CI checks for the patch series and the GN profiles.
+- Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
+  in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
 ### Added
 

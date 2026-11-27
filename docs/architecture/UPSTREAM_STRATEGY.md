@@ -99,7 +99,7 @@ Details: [`patches/README.md`](../../patches/README.md).
 
 | Job | Trigger | Runs where | Output |
 | --- | --- | --- | --- |
-| `check-upstream` | Scheduled (e.g. every 6 hours) | GitHub-hosted runner | Issue or PR when a new stable version appears ([`check_upstream.py`](../../scripts/upstream/check_upstream.py)) |
+| `check-upstream` (**Available**: [`upstream-check.yml`](../../.github/workflows/upstream-check.yml)) | Every 6 hours and on demand | GitHub-hosted runner | A single "Upstream update available" issue (label `upstream`), updated in place and closed when the pin is current again. It also shows whether ungoogled-chromium has a matching tag |
 | `patch-apply-check` | New version detected | Runner with a cached checkout (self-hosted, trusted branches only) | Report of clean / conflicting patches |
 | `rebase-pr` | Patches apply | Same | PR with bumped pin, refreshed patches, diff summary |
 | `build-and-test` | PR from trusted branch | Self-hosted runners | Artifacts, test results |
