@@ -192,7 +192,7 @@ brumel/
 ├── patches/                    # quilt-style patch series applied to Chromium
 │   ├── upstream-ungoogled/     # imported de-Googling patches (BSD-3-Clause)
 │   └── brumel/                 # Brumel patches by area
-├── src/ (planned)              # Brumel-added files copied into //brumel in the checkout
+├── src/                        # Brumel-added files, mirrored into //brumel by scripts/overlay.py
 ├── scripts/                    # fetch, apply, build, package, upstream checks
 ├── tests/                      # repository tests; browser tests live with code
 ├── docs/                       # product, architecture, security, privacy, research

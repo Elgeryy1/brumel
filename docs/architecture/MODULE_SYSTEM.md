@@ -109,9 +109,9 @@ Each `Module` implementation keeps a debug-only live-instance counter and observ
 
 Brumel's added files live in this repository under `src/` and appear in the checkout as `//brumel`:
 
-- A sync step (planned: `scripts/overlay.py sync --checkout DIR`) mirrors `src/` into `<checkout>/src/brumel`. It copies new and changed files and deletes stale ones.
+- [`scripts/overlay.py`](../../scripts/overlay.py) `sync --checkout DIR` mirrors `src/` into `<checkout>/src/brumel`. It copies new and changed files, deletes stale ones, and refuses to touch a `brumel/` directory it did not create.
 - The overlay is **not committed** in the Chromium checkout. The sync step adds `/brumel/` to the checkout's `.git/info/exclude`, so `patches.py refresh` never mistakes overlay files for patch content.
-- This repository's `.gitignore` currently ignores `/src/` (left over from guarding against a Chromium checkout at the root). Step 4 removes that entry. `fetch.py` already refuses to put a checkout inside the repository.
+- `fetch.py` refuses to put a Chromium checkout inside this repository, so `src/` is never confused with Chromium's `src/`.
 
 ## 8. Open questions
 

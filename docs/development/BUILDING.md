@@ -15,7 +15,7 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 | Patch apply / refresh / check tooling (`scripts/patches.py`, [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)) | In Development — tested on small repositories; `check` runs in CI |
 | GN argument profiles ([`config/gn/`](../../config/gn/dev.gn)) | In Development — guard runs in CI; arguments not yet validated by a build |
 | Build wrapper (`scripts/build.py`) | In Development — not yet run against Chromium |
-| Brumel source overlay (`//brumel`) | Planned (module system, CORE-005) |
+| Brumel source overlay (`scripts/overlay.py`: `src/` → `//brumel`) | In Development — tested; `src/` holds no browser code yet |
 | Packaging (Windows installer, Linux packages) | Planned |
 | CI build pipeline | Planned |
 
@@ -77,6 +77,9 @@ python3 scripts/fetch.py --checkout <checkout dir> [--execute]
 
 # 2. Apply patches/series, one Git commit per patch (resumable).
 python3 scripts/patches.py apply --checkout <checkout dir> [--3way] [--execute]
+
+# 2b. Mirror Brumel's own sources (src/) into the checkout as //brumel.
+python3 scripts/overlay.py sync --checkout <checkout dir> [--execute]
 
 # 3. Write out/<Profile>/args.gn, run gn gen, then autoninja.
 python3 scripts/build.py build --checkout <checkout dir> --profile dev|release|minimal [--target chrome] [--execute]
