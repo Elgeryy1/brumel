@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Pinned upstream versions for Brumel builds. Candidate pin recorded during pre-development (2026-11-26); not yet built or validated. Update only through a reviewed pull request. See docs/architecture/UPSTREAM_STRATEGY.md. On 2026-11-26 Chromium Dash reported 158.0.8127.88 as Linux stable and 159.0.8154.34 as Windows stable; the pin stays on 158 because it is the newest version with a matching ungoogled-chromium tag. Run scripts/upstream/check_upstream.py for the current state.",
+  "note": "Pinned upstream versions for Brumel builds. One pin for every platform; policy in docs/architecture/adr/0014-upstream-pin-policy.md. Update only through a reviewed pull request. The pin stays on 158.0.8127.88 during the Phase 1 build spike (ADR-0014, point 8). Run scripts/upstream/check_upstream.py for the current upstream state.",
   "chromium": {
     "version": "158.0.8127.88",
     "channel": "stable",

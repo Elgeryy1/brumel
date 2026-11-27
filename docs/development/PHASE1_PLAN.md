@@ -11,7 +11,7 @@ Related: [BUILDING.md](BUILDING.md) · [INFRASTRUCTURE.md](INFRASTRUCTURE.md) ·
 | Decision | Recommendation | Issue |
 |---|---|---|
 | Where full builds run | On a maintainer-owned desktop, kept local at first. GitHub-hosted runners cannot build Chromium within their disk and time limits. No self-hosted runner until the process is stable, and never for pull requests from forks. | [#66](https://github.com/Elgeryy1/brumel/issues/66) |
-| Which version to pin | Start on the newest version with a matching ungoogled-chromium tag (currently 158). Moving to the next stable then serves as the first rebase drill (step 5). | [#65](https://github.com/Elgeryy1/brumel/issues/65) |
+| Which version to pin | **Decided** in [ADR-0014](../architecture/adr/0014-upstream-pin-policy.md): one pin for all platforms, preferring an ungoogled-chromium match with a bounded wait. The spike stays on 158; moving to the next stable is the first rebase drill (step 5). | [#65](https://github.com/Elgeryy1/brumel/issues/65) |
 | Code signing | Defer. Internal builds stay unsigned and are never published. | [#67](https://github.com/Elgeryy1/brumel/issues/67) |
 
 ## Steps

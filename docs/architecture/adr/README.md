@@ -29,6 +29,7 @@ Brumel records significant technical decisions as Architecture Decision Records 
 | [0011](0011-native-content-blocking.md) | Native content blocking based on adblock-rust | Proposed |
 | [0012](0012-update-system.md) | Update system: Chromium updater on Windows, signed repositories on Linux | Proposed |
 | [0013](0013-git-backed-patch-tooling.md) | Git-backed patch series tooling | Accepted (provisional) |
+| [0014](0014-upstream-pin-policy.md) | Upstream pin policy | Accepted (provisional) |
 
 ## Template
 
