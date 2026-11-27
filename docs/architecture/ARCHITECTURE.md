@@ -119,7 +119,7 @@ Rules:
 5. **Disabled means no observers, no timers, no network, no memory.** A disabled module must not register observers on hot paths (navigation, tab events). This is testable: browser tests assert that disabled modules have no live service instance and no scheduled tasks.
 6. **Dormant services** release caches and close databases after an idle timeout.
 
-Measuring idle cost of every module (with it off, dormant and active) is part of [BENCHMARKS.md](../benchmarks/BENCHMARKS.md).
+Measuring idle cost of every module (with it off, dormant and active) is part of [BENCHMARKS.md](../benchmarks/BENCHMARKS.md). The detailed design of the registry, `ModuleHost` and the tests is in [MODULE_SYSTEM.md](MODULE_SYSTEM.md).
 
 ## 6. Shared infrastructure
 
