@@ -1,4 +1,6 @@
 # Brumel patch series. Order matters; see patches/README.md.
+# --- build fixes ---
+brumel/fixes/0001-limit-blink-bindings-parallelism.patch
 # --- ungoogled-chromium (158.0.8127.88-1), selected; see docs/privacy/DEGOOGLING_AUDIT.md ---
 upstream-ungoogled/core/inox-patchset/0003-disable-autofill-download-manager.patch
 upstream-ungoogled/core/inox-patchset/0015-disable-update-pings.patch
