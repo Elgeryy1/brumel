@@ -1,6 +1,6 @@
 # Patches
 
-This directory will contain the ordered series of patches that Brumel applies on top of the pinned Chromium tag ([`config/upstream.json`](../config/upstream.json)). **No patches exist yet** — Brumel is in pre-development. These conventions apply from the first patch.
+This directory will contain the ordered series of patches that Brumel applies on top of the pinned Chromium tag ([`config/upstream.json`](../config/upstream.json)). The series holds its first branding patch, which applies to the pin but has **not yet been built**. Brumel is in pre-development.
 
 Background: [ADR-0003](../docs/architecture/adr/0003-patch-based-repository.md) · [Upstream Strategy](../docs/architecture/UPSTREAM_STRATEGY.md) · [Licensing](../docs/architecture/adr/0004-licensing.md)
 
