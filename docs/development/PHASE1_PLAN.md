@@ -41,7 +41,6 @@ Related: [BUILDING.md](BUILDING.md) · [INFRASTRUCTURE.md](INFRASTRUCTURE.md) ·
 
 ## Known follow-ups
 
-- `.gitignore` ignores `/src/` at the repository root (meant for a Chromium checkout). The planned Brumel source overlay also uses `src/`, so step 4 must change one of the two.
 - `patches.py refresh` rewrites imported ungoogled-chromium patches in Git's diff format the first time they change ([ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)).
 - GN arguments in `config/gn/` are taken from upstream documentation and ungoogled-chromium practice. The build spike confirms them for the pinned version.
 

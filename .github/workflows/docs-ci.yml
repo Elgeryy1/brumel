@@ -36,6 +36,9 @@ jobs:
       - name: Check the patch series
         run: python3 scripts/patches.py check
 
+      - name: Check Brumel sources (src/)
+        run: python3 scripts/overlay.py check
+
       - name: Check the GN build profiles
         run: python3 scripts/build.py check
 

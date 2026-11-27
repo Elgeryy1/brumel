@@ -1,5 +1,4 @@
 # --- Chromium checkout and build outputs (never committed; see docs/architecture/UPSTREAM_STRATEGY.md) ---
-/src/
 /chromium/
 /chromium-src/
 /depot_tools/
