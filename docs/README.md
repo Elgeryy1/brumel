@@ -35,6 +35,7 @@ Public documentation is written in English. Corrections are welcome through pull
 | [SYNC_ARCHITECTURE.md](architecture/SYNC_ARCHITECTURE.md) | Brumel Connect: local-first, end-to-end encrypted sync |
 | [UPSTREAM_STRATEGY.md](architecture/UPSTREAM_STRATEGY.md) | Pinned upstream, patch series, rebases, security updates |
 | [COMPATIBILITY.md](architecture/COMPATIBILITY.md) | Web standards, extensions, DRM, codecs, Cast, passkeys |
+| [MODULE_SYSTEM.md](architecture/MODULE_SYSTEM.md) | Module registry, gates, lifecycle and the "off means zero" tests (design) |
 | [adr/](architecture/adr/README.md) | Architecture Decision Records |
 
 ## Security and privacy
