@@ -534,6 +534,8 @@ class BuildProfileTests(unittest.TestCase):
         self.assertEqual(steps[2].argv, ["autoninja", "-C", "out/Dev", "chrome"])
         limited = build.plan_build(self.dir, profile, ["chrome"], build=True, jobs=8)
         self.assertEqual(limited[2].argv, ["autoninja", "-j", "8", "-C", "out/Dev", "chrome"])
+        limited[0].action()
+        self.assertIn("action_pool_depth = 8", (self.dir / "out" / "Dev" / "args.gn").read_text(encoding="utf-8"))
         with self.assertRaises(SystemExit), mock.patch("sys.stderr"):
             build.parse_args(["build", "--checkout", ".", "--profile", "dev", "--jobs", "0"])
         steps[0].action()
