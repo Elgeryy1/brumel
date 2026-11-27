@@ -5,7 +5,8 @@ Description: Give the Windows install mode its own identity, so Brumel does not
  toast activator, the elevation service and the tracing service. COM interface
  IDs stay the same, because they belong to the IDL files and their pre-built
  MIDL output. The sandbox AppContainer SID prefix is unchanged on purpose
- (upstream value, so sandbox behavior is identical).
+ (upstream value, so sandbox behavior is identical). install_static unit test
+ expectations follow the new directory and app ID.
 Origin: brumel
 Module: branding
 Feature: CORE-004
@@ -88,6 +89,27 @@ diff --git a/chrome/install_static/chromium_install_modes.h b/chrome/install_sta
          .tracing_service_iid = {0xe0b03e2d,
                                  0x7682,
                                  0x4d83,
+diff --git a/chrome/install_static/install_util_unittest.cc b/chrome/install_static/install_util_unittest.cc
+--- a/chrome/install_static/install_util_unittest.cc
++++ b/chrome/install_static/install_util_unittest.cc
+@@ -417,7 +417,7 @@
+   // The directory strings for the brand's install modes; parallel to
+   // kInstallModes.
+   static constexpr auto kInstallDirs = std::to_array<const wchar_t*>({
+-      L"Chromium",
++      L"Brumel",
+   });
+ #endif
+   static_assert(std::size(kInstallDirs) == NUM_INSTALL_MODES,
+@@ -531,7 +531,7 @@
+ #else
+   // The base app ids for the brand's install modes; parallel to kInstallModes.
+   static constexpr auto kBaseAppIds = std::to_array<const wchar_t*>({
+-      L"Chromium",
++      L"Brumel",
+   });
+ #endif
+   static_assert(std::size(kBaseAppIds) == NUM_INSTALL_MODES,
 diff --git a/chrome/test/mini_installer/variable_expander.py b/chrome/test/mini_installer/variable_expander.py
 --- a/chrome/test/mini_installer/variable_expander.py
 +++ b/chrome/test/mini_installer/variable_expander.py
