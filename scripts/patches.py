@@ -17,7 +17,9 @@ How apply works (see ADR-0013): the commit the checkout starts from is recorded
 as refs/brumel/base. Each patch becomes one commit with a "Brumel-Patch: <path>"
 trailer and fixed author/committer data, so the same pin and series give the
 same commit IDs on every machine. Apply is resumable: it skips patches that
-already have a commit and continues with the rest.
+already have a commit and continues with the rest. A patch that touches nested
+DEPS repositories (v8/, third_party/devtools-frontend/src/, ...) is split, and
+each part is committed in its own repository with the same trailer.
 
 apply and refresh only print their plan unless --execute is given.
 """
@@ -183,6 +185,18 @@ def hunk_lines(body: bytes) -> list[bytes]:
             continue
         keep.append(line)
     return keep
+
+
+def same_changes(old: bytes, new: bytes) -> bool:
+    """True when two diffs make the same changes, whatever the order of their files."""
+    if hunk_lines(old) == hunk_lines(new):
+        return True
+    try:
+        sections = [split_sections(body)[1] for body in (old, new)]
+    except ToolError:
+        return False
+    signatures = [sorted((path, hunk_lines(b"".join(lines))) for path, lines in parts) for parts in sections]
+    return signatures[0] == signatures[1]
 
 
 def load_patches(patches_dir: Path) -> tuple[list[Patch], list[str]]:
@@ -353,6 +367,162 @@ def is_clean(src: Path) -> bool:
 
 
 # --------------------------------------------------------------------------- #
+# Nested repositories
+# --------------------------------------------------------------------------- #
+# A gclient checkout is many Git repositories: chromium/src plus nested DEPS
+# such as v8/ or third_party/devtools-frontend/src/, which src/ ignores. A patch
+# may touch several of them. apply splits it per repository and commits each
+# part there with the same trailer. src/ always gets one commit per patch (empty
+# if the patch does not touch src/), so its history is the ledger of the series.
+# refresh joins the parts again, with the repository prefix restored.
+
+REPOS_FILE = "brumel-patch-repos"  # in src's Git directory: nested repositories that have a base
+
+
+def _section_path(line: bytes) -> str | None:
+    """Path named by a '--- a/x', '+++ b/x' or 'diff --git a/x b/y' line, without its a/ or b/."""
+    if line.startswith(b"diff --git "):
+        parts = line[len(b"diff --git "):].rstrip(b"\r\n").split(b" ")
+        raw = parts[-1] if parts else b""
+    else:
+        raw = line[4:].rstrip(b"\r\n").split(b"\t", 1)[0]
+    if raw == b"/dev/null" or not raw:
+        return None
+    return _strip_prefix(raw)
+
+
+def split_sections(body: bytes) -> tuple[bytes, list[tuple[str, list[bytes]]]]:
+    """Split a diff into (preamble, [(path, lines)]), one entry per file.
+
+    Hunk line counts are followed, so a removed line that starts with '--' is
+    never taken for a file header.
+    """
+    preamble: list[bytes] = []
+    sections: list[tuple[str, list[bytes]]] = []
+    current: list[bytes] | None = None
+    git_header_open = False      # inside a 'diff --git' header, before its '---' line
+    old_left = new_left = 0
+    lines = body.splitlines(keepends=True)
+    for index, line in enumerate(lines):
+        if old_left > 0 or new_left > 0:
+            if line.startswith(b"\\"):
+                pass
+            elif line.startswith(b"-"):
+                old_left -= 1
+            elif line.startswith(b"+"):
+                new_left -= 1
+            else:
+                old_left -= 1
+                new_left -= 1
+            current.append(line)
+            continue
+        starts_plain = (line.startswith(b"--- ") and index + 1 < len(lines)
+                        and lines[index + 1].startswith(b"+++ "))
+        if line.startswith(b"diff --git ") or (starts_plain and not git_header_open):
+            current = [line]
+            sections.append(("", current))
+            git_header_open = line.startswith(b"diff --git ")
+            continue
+        if current is None:
+            preamble.append(line)
+            continue
+        if line.startswith(b"--- "):
+            git_header_open = False
+        hunk = HUNK.match(line)
+        if hunk:
+            old_left = int(hunk.group(1)) if hunk.group(1) is not None else 1
+            new_left = int(hunk.group(2)) if hunk.group(2) is not None else 1
+        current.append(line)
+    named = []
+    for _, section_lines in sections:
+        path = None
+        for line in section_lines:
+            if line.startswith(b"+++ "):
+                path = _section_path(line) or path
+                break
+            if line.startswith((b"--- ", b"diff --git ")):
+                path = _section_path(line) or path
+            if line.startswith(b"@@"):
+                break
+        if path is None:
+            raise ToolError("cannot tell which file a diff section changes: " + section_lines[0].decode("utf-8", "replace").strip())
+        named.append((path, section_lines))
+    return b"".join(preamble), named
+
+
+def owner_repo(src: Path, path: str, cache: dict[str, str] | None = None) -> str:
+    """The nested repository (relative to src, '' for src itself) that holds path."""
+    parts = path.split("/")
+    for depth in range(len(parts) - 1, 0, -1):
+        directory = "/".join(parts[:depth])
+        if cache is not None and directory in cache:
+            return cache[directory]
+        if (src / directory / ".git").exists():
+            if cache is not None:
+                cache[directory] = directory
+            return directory
+    return ""
+
+
+_HEADER_PREFIXES = (b"diff --git ", b"--- ", b"+++ ", b"rename from ", b"rename to ", b"copy from ", b"copy to ")
+
+
+def _reprefix(line: bytes, old: str, new: str) -> bytes:
+    """Replace the repository prefix old/ with new/ in one file header line."""
+    old_b = (old + "/").encode() if old else b""
+    new_b = (new + "/").encode() if new else b""
+    for side in (b"a/", b"b/", b""):
+        line = line.replace(b" " + side + old_b, b" " + side + new_b)
+    return line
+
+
+def _rewrite_section(lines: list[bytes], old: str, new: str) -> bytes:
+    out = []
+    in_header = True
+    for line in lines:
+        if line.startswith(b"@@") or line.startswith(b"GIT binary patch"):
+            in_header = False
+        if in_header and line.startswith(_HEADER_PREFIXES):
+            line = _reprefix(line, old, new)
+        out.append(line)
+    return b"".join(out)
+
+
+def split_by_repo(src: Path, body: bytes) -> list[tuple[str, bytes]]:
+    """[(repository relative to src, diff with paths relative to it)], src first, others sorted."""
+    _, sections = split_sections(body)
+    cache: dict[str, str] = {}
+    grouped: dict[str, list[bytes]] = {}
+    for path, lines in sections:
+        repo = owner_repo(src, path, cache)
+        grouped.setdefault(repo, []).append(_rewrite_section(lines, repo, ""))
+    return [(repo, b"".join(grouped[repo])) for repo in sorted(grouped, key=lambda r: (r != "", r))]
+
+
+def git_dir(src: Path) -> Path:
+    return Path(git(["rev-parse", "--absolute-git-dir"], src).strip())
+
+
+def read_patch_repos(src: Path) -> list[str]:
+    path = git_dir(src) / REPOS_FILE
+    if not path.exists():
+        return []
+    return [line for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def _record_repos(src: Path, repos: list[str]):
+    def write() -> None:
+        known = read_patch_repos(src)
+        merged = known + [r for r in repos if r not in known]
+        (git_dir(src) / REPOS_FILE).write_text("".join(r + "\n" for r in merged), encoding="utf-8", newline="\n")
+    return write
+
+
+def _trailers(repo: Path) -> set[str]:
+    return {t for _, t in applied_commits(repo) if t}
+
+
+# --------------------------------------------------------------------------- #
 # apply
 # --------------------------------------------------------------------------- #
 
@@ -390,18 +560,67 @@ def plan_apply(src: Path, patches_dir: Path, three_way: bool, reset: bool) -> tu
     if not (reset and base is not None) and not is_clean(src):
         raise ToolError(f"{src} has uncommitted changes; commit or discard them first")
 
+    # Nested repositories touched before: reset them with src, or check they are clean.
+    for repo in read_patch_repos(src) if base is not None else []:
+        repo_path = src / repo
+        if reset:
+            if rev(repo_path, BASE_REF):
+                steps.append(Step(f"Discard applied patches in {repo}",
+                                  argv=["git", "reset", "--hard", BASE_REF], cwd=repo_path))
+        elif not is_clean(repo_path):
+            raise ToolError(f"{repo_path} has uncommitted changes; commit or discard them first")
+
+    apply_argv = ["git", "apply", "--index", "--whitespace=nowarn"]
+    if three_way:
+        apply_argv.append("--3way")
+    split_dir = git_dir(src) / "brumel-split"
+    new_repos: list[str] = []
+    based: set[str] = set()
     for entry in series[len(applied):]:
         patch_file = (patches_dir / entry).resolve()
-        apply_argv = ["git", "apply", "--index", "--whitespace=nowarn"]
-        if three_way:
-            apply_argv.append("--3way")
-        steps.append(Step(f"Apply {entry}", argv=[*apply_argv, str(patch_file)], cwd=src))
+        parts = split_by_repo(src, split_patch(patch_file.read_bytes())[1]) if patch_file.is_file() else []
+        nested = [(repo, body) for repo, body in parts if repo]
+        if not nested:
+            steps.append(Step(f"Apply {entry}", argv=[*apply_argv, str(patch_file)], cwd=src))
+        for repo, body in nested:
+            repo_path = src / repo
+            if repo not in based:
+                based.add(repo)
+                if rev(repo_path, BASE_REF) is None:
+                    steps.append(Step(f"Record the current commit of {repo} as its patch base",
+                                      argv=["git", "update-ref", BASE_REF, "HEAD"], cwd=repo_path))
+                    if repo not in new_repos:
+                        new_repos.append(repo)
+                elif not reset and not is_clean(repo_path):
+                    raise ToolError(f"{repo_path} has uncommitted changes; commit or discard them first")
+            if not reset and rev(repo_path, BASE_REF) and entry in _trailers(repo_path):
+                notes.append(f"{entry}: the part for {repo} is already committed there")
+                continue
+            part = split_dir / repo.replace("/", "__") / entry
+            steps.append(Step(f"Write the part of {entry} for {repo}", action=_writer(part, body)))
+            steps.append(Step(f"Apply {entry} in {repo}", argv=[*apply_argv, str(part)], cwd=repo_path))
+            steps.append(Step(
+                f"Commit {entry} in {repo}",
+                argv=["git", "commit", "--quiet", "--allow-empty", "-m", entry, "-m", f"{TRAILER}: {entry}"],
+                cwd=repo_path,
+                env=COMMIT_ENV,
+            ))
+        if nested:
+            src_body = dict(parts).get("")
+            if src_body:
+                part = split_dir / "src" / entry
+                steps.append(Step(f"Write the part of {entry} for src", action=_writer(part, src_body)))
+                steps.append(Step(f"Apply {entry} in src", argv=[*apply_argv, str(part)], cwd=src))
         steps.append(Step(
             f"Commit {entry}",
             argv=["git", "commit", "--quiet", "--allow-empty", "-m", entry, "-m", f"{TRAILER}: {entry}"],
             cwd=src,
             env=COMMIT_ENV,
         ))
+    if new_repos:
+        # Recorded first, so a failure part-way still leaves the list complete.
+        steps.insert(0, Step("Remember the nested repositories the series touches",
+                             action=_record_repos(src, new_repos)))
     if not series:
         notes.append("patches/series is empty: there is nothing to apply yet")
     return steps, notes
@@ -411,10 +630,12 @@ def plan_apply(src: Path, patches_dir: Path, three_way: bool, reset: bool) -> tu
 # refresh
 # --------------------------------------------------------------------------- #
 
-def diff_commits(src: Path, first: str, last: str) -> bytes:
+def diff_commits(src: Path, first: str, last: str, prefix: str = "") -> bytes:
+    """Diff of commits first..last; prefix (a nested repository path) goes before every file path."""
+    lead = prefix + "/" if prefix else ""
     result = subprocess.run(
         ["git", "-c", "core.quotePath=false", "diff", "--no-color", "--no-ext-diff", "--no-textconv",
-         "--no-renames", "--src-prefix=a/", "--dst-prefix=b/", f"{first}^", last],
+         "--no-renames", f"--src-prefix=a/{lead}", f"--dst-prefix=b/{lead}", f"{first}^", last],
         cwd=src, capture_output=True,
     )
     if result.returncode != 0:
@@ -446,6 +667,29 @@ def plan_refresh(src: Path, patches_dir: Path) -> tuple[list[Step], list[str]]:
         else:
             groups.append((trailer, [sha]))
 
+    # Parts of the same patches committed in nested repositories.
+    ledger = {path for path, _ in groups}
+    nested: dict[str, dict[str, list[str]]] = {}   # repo -> trailer -> commits
+    for repo in read_patch_repos(src):
+        repo_path = src / repo
+        if not rev(repo_path, BASE_REF):
+            continue
+        by_trailer: dict[str, list[str]] = {}
+        last = None
+        for sha, trailer in applied_commits(repo_path):
+            if trailer is None:
+                raise ToolError(f"a commit in {repo} has no '{TRAILER}: <path>' trailer: {sha[:12]}")
+            if trailer not in ledger:
+                raise ToolError(
+                    f"{repo} has commits for {trailer}, but src has none. Add one in src with "
+                    f"git commit --allow-empty -m {trailer} -m '{TRAILER}: {trailer}'"
+                )
+            if trailer in by_trailer and last != trailer:
+                raise ToolError(f"commits for {trailer} in {repo} are not consecutive; squash them first")
+            by_trailer.setdefault(trailer, []).append(sha)
+            last = trailer
+        nested[repo] = by_trailer
+
     series = read_series(patches_dir)
     notes: list[str] = []
     steps: list[Step] = []
@@ -456,9 +700,13 @@ def plan_refresh(src: Path, patches_dir: Path) -> tuple[list[Step], list[str]]:
             raise ToolError(f"invalid patch path in trailer: {path!r}")
         target = patches_dir / path
         body = diff_commits(src, shas[0], shas[-1])
+        for repo in sorted(nested):
+            repo_shas = nested[repo].get(path)
+            if repo_shas:
+                body += diff_commits(src / repo, repo_shas[0], repo_shas[-1], prefix=repo)
         if target.exists():
             header, old_body = split_patch(target.read_bytes())
-            if hunk_lines(old_body) == hunk_lines(body):
+            if same_changes(old_body, body):
                 previous = path
                 continue
             notes.append(f"update {path}")

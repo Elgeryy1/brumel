@@ -48,6 +48,12 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
 - Build fix `brumel/fixes/0001-limit-blink-bindings-parallelism.patch`: Blink's
   bindings generators run one at a time with at most 8 workers each. Unlimited,
   they exhausted 32 GB of RAM and hung the spike machine. Build-only.
+- `scripts/patches.py` applies and refreshes patches that touch nested DEPS
+  repositories (`v8/`, `third_party/devtools-frontend/src/` and others), one
+  commit per repository with the same trailer (ADR-0013, amended). Found in the
+  build spike: these patches failed to apply before.
+- `scripts/build.py build --jobs N` limits parallel compile jobs, for machines
+  with little free memory.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
