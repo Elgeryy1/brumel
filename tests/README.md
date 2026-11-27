@@ -13,6 +13,7 @@ python3 -m unittest discover -s tests -v
 | `test_validate_docs.py` | Link checking and feature-catalog validation in `scripts/validate_docs.py`, using small synthetic fixtures |
 | `test_upstream_issue.py` | Tracking-issue rendering for the upstream check, including rejection of untrusted version strings |
 | `test_overlay.py` | `overlay.py` source checks and sync (new, changed, stale files; refusing a directory it does not own) |
+| `test_bench_harness.py` | Benchmark harness statistics, corpus, process parsing and the local beacon server (no browser is launched) |
 | `test_build_tooling.py` | `fetch.py` plans and pin validation, `patches.py` checks and an apply/refresh round trip on a tiny Git repository, and the `build.py` profile guard. Nothing is downloaded. |
 
 CI runs these tests on every push and pull request (see

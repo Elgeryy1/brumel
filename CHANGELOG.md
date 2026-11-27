@@ -23,6 +23,8 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
 - CI checks for the patch series and the GN profiles.
 - `scripts/overlay.py`: checks Brumel's own sources in `src/` and mirrors them
   into a checkout as `//brumel`.
+- Prototype benchmark harness `scripts/bench/harness.py` for stock browsers
+  (startup, tab load, memory, idle CPU). It produces no Brumel results.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
