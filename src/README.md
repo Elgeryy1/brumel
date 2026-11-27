@@ -7,7 +7,7 @@ live here; they are patches in [`../patches/`](../patches/README.md).
 Layout and rules: [MODULE_SYSTEM.md](../docs/architecture/MODULE_SYSTEM.md) and
 [ARCHITECTURE.md §3](../docs/architecture/ARCHITECTURE.md#3-brumel-layers-mapped-to-the-chromium-tree).
 
-Status: **Planned** — no browser code yet. The module system skeleton (CORE-005) comes
+Status: **Planned** — no browser code yet. `branding/BRANDING` holds the product name, company and copyright that `config/gn/_common.gn` passes to the build ([ADR-0015](../docs/architecture/adr/0015-branding-without-string-patches.md)). The module system skeleton (CORE-005) comes
 first, after the build spike.
 
 - Every source file starts with `SPDX-License-Identifier: MPL-2.0` (`overlay.py check`

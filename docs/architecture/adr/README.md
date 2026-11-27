@@ -30,6 +30,7 @@ Brumel records significant technical decisions as Architecture Decision Records 
 | [0012](0012-update-system.md) | Update system: Chromium updater on Windows, signed repositories on Linux | Proposed |
 | [0013](0013-git-backed-patch-tooling.md) | Git-backed patch series tooling | Accepted (provisional) |
 | [0014](0014-upstream-pin-policy.md) | Upstream pin policy | Accepted (provisional) |
+| [0015](0015-branding-without-string-patches.md) | Branding through GN arguments and generated strings | Accepted (provisional) |
 
 ## Template
 

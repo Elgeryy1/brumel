@@ -1,0 +1,10 @@
+COMPANY_FULLNAME=The Brumel Authors
+COMPANY_SHORTNAME=The Brumel Authors
+PRODUCT_FULLNAME=Brumel
+PRODUCT_SHORTNAME=Brumel
+PRODUCT_INSTALLER_FULLNAME=Brumel Installer
+PRODUCT_INSTALLER_SHORTNAME=Brumel Installer
+COPYRIGHT=Copyright @LASTCHANGE_YEAR@ The Brumel Authors and The Chromium Authors. All rights reserved.
+MAC_BUNDLE_ID=io.github.elgeryy1.Brumel
+MAC_CREATOR_CODE=Brml
+MAC_TEAM_ID=

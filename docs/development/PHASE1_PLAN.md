@@ -1,6 +1,6 @@
 # Phase 1 plan — Technical Foundation
 
-Status: **In Development** — step 1 is done; steps 2–7 are Planned. This plan breaks [Phase 1](../../ROADMAP.md#phase-1--technical-foundation) into ordered steps. Like the roadmap, it has **no dates**: each step starts when the one it depends on is done.
+Status: **In Development** — step 1 is done; steps 2, 3 and 5 are in development; steps 4, 6 and 7 are Planned. This plan breaks [Phase 1](../../ROADMAP.md#phase-1--technical-foundation) into ordered steps. Like the roadmap, it has **no dates**: each step starts when the one it depends on is done.
 
 Goal of the phase: a reproducible, rebranded Chromium build from a pinned upstream tag, plus a measured answer to "how much does it cost to keep it up to date?". **No Brumel features are built in this phase.**
 
@@ -19,8 +19,8 @@ Related: [BUILDING.md](BUILDING.md) · [INFRASTRUCTURE.md](INFRASTRUCTURE.md) ·
 | # | Step | Output | Status | Issues · catalog |
 |---|---|---|---|---|
 | 1 | **Repository tooling:** `fetch.py`, `patches.py`, `build.py`, GN profiles, unit tests and CI checks | Commands that fetch, patch and build reproducibly, tested without a checkout | Done (not yet run against Chromium) | [#62](https://github.com/Elgeryy1/brumel/issues/62), [#63](https://github.com/Elgeryy1/brumel/issues/63) · CORE-001, CORE-002 · [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md) |
-| 2 | **Build spike:** fetch and build unmodified Chromium at the pin on Windows and Linux | Measured disk, peak RAM, full and incremental build time, published in BUILDING.md; tooling fixes | Planned | [#61](https://github.com/Elgeryy1/brumel/issues/61) |
-| 3 | **First patches:** branding, a small ungoogled-chromium subset, no Google API keys | A browser called Brumel that starts and browses | Planned | [#68](https://github.com/Elgeryy1/brumel/issues/68), [#69](https://github.com/Elgeryy1/brumel/issues/69) · CORE-004, CORE-006 |
+| 2 | **Build spike:** fetch and build unmodified Chromium at the pin on Windows and Linux | Measured disk, peak RAM, full and incremental build time, published in BUILDING.md; tooling fixes | In Development (fetched on Windows; Windows build running) | [#61](https://github.com/Elgeryy1/brumel/issues/61) |
+| 3 | **First patches:** branding, a small ungoogled-chromium subset, no Google API keys | A browser called Brumel that starts and browses | In Development (branding approach and string tool written, [ADR-0015](../architecture/adr/0015-branding-without-string-patches.md); patches and first branded build Planned) | [#68](https://github.com/Elgeryy1/brumel/issues/68), [#69](https://github.com/Elgeryy1/brumel/issues/69) · CORE-004, CORE-006 |
 | 4 | **Module skeleton:** `//brumel` source overlay, feature registry with flags, a test internal page | Proof that Brumel code can be added without editing Chromium beyond small hooks | Design written ([MODULE_SYSTEM.md](../architecture/MODULE_SYSTEM.md)); implementation Planned | [#70](https://github.com/Elgeryy1/brumel/issues/70) · CORE-005 · [ADR-0006](../architecture/adr/0006-in-process-modules.md) |
 | 5 | **Rebase drill:** move the pin to the next stable and measure the rebase; run `check_upstream.py` on a schedule | The first real number for the cost of staying current | In Development (scheduled check done; drill Planned) | [#64](https://github.com/Elgeryy1/brumel/issues/64), [#65](https://github.com/Elgeryy1/brumel/issues/65) · CORE-003 |
 | 6 | **Security baseline:** verify sandbox, site isolation and HTTPS-First stay on; publish the de-Googling audit | A published audit and regression checks | Planned | [#72](https://github.com/Elgeryy1/brumel/issues/72), [#69](https://github.com/Elgeryy1/brumel/issues/69) · EP-CORE-06 |

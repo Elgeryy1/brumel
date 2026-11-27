@@ -27,6 +27,11 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   (startup, tab load, memory, idle CPU). It produces no Brumel results.
 - `config/upstream.json` records the Chromium commit of the pin
   (`chromium.revision`), taken from the first verified fetch (ADR-0014, point 7).
+- Branding without string patches (ADR-0015): `src/branding/BRANDING` reaches
+  the checkout through the overlay and `branding_file_path`; `scripts/rebrand.py`
+  replaces the product name in Chromium's strings and renames their
+  translations with the checkout's GRIT, keeping Chromium attribution. Not yet
+  built.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 

@@ -1,0 +1,8 @@
+SPDX-License-Identifier: MPL-2.0
+
+BRANDING is read by Chromium's build/util/version.py, which accepts only
+KEY=VALUE lines, so its license notice lives in this file (REUSE convention).
+config/gn/_common.gn points branding_file_path at it. See ADR-0015.
+
+MAC_BUNDLE_ID uses a namespace the project controls today. It is provisional:
+macOS is Deferred, and the ID changes if the project registers a domain.
