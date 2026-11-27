@@ -11,6 +11,7 @@ python3 -m unittest discover -s tests -v
 | Test file | Covers |
 |---|---|
 | `test_validate_docs.py` | Link checking and feature-catalog validation in `scripts/validate_docs.py`, using small synthetic fixtures |
+| `test_upstream_issue.py` | Tracking-issue rendering for the upstream check, including rejection of untrusted version strings |
 | `test_build_tooling.py` | `fetch.py` plans and pin validation, `patches.py` checks and an apply/refresh round trip on a tiny Git repository, and the `build.py` profile guard. Nothing is downloaded. |
 
 CI runs these tests on every push and pull request (see

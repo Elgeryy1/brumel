@@ -18,6 +18,7 @@ installing anything.
 | [`build.py`](build.py) | Composes `args.gn` from the profiles in [`config/gn/`](../config/gn/dev.gn), rejects insecure settings, runs `gn gen` and `autoninja`. | `python3 scripts/build.py check`; `build --checkout DIR --profile dev` |
 | [`brumeltools/`](brumeltools/__init__.py) | Shared helpers: upstream pin loading, printable command plans, Git calls. | Imported by the scripts above |
 | [`upstream/check_upstream.py`](upstream/check_upstream.py) | Compares the pinned Chromium version in [`config/upstream.json`](../config/upstream.json) with the current upstream stable release. Reports only and never downloads source. | `python3 scripts/upstream/check_upstream.py` |
+| [`upstream/render_issue.py`](upstream/render_issue.py) | Renders the body of the "Upstream update available" issue from `check_upstream.py --json` and the ungoogled-chromium tag list. It validates every version string first. Used by the scheduled [Upstream check](../.github/workflows/upstream-check.yml) workflow. | `python3 scripts/upstream/render_issue.py check.json --ungoogled-tags tags.json` |
 
 ## Conventions
 
