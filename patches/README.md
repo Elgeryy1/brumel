@@ -76,6 +76,10 @@ A patch whose added lines mention switches or arguments that weaken a security b
 
 `apply` and `refresh` print a plan and change nothing unless you pass `--execute`.
 
+### Patches that touch nested repositories
+
+A Chromium checkout is several Git repositories: `src/` plus nested DEPS such as `v8/` or `third_party/devtools-frontend/src/`, which `src/` ignores. Patches keep paths relative to `src/` either way. `apply` splits a patch by repository, applies each part there and commits it with the same `Brumel-Patch:` trailer; `src/` always gets one commit per patch, empty if the patch does not touch it. When you resolve a conflict in a nested repository, commit it there with the trailer. For a new patch that only changes a nested repository, also add an empty commit in `src/` with the same trailer (`git commit --allow-empty -m <path> -m "Brumel-Patch: <path>"`), so `refresh` knows where it goes in the series. `gclient sync` resets nested repositories to their pinned commits, so run `apply` again after a sync.
+
 ### Updating a patch after a conflict
 
 1. `python3 scripts/patches.py apply --checkout DIR --3way --execute` stops at the patch that fails.

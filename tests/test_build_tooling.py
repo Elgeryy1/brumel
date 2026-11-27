@@ -347,6 +347,136 @@ class PatchApplyRefreshTests(unittest.TestCase):
             patches.plan_refresh(self.src, self.dir)
 
 
+# A patch that changes src/ and a nested DEPS repository at third_party/dep/src.
+NESTED_DIFF = DIFF + b"""--- a/third_party/dep/src/dep.txt
++++ b/third_party/dep/src/dep.txt
+@@ -1,2 +1,2 @@
+ dep one
+-dep two
++dep 2
+"""
+NESTED_ONLY_DIFF = b"""diff --git a/third_party/dep/src/other.txt b/third_party/dep/src/other.txt
+new file mode 100644
+--- /dev/null
++++ b/third_party/dep/src/other.txt
+@@ -0,0 +1 @@
++other
+"""
+
+
+class PatchSplitTests(unittest.TestCase):
+    def test_sections_follow_hunk_counts(self):
+        _, sections = patches.split_sections(NESTED_DIFF)
+        self.assertEqual([path for path, _ in sections], ["hello.txt", "third_party/dep/src/dep.txt"])
+        # The removed line '--- not a header' stays inside the first section.
+        self.assertIn(b"--- not a header, a removed line\n", sections[0][1])
+
+    def test_new_file_section_takes_its_path_from_plus_line(self):
+        _, sections = patches.split_sections(NESTED_ONLY_DIFF)
+        self.assertEqual(sections[0][0], "third_party/dep/src/other.txt")
+
+    def test_same_changes_ignores_file_order(self):
+        _, sections = patches.split_sections(NESTED_DIFF)
+        reordered = b"".join(sections[1][1]) + b"".join(sections[0][1])
+        self.assertTrue(patches.same_changes(NESTED_DIFF, reordered))
+        self.assertFalse(patches.same_changes(NESTED_DIFF, DIFF))
+
+
+@unittest.skipUnless(HAS_GIT, "git not available")
+class NestedRepositoryTests(unittest.TestCase):
+    def setUp(self):
+        self._git = IsolatedGit().__enter__()
+        self._tmp = tempfile.TemporaryDirectory()
+        tmp = Path(self._tmp.name)
+        self.src = make_repo(tmp / "checkout" / "src")
+        # src ignores its nested DEPS repositories, as chromium/src does.
+        (self.src / ".gitignore").write_text("/third_party/dep/src/\n")
+        run_git(self.src, "add", ".gitignore")
+        run_git(self.src, "commit", "--quiet", "-m", "ignore deps")
+        self.dep = self.src / "third_party" / "dep" / "src"
+        self.dep.mkdir(parents=True)
+        run_git(self.dep, "init", "--quiet", "--initial-branch=main")
+        (self.dep / "dep.txt").write_bytes(b"dep one\ndep two\n")
+        run_git(self.dep, "add", "dep.txt")
+        run_git(self.dep, "commit", "--quiet", "-m", "dep base")
+        self.dir = tmp / "patches"
+        write_patch(self.dir, "brumel/core/0001-both.patch", diff=NESTED_DIFF)
+        write_patch(self.dir, "brumel/core/0002-dep-only.patch", diff=NESTED_ONLY_DIFF)
+        write_series(self.dir, "brumel/core/0001-both.patch", "brumel/core/0002-dep-only.patch")
+
+    def tearDown(self):
+        self._tmp.cleanup()
+        self._git.__exit__(None, None, None)
+
+    def apply(self, reset=False):
+        steps, notes = patches.plan_apply(self.src, self.dir, three_way=False, reset=reset)
+        brumeltools.run_plan(steps)
+        return notes
+
+    def test_split_by_repo_strips_the_repository_prefix(self):
+        parts = patches.split_by_repo(self.src, NESTED_DIFF)
+        self.assertEqual([repo for repo, _ in parts], ["", "third_party/dep/src"])
+        self.assertIn(b"--- a/dep.txt\n+++ b/dep.txt\n", parts[1][1])
+        self.assertNotIn(b"third_party", parts[1][1])
+
+    def test_apply_commits_in_each_repository(self):
+        self.apply()
+        self.assertEqual((self.dep / "dep.txt").read_text(), "dep one\ndep 2\n")
+        self.assertEqual((self.dep / "other.txt").read_text(), "other\n")
+        self.assertEqual((self.src / "hello.txt").read_text(), "line one\nline two\nline three\n")
+        # src keeps one commit per patch, even for a patch that does not touch it.
+        self.assertEqual([t for _, t in patches.applied_commits(self.src)],
+                         ["brumel/core/0001-both.patch", "brumel/core/0002-dep-only.patch"])
+        self.assertEqual([t for _, t in patches.applied_commits(self.dep)],
+                         ["brumel/core/0001-both.patch", "brumel/core/0002-dep-only.patch"])
+        self.assertEqual(patches.read_patch_repos(self.src), ["third_party/dep/src"])
+        # Nothing left to do, and the patch files are already up to date.
+        self.assertEqual(patches.plan_apply(self.src, self.dir, False, False)[0], [])
+        steps, notes = patches.plan_refresh(self.src, self.dir)
+        self.assertEqual(steps, [])
+        self.assertIn("all patches are up to date", notes)
+
+    def test_reset_restores_nested_repositories_and_ids_repeat(self):
+        self.apply()
+        dep_head = run_git(self.dep, "rev-parse", "HEAD")
+        self.apply(reset=True)
+        self.assertEqual(run_git(self.dep, "rev-parse", "HEAD"), dep_head)
+
+    def test_resume_skips_parts_already_committed(self):
+        # Simulate a stop after the nested part of 0001 was committed, before src's commit.
+        steps, _ = patches.plan_apply(self.src, self.dir, False, False)
+        upto = next(i for i, s in enumerate(steps) if s.description == "Commit brumel/core/0001-both.patch in third_party/dep/src")
+        brumeltools.run_plan(steps[: upto + 1])
+        steps, notes = patches.plan_apply(self.src, self.dir, False, False)
+        self.assertTrue(any("already committed there" in n for n in notes))
+        brumeltools.run_plan(steps)
+        self.assertEqual(len(patches.applied_commits(self.dep)), 2)
+        self.assertEqual((self.src / "hello.txt").read_text(), "line one\nline two\nline three\n")
+
+    def test_refresh_joins_nested_changes_with_their_prefix(self):
+        self.apply()
+        (self.dep / "dep.txt").write_bytes(b"dep one\ndep two, edited\n")
+        run_git(self.dep, "commit", "--quiet", "-a", "--fixup=HEAD~1")
+        run_git(self.dep, "-c", "sequence.editor=true", "rebase", "--quiet", "-i", "--autosquash",
+                patches.BASE_REF)
+        steps, notes = patches.plan_refresh(self.src, self.dir)
+        self.assertIn("update brumel/core/0001-both.patch", notes)
+        brumeltools.run_plan(steps)
+        text = (self.dir / "brumel/core/0001-both.patch").read_bytes()
+        self.assertTrue(text.startswith(GOOD_HEADER.encode()))
+        self.assertIn(b"+++ b/third_party/dep/src/dep.txt", text)
+        self.assertIn(b"+dep two, edited", text)
+        self.assertIn(b"+line two", text)
+
+    def test_nested_commit_without_src_ledger_is_refused(self):
+        self.apply()
+        (self.dep / "x.txt").write_text("x\n")
+        run_git(self.dep, "add", "x.txt")
+        run_git(self.dep, "commit", "--quiet", "-m", "x", "-m", "Brumel-Patch: brumel/core/0003-x.patch")
+        with self.assertRaises(brumeltools.ToolError):
+            patches.plan_refresh(self.src, self.dir)
+
+
 # --------------------------------------------------------------------------- #
 # build.py
 # --------------------------------------------------------------------------- #
@@ -402,6 +532,10 @@ class BuildProfileTests(unittest.TestCase):
         steps = build.plan_build(self.dir, profile, ["chrome"], build=True)
         self.assertEqual(steps[1].argv, ["gn", "gen", "out/Dev"])
         self.assertEqual(steps[2].argv, ["autoninja", "-C", "out/Dev", "chrome"])
+        limited = build.plan_build(self.dir, profile, ["chrome"], build=True, jobs=8)
+        self.assertEqual(limited[2].argv, ["autoninja", "-j", "8", "-C", "out/Dev", "chrome"])
+        with self.assertRaises(SystemExit), mock.patch("sys.stderr"):
+            build.parse_args(["build", "--checkout", ".", "--profile", "dev", "--jobs", "0"])
         steps[0].action()
         written = (self.dir / "out" / "Dev" / "args.gn").read_text(encoding="utf-8")
         self.assertIn("is_component_build = true", written)

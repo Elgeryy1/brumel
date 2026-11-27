@@ -163,7 +163,7 @@ def resolve_src(path: Path) -> Path:
     raise ToolError(f"{path} does not look like a Chromium src checkout (no .gn and BUILD.gn)")
 
 
-def plan_build(src: Path, profile: Profile, targets: list[str], build: bool) -> list[Step]:
+def plan_build(src: Path, profile: Profile, targets: list[str], build: bool, jobs: int | None = None) -> list[Step]:
     out = out_dir_name(profile.name)
     args_path = src / out / "args.gn"
     content = compose_args_gn(profile)
@@ -178,8 +178,17 @@ def plan_build(src: Path, profile: Profile, targets: list[str], build: bool) -> 
         Step(f"Generate build files in {out}", argv=["gn", "gen", out], cwd=src, env=env),
     ]
     if build:
-        steps.append(Step(f"Build {' '.join(targets)}", argv=["autoninja", "-C", out, *targets], cwd=src, env=env))
+        jobs_args = ["-j", str(jobs)] if jobs else []
+        steps.append(Step(f"Build {' '.join(targets)}", argv=["autoninja", *jobs_args, "-C", out, *targets],
+                          cwd=src, env=env))
     return steps
+
+
+def positive_int(text: str) -> int:
+    value = int(text)
+    if value < 1:
+        raise argparse.ArgumentTypeError("must be 1 or more")
+    return value
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -197,6 +206,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         if name == "build":
             cmd.add_argument("--target", action="append", dest="targets", metavar="TARGET",
                              help=f"Ninja target (repeatable; default: {' '.join(DEFAULT_TARGETS)})")
+            cmd.add_argument("--jobs", "-j", type=positive_int, metavar="N",
+                             help="parallel compile jobs (default: autoninja's choice, every CPU thread). "
+                                  "Lower it when the machine has little free memory")
     return parser.parse_args(argv)
 
 
@@ -235,7 +247,8 @@ def main(argv: list[str] | None = None) -> int:
             f"Run: python3 scripts/overlay.py sync --checkout {args.checkout} --execute"
         )
     targets = args.targets if args.command == "build" and args.targets else list(DEFAULT_TARGETS)
-    steps = plan_build(src, profile, targets, build=args.command == "build")
+    steps = plan_build(src, profile, targets, build=args.command == "build",
+                       jobs=getattr(args, "jobs", None))
     print_plan(f"{args.command} profile {profile.name} in {src}", steps, args.execute)
     if args.execute:
         run_plan(steps)
