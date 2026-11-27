@@ -32,6 +32,11 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   replaces the product name in Chromium's strings and renames their
   translations with the checkout's GRIT, keeping Chromium attribution. Not yet
   built.
+- First patch, `brumel/branding/0001-windows-install-mode.patch`: the Windows
+  install mode gets its own user data directory (`%LOCALAPPDATA%\Brumel`),
+  app and ProgIDs, launch scheme and COM class IDs, so it does not collide with
+  an installed Chromium. The sandbox AppContainer SID prefix is unchanged.
+  Applies to the pin; not yet built.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 

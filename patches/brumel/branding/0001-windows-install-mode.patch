@@ -1,0 +1,115 @@
+Description: Give the Windows install mode its own identity, so Brumel does not
+ share a profile, registry keys, file associations or COM registrations with an
+ installed Chromium: user data under %LOCALAPPDATA%\Brumel, app and ProgIDs
+ named Brumel, the brumel: launch scheme, and new GUIDs for Active Setup, the
+ toast activator, the elevation service and the tracing service. COM interface
+ IDs stay the same, because they belong to the IDL files and their pre-built
+ MIDL output. The sandbox AppContainer SID prefix is unchanged on purpose
+ (upstream value, so sandbox behavior is identical).
+Origin: brumel
+Module: branding
+Feature: CORE-004
+Upstreamable: no
+SPDX-License-Identifier: BSD-3-Clause
+
+diff --git a/chrome/install_static/chromium_install_modes.h b/chrome/install_static/chromium_install_modes.h
+--- a/chrome/install_static/chromium_install_modes.h
++++ b/chrome/install_static/chromium_install_modes.h
+@@ -21,7 +21,7 @@
+ 
+ // The brand-specific product name to be included as a component of the install
+ // and user data directory paths.
+-inline constexpr wchar_t kProductPathName[] = L"Chromium";
++inline constexpr wchar_t kProductPathName[] = L"Brumel";
+ 
+ // The brand-specific safe browsing client name.
+ inline constexpr char kSafeBrowsingName[] = "chromium";
+@@ -54,28 +54,28 @@
+         .logo_suffix = L"",  // No logo suffix for the primary install mode.
+         .app_guid =
+             L"",  // Empty app_guid since no integration with Google Update.
+-        .base_app_name = L"Chromium",              // A distinct base_app_name.
+-        .base_app_id = L"Chromium",                // A distinct base_app_id.
+-        .browser_prog_id_prefix = L"ChromiumHTM",  // Browser ProgID prefix.
++        .base_app_name = L"Brumel",                // A distinct base_app_name.
++        .base_app_id = L"Brumel",                  // A distinct base_app_id.
++        .browser_prog_id_prefix = L"BrumelHTM",    // Browser ProgID prefix.
+         .browser_prog_id_description =
+-            L"Chromium HTML Document",  // Browser ProgID description.
+-        .direct_launch_url_scheme = "chromium",
+-        .pdf_prog_id_prefix = L"ChromiumPDF",  // PDF ProgID prefix.
++            L"Brumel HTML Document",  // Browser ProgID description.
++        .direct_launch_url_scheme = "brumel",
++        .pdf_prog_id_prefix = L"BrumelPDF",    // PDF ProgID prefix.
+         .pdf_prog_id_description =
+-            L"Chromium PDF Document",  // PDF ProgID description.
++            L"Brumel PDF Document",  // PDF ProgID description.
+         .active_setup_guid =
+-            L"{7D2B3E1D-D096-4594-9D8F-A6667F12E0AC}",  // Active Setup
++            L"{CABA9154-A7C4-4A09-9318-F7287EA7C892}",  // Active Setup
+                                                         // GUID.
+-        .toast_activator_clsid = {0x635EFA6F,
+-                                  0x08D6,
+-                                  0x4EC9,
+-                                  {0xBD, 0x14, 0x8A, 0x0F, 0xDE, 0x97, 0x51,
+-                                   0x59}},  // Toast Activator CLSID.
+-        .elevator_clsid = {0xD133B120,
+-                           0x6DB4,
+-                           0x4D6B,
+-                           {0x8B, 0xFE, 0x83, 0xBF, 0x8C, 0xA1, 0xB1,
+-                            0xB0}},  // Elevator CLSID.
++        .toast_activator_clsid = {0x885D938C,
++                                  0xCA2A,
++                                  0x4630,
++                                  {0x9F, 0xA0, 0xB9, 0x9A, 0x0F, 0x69, 0xCC,
++                                   0x4E}},  // Toast Activator CLSID.
++        .elevator_clsid = {0x08D2C723,
++                           0x5CB8,
++                           0x4DD9,
++                           {0xA1, 0x47, 0xF6, 0x54, 0x6A, 0x87, 0xF6,
++                            0x5A}},  // Elevator CLSID.
+         .elevator_iid = {0xbb19a0e5,
+                          0xc6,
+                          0x4966,
+@@ -83,11 +83,11 @@
+                           0x3a}},  // IElevator IID and TypeLib
+         // {BB19A0E5-00C6-4966-94B2-5AFEC6FED93A}.
+         .old_elevator_iids = {},
+-        .tracing_service_clsid = {0x83f69367,
+-                                  0x442d,
+-                                  0x447f,
+-                                  {0x8b, 0xcc, 0x0e, 0x3f, 0x97, 0xbe, 0x9c,
+-                                   0xf2}},  // SystemTraceSession CLSID.
++        .tracing_service_clsid = {0xfd80b9d1,
++                                  0xba25,
++                                  0x4122,
++                                  {0xbe, 0x13, 0x8a, 0x2b, 0xcd, 0x79, 0x54,
++                                   0x57}},  // SystemTraceSession CLSID.
+         .tracing_service_iid = {0xe0b03e2d,
+                                 0x7682,
+                                 0x4d83,
+diff --git a/chrome/test/mini_installer/variable_expander.py b/chrome/test/mini_installer/variable_expander.py
+--- a/chrome/test/mini_installer/variable_expander.py
++++ b/chrome/test/mini_installer/variable_expander.py
+@@ -389,10 +389,10 @@
+                     'CHROME_CLIENT_STATE_KEY': 'Software\\Chromium',
+                     'CHROME_DIRECT_LAUNCH_SCHEME': 'chromium',
+                     'CHROME_TOAST_ACTIVATOR_CLSID': (
+-                        '{635EFA6F-08D6-4EC9-BD14-8A0FDE975159}'
++                        '{885D938C-CA2A-4630-9FA0-B99A0F69CC4E}'
+                     ),
+                     'CHROME_ELEVATOR_CLSID': (
+-                        '{D133B120-6DB4-4D6B-8BFE-83BF8CA1B1B0}'
++                        '{08D2C723-5CB8-4DD9-A147-F6546A87F65A}'
+                     ),
+                     'CHROME_ELEVATOR_IID': (
+                         '{BB19A0E5-00C6-4966-94B2-5AFEC6FED93A}'
+@@ -401,7 +401,7 @@
+                     'CHROME_ELEVATION_SERVICE_DISPLAY_NAME': (
+                         'Chromium Elevation Service (ChromiumElevationService)'
+                     ),
+-                    'TRACING_SERVICE_CLSID': '{83F69367-442D-447F-8BCC-0E3F97BE9CF2}',
++                    'TRACING_SERVICE_CLSID': '{FD80B9D1-BA25-4122-BE13-8A2BCD795457}',
+                     'TRACING_SERVICE_STORAGE_DIR': os.path.join(
+                         shell.SHGetFolderPath(
+                             0, shellcon.CSIDL_WINDOWS, None, 0

@@ -1,0 +1,3 @@
+# Brumel patch series. Order matters; see patches/README.md.
+# --- branding ---
+brumel/branding/0001-windows-install-mode.patch

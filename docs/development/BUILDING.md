@@ -10,7 +10,7 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 | --- | --- |
 | Pinned upstream version (`config/upstream.json`) | Available (candidate pin; commit recorded after the first verified fetch, not yet built) |
 | Upstream version check (`scripts/upstream/check_upstream.py`) | Available |
-| Patch series conventions (`patches/README.md`) | Available (no patches yet) |
+| Patch series conventions (`patches/README.md`) | Available; first patch (Windows install mode branding) applies to the pin, not yet built |
 | Fetch script (`scripts/fetch.py`) | In Development — written and unit-tested, not yet run against Chromium |
 | Patch apply / refresh / check tooling (`scripts/patches.py`, [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)) | In Development — tested on small repositories; `check` runs in CI |
 | GN argument profiles ([`config/gn/`](../../config/gn/dev.gn)) | In Development — guard runs in CI; arguments not yet validated by a build |
