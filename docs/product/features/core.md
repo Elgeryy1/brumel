@@ -18,9 +18,9 @@
 | [CORE-001](#core-001) | Reproducible upstream fetch | Essential | Planned | P0 | 1 |
 | [CORE-002](#core-002) | Patch series system | Essential | Planned | P0 | 1 |
 | [CORE-003](#core-003) | Upstream release tracking automation | Essential | Planned | P0 | 1 |
-| [CORE-004](#core-004) | Brumel branding | Essential | Planned | P0 | 1 |
+| [CORE-004](#core-004) | Brumel branding | Essential | In Development | P0 | 1 |
 | [CORE-005](#core-005) | Module system and feature registry | Essential | Planned | P0 | 1 |
-| [CORE-006](#core-006) | De-Googling and Google API audit | Essential | Planned | P0 | 1 |
+| [CORE-006](#core-006) | De-Googling and Google API audit | Essential | In Development | P0 | 1 |
 | [CORE-007](#core-007) | CI build and release signing pipeline | Essential | Planned | P0 | 1 |
 | [CORE-008](#core-008) | SBOM and dependency governance | Essential | Planned | P1 | 1 |
 | [CORE-009](#core-009) | Windows installer packaging | Essential | Planned | P0 | 1 |
@@ -146,7 +146,7 @@ Automation that detects new Chromium stable and security releases and opens a re
 
 ## CORE-004 — Brumel branding
 
-`Essential` · `Planned` · **P0** · Impact High · Complexity M · Phase 1 (Technical Foundation) · Pillar Foundation · Epic EP-CORE-02 (Branding, packaging and signed updates)
+`Essential` · `In Development` · **P0** · Impact High · Complexity M · Phase 1 (Technical Foundation) · Pillar Foundation · Epic EP-CORE-02 (Branding, packaging and signed updates)
 
 Product name, icons, strings, installer assets and internal page branding replaced through patches and resource overrides.
 
@@ -196,7 +196,7 @@ Registry that declares every Brumel module, its prefs, flags, services and backg
 
 ## CORE-006 — De-Googling and Google API audit
 
-`Essential` · `Planned` · **P0** · Impact High · Complexity M · Phase 1 (Technical Foundation) · Pillar Foundation · Epic EP-CORE-01 (Reproducible build, upstream tracking and supply chain)
+`Essential` · `In Development` · **P0** · Impact High · Complexity M · Phase 1 (Technical Foundation) · Pillar Foundation · Epic EP-CORE-01 (Reproducible build, upstream tracking and supply chain)
 
 Audit and removal/replacement of Google service endpoints and API keys, reusing ungoogled-chromium patches where suitable.
 

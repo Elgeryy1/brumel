@@ -1,3 +1,19 @@
 # Brumel patch series. Order matters; see patches/README.md.
+# --- ungoogled-chromium (158.0.8127.88-1), selected; see docs/privacy/DEGOOGLING_AUDIT.md ---
+upstream-ungoogled/core/inox-patchset/0003-disable-autofill-download-manager.patch
+upstream-ungoogled/core/inox-patchset/0015-disable-update-pings.patch
+upstream-ungoogled/core/inox-patchset/0021-disable-rlz.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-crash-reporter.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-google-host-detection.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-profile-avatar-downloading.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-gcm.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-domain-reliability.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-gaia.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-fonts-googleapis-references.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-webrtc-log-uploader.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-network-time-tracker.patch
+upstream-ungoogled/core/ungoogled-chromium/disable-mei-preload.patch
+upstream-ungoogled/core/ungoogled-chromium/remove-navigation-source-param.patch
+upstream-ungoogled/core/ungoogled-chromium/toggle-translation-via-switch.patch
 # --- branding ---
 brumel/branding/0001-windows-install-mode.patch

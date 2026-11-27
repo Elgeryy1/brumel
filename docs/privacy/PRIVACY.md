@@ -41,7 +41,7 @@ Retention values are proposed defaults, all user-configurable.
 
 ## 3. Network connections and Google service replacements
 
-Chromium contacts Google services for several features. Brumel will audit every outbound connection (starting from ungoogled-chromium's work, [ADR-0002](../architecture/adr/0002-chromium-base-selection.md)) and classify each as **removed**, **replaced** or **user opt-in**. The full list will be published in Glass Box and in this document before the first public build.
+Chromium contacts Google services for several features. Brumel will audit every outbound connection (starting from ungoogled-chromium's work, [ADR-0002](../architecture/adr/0002-chromium-base-selection.md)) and classify each as **removed**, **replaced** or **user opt-in**. The full list will be published in Glass Box and in this document before the first public build. The working inventory, with the patch that handles each service, is the [de-Googling audit](DEGOOGLING_AUDIT.md) (In Development, not yet checked against a running build).
 
 | Chromium / Chrome function | Default in Chrome | Brumel plan | Status |
 | --- | --- | --- | --- |
@@ -52,9 +52,9 @@ Chromium contacts Google services for several features. Brumel will audit every 
 | Spellcheck dictionaries | Downloaded from Google | Mirror Hunspell dictionaries on Brumel component channel | Planned |
 | Enhanced spellcheck | Google cloud | Removed; local only | Planned |
 | Component updates (Widevine, CRLSets, etc.) | Google component updater | Brumel component server for Brumel components; Google-provided components only where license allows and user benefits (e.g. CRLSet-equivalent revocation data) — to be validated | Research |
-| Crash reporting | Google | Opt-in, Brumel-operated or self-hostable endpoint | Planned |
-| Domain reliability, usage stats, field trials | Google | Removed | Planned |
-| Network time | Google | Removed or replaced with OS time checks | Research |
+| Crash reporting | Google | Opt-in, Brumel-operated or self-hostable endpoint | In Development (upload disabled by an imported patch, not yet built; opt-in endpoint Planned) |
+| Domain reliability, usage stats, field trials | Google | Removed | In Development (domain reliability removed by an imported patch, not yet built; field-trial seeds are not fetched by unbranded builds) |
+| Network time | Google | Removed or replaced with OS time checks | In Development (removed by an imported patch, not yet built) |
 | Media Router / Cast discovery | Google Cast | Opt-in, local network only, subject to compatibility | Research |
 | Prefetch / preconnect hints | Various | Smart Preload only to user-visited sites; no prediction services | Planned |
 | Brumel updates | — | Brumel update server; requests carry version/platform/channel only | Planned |
