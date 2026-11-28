@@ -62,6 +62,15 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   overlay and rebrand apply cleanly, and the browser starts as "Brumel" with
   the sandbox on. `BUILDING.md` documents the AppArmor profile Ubuntu needs
   instead of `--no-sandbox`.
+- First branded Windows x64 `release` build and unsigned installer,
+  cross-compiled on Linux. Run headless without installing it, the browser
+  starts as "Brumel" with the renderer sandbox on. The installer has not been
+  run and nothing is published. `BUILDING.md` documents the steps.
+- Build fixes for the selected ungoogled-chromium patches on Windows:
+  `brumel/fixes/0002-windows-installer-without-rlz.patch` removes the
+  installer's dependency on the disabled RLZ library, and
+  `brumel/fixes/0003-crashpad-without-unreachable-code.patch` keeps Crashpad off
+  without unreachable code, so warnings stay errors.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
