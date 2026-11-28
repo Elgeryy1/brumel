@@ -1,0 +1,129 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main window mockup, horizontal tabs | Brumel design</title>
+  <meta name="description" content="Brumel main window with the default horizontal tab strip, toolbar and the quiet New Tab page.">
+  <link rel="stylesheet" href="mockups.css">
+  <script src="mockups.js" defer></script>
+</head>
+<body>
+<!--ICONS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-reload" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.46-3.54"/><path d="M13 2.5v3h-3"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3.2-2.1 5.4-5 6.6-2.9-1.2-5-3.4-5-6.6v-4z"/></symbol>
+  <symbol id="i-extensions" viewBox="0 0 16 16"><path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2.5V10M4.5 7 8 10.5 11.5 7M3 13.5h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><circle cx="8" cy="3.5" r="0.6"/><circle cx="8" cy="8" r="0.6"/><circle cx="8" cy="12.5" r="0.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 16 16"><path d="M2.5 11.5a5.5 5.5 0 1 1 11 0"/><path d="m8 11.5 2.5-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.2 14 13H2z"/><path d="M8 6.5v3M8 11.3v.2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v4M8 4.8v.2"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M6.5 3v10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></symbol>
+  <symbol id="i-muted" viewBox="0 0 16 16"><path d="M2.5 6h2l3-2.5v9l-3-2.5h-2z"/><path d="m10.5 6 3 4M13.5 6l-3 4"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
+  <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
+</svg>
+<!--/ICONS-->
+<main class="mock">
+  <header class="mock-head">
+    <div>
+      <h1>Main window, horizontal tabs</h1>
+      <p>The default layout (UI-018): tab strip, toolbar and the quiet New Tab page (UI-022). Surfaces S-WIN-01, S-WIN-03, S-WIN-07 and S-WEB-01 in the <a href="../UI_INVENTORY.md">inventory</a>.</p>
+    </div>
+    <fieldset class="segmented" aria-label="Mockup theme">
+      <label><input type="radio" name="mock-theme" value="system" checked>System</label>
+      <label><input type="radio" name="mock-theme" value="light">Light</label>
+      <label><input type="radio" name="mock-theme" value="dark">Dark</label>
+      <label><input type="radio" name="mock-theme" value="oled">OLED</label>
+    </fieldset>
+  </header>
+
+  <figure class="window" aria-label="Brumel window mockup">
+    <div class="tabstrip">
+      <div role="tablist" aria-label="Tabs">
+        <button class="tab tab--pinned" role="tab" aria-selected="false" aria-label="Pinned tab: Calendar" type="button"><span class="tab__fav" aria-hidden="true">C</span></button>
+        <span class="tab-group">Trip</span>
+        <button class="tab tab--grouped" role="tab" aria-selected="false" type="button" aria-label="Train times, in group Trip"><span class="tab__fav" aria-hidden="true">T</span><span class="tab__title">Train times</span></button>
+        <button class="tab tab--grouped tab--suspended" role="tab" aria-selected="false" type="button" aria-label="Hotel booking, suspended to save memory, in group Trip" title="Suspended to save memory. Opens when you select it."><span class="tab__fav" aria-hidden="true">H</span><span class="tab__title">Hotel booking</span><span class="tab__state" aria-hidden="true">Suspended</span></button>
+        <button class="tab" role="tab" aria-selected="false" type="button" aria-label="Podcast player, muted"><span class="tab__fav" aria-hidden="true">P</span><span class="tab__title">Podcast player</span><svg class="icon" aria-hidden="true"><use href="#i-muted"/></svg></button>
+        <button class="tab" role="tab" aria-selected="true" type="button"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><span class="tab__title">New Tab</span><span class="icon-btn icon-btn--sm" aria-hidden="true"><svg class="icon"><use href="#i-close"/></svg></span></button>
+      </div>
+      <button class="icon-btn" type="button" aria-label="New tab"><svg class="icon"><use href="#i-plus"/></svg></button>
+    </div>
+
+    <div class="toolbar">
+      <button class="icon-btn" type="button" aria-label="Back" disabled><svg class="icon"><use href="#i-back"/></svg></button>
+      <button class="icon-btn hide-phone" type="button" aria-label="Forward" disabled><svg class="icon"><use href="#i-forward"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Reload"><svg class="icon"><use href="#i-reload"/></svg></button>
+      <label class="omnibox">
+        <span class="visually-hidden">Address and search bar</span>
+        <svg class="icon muted" aria-hidden="true"><use href="#i-search"/></svg>
+        <input type="text" placeholder="Search or type a web address" autocomplete="off">
+      </label>
+      <button class="cw-btn" type="button" aria-label="Clean Web: nothing to block on this page"><svg class="icon"><use href="#i-shield"/></svg></button>
+      <span class="toolbar__sep hide-narrow" aria-hidden="true"></span>
+      <button class="icon-btn hide-narrow" type="button" aria-label="Extensions"><svg class="icon"><use href="#i-extensions"/></svg></button>
+      <button class="icon-btn hide-narrow" type="button" aria-label="Downloads"><svg class="icon"><use href="#i-download"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Profile: Personal, local only"><span class="avatar" aria-hidden="true">G</span></button>
+      <button class="icon-btn" type="button" aria-label="Brumel menu"><svg class="icon"><use href="#i-more"/></svg></button>
+    </div>
+
+    <div class="viewport">
+      <section class="ntp" aria-label="New Tab page">
+        <label class="ntp__search">
+          <svg class="icon icon--20" aria-hidden="true"><use href="#i-search"/></svg>
+          <span class="visually-hidden">Search the web</span>
+          <input type="search" placeholder="Search the web" autocomplete="off">
+        </label>
+        <ul class="shortcuts" aria-label="Your shortcuts">
+          <li><a class="shortcut" href="#"><span class="shortcut__icon" aria-hidden="true">W</span><span class="shortcut__name">Wikipedia</span></a></li>
+          <li><a class="shortcut" href="#"><span class="shortcut__icon" aria-hidden="true">G</span><span class="shortcut__name">GitHub</span></a></li>
+          <li><a class="shortcut" href="#"><span class="shortcut__icon" aria-hidden="true">M</span><span class="shortcut__name">Mail</span></a></li>
+          <li><a class="shortcut" href="#"><span class="shortcut__icon" aria-hidden="true">N</span><span class="shortcut__name">News</span></a></li>
+          <li><button class="shortcut shortcut--add" type="button"><span class="shortcut__icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span><span class="shortcut__name">Add shortcut</span></button></li>
+        </ul>
+        <button class="btn btn--quiet ntp__corner" type="button">Customize this page</button>
+      </section>
+    </div>
+  </figure>
+
+  <p class="mock-note">Tab titles, shortcuts and the profile initial are sample content for layout. The right end of the tab strip is left empty on purpose: on Windows the OS caption buttons sit there. The New Tab page makes no network request until you type, and has no feed or sponsored tiles.</p>
+
+  <section class="mock-section" aria-labelledby="states-tabs">
+    <h2 id="states-tabs">Tab states</h2>
+    <p class="mock-note">State is shown by shape and text as well as colour. A suspended tab keeps its title and position; its favicon sits in a dashed ring and its accessible name says it is suspended (ENG-019).</p>
+    <div class="mock-grid">
+      <div class="mock-state"><h3>Active</h3><div class="tabstrip tabstrip--sample"><button class="tab" role="tab" aria-selected="true" type="button"><span class="tab__fav" aria-hidden="true">D</span><span class="tab__title">Documentation</span></button></div></div>
+      <div class="mock-state"><h3>Inactive</h3><div class="tabstrip tabstrip--sample"><button class="tab" role="tab" aria-selected="false" type="button"><span class="tab__fav" aria-hidden="true">D</span><span class="tab__title">Documentation</span></button></div></div>
+      <div class="mock-state"><h3>Suspended</h3><div class="tabstrip tabstrip--sample"><button class="tab tab--suspended" role="tab" aria-selected="false" type="button" aria-label="Documentation, suspended to save memory"><span class="tab__fav" aria-hidden="true">D</span><span class="tab__title">Documentation</span><span class="tab__state" aria-hidden="true">Suspended</span></button></div></div>
+      <div class="mock-state"><h3>Pinned</h3><div class="tabstrip tabstrip--sample"><button class="tab tab--pinned" role="tab" aria-selected="false" type="button" aria-label="Pinned tab: Documentation"><span class="tab__fav" aria-hidden="true">D</span></button></div></div>
+    </div>
+  </section>
+
+  <section class="mock-section" aria-labelledby="states-cw">
+    <h2 id="states-cw">Clean Web button</h2>
+    <p class="mock-note">The button shows a count only when something was blocked on this page, and says so when Clean Web is off for the site. Numbers are sample values.</p>
+    <div class="mock-grid">
+      <div class="mock-state"><h3>Nothing blocked</h3><div class="toolbar toolbar--sample"><button class="cw-btn" type="button" aria-label="Clean Web: nothing blocked on this page"><svg class="icon"><use href="#i-shield"/></svg></button></div></div>
+      <div class="mock-state"><h3>Items blocked</h3><div class="toolbar toolbar--sample"><button class="cw-btn" type="button" aria-label="Clean Web: 14 items blocked on this page"><svg class="icon"><use href="#i-shield"/></svg><span class="num">14</span></button></div></div>
+      <div class="mock-state"><h3>Off for this site</h3><div class="toolbar toolbar--sample"><button class="cw-btn" type="button" aria-label="Clean Web is off for this site"><svg class="icon"><use href="#i-shield"/></svg><span>Off</span></button></div></div>
+      <div class="mock-state"><h3>Panel open</h3><div class="toolbar toolbar--sample"><button class="cw-btn" type="button" aria-expanded="true" aria-label="Clean Web: 14 items blocked on this page"><svg class="icon"><use href="#i-shield"/></svg><span class="num">14</span></button></div></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

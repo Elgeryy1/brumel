@@ -43,6 +43,10 @@ Brumel's slogan is **Less noise. More control.** The interface has to deliver on
 
 ## 3. Colour
 
+The semantic colour roles built on this palette, with every pair's measured contrast, are
+generated from [tokens/brumel.tokens.json](tokens/brumel.tokens.json); see
+[INTERFACE.md § 3](INTERFACE.md#3-tokens).
+
 ### 3.1 Brand palette
 
 | Token | Hex | Use |

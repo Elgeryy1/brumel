@@ -1,0 +1,184 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings mockup, Performance and Clean Web | Brumel design</title>
+  <meta name="description" content="Brumel settings shell with the Performance and Clean Web sections, and their loading, empty and error states.">
+  <link rel="stylesheet" href="mockups.css">
+  <script src="mockups.js" defer></script>
+</head>
+<body>
+<!--ICONS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-reload" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.46-3.54"/><path d="M13 2.5v3h-3"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3.2-2.1 5.4-5 6.6-2.9-1.2-5-3.4-5-6.6v-4z"/></symbol>
+  <symbol id="i-extensions" viewBox="0 0 16 16"><path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2.5V10M4.5 7 8 10.5 11.5 7M3 13.5h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><circle cx="8" cy="3.5" r="0.6"/><circle cx="8" cy="8" r="0.6"/><circle cx="8" cy="12.5" r="0.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 16 16"><path d="M2.5 11.5a5.5 5.5 0 1 1 11 0"/><path d="m8 11.5 2.5-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.2 14 13H2z"/><path d="M8 6.5v3M8 11.3v.2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v4M8 4.8v.2"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M6.5 3v10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></symbol>
+  <symbol id="i-muted" viewBox="0 0 16 16"><path d="M2.5 6h2l3-2.5v9l-3-2.5h-2z"/><path d="m10.5 6 3 4M13.5 6l-3 4"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
+  <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
+</svg>
+<!--/ICONS-->
+<main class="mock">
+  <header class="mock-head">
+    <div>
+      <h1>Settings: Performance and Clean Web</h1>
+      <p>The settings shell (S-WEB-02) with two Internal Alpha sections: Performance (S-WEB-04) and Clean Web (S-WEB-05). Built as WebUI on Chromium’s settings page.</p>
+    </div>
+    <fieldset class="segmented" aria-label="Mockup theme">
+      <label><input type="radio" name="mock-theme" value="system" checked>System</label>
+      <label><input type="radio" name="mock-theme" value="light">Light</label>
+      <label><input type="radio" name="mock-theme" value="dark">Dark</label>
+      <label><input type="radio" name="mock-theme" value="oled">OLED</label>
+    </fieldset>
+  </header>
+
+  <div class="window window--page" role="group" aria-label="Settings page mockup">
+    <div class="webui viewport">
+      <nav class="webui__nav" aria-label="Settings sections">
+        <p class="webui__brand"><img class="logo-light" src="../../../assets/branding/logo/mark.svg" alt="" width="24" height="24"><img class="logo-dark" src="../../../assets/branding/logo/mark-dark.svg" alt="" width="24" height="24">Settings</p>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg>You and this device</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg>Appearance</a>
+        <a class="navlink" href="#performance" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Performance</a>
+        <a class="navlink" href="#clean-web"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Clean Web</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Privacy and security</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-tune"/></svg>Site settings</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Downloads</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Startup and sessions</a>
+        <a class="navlink" href="#"><svg class="icon" aria-hidden="true"><use href="#i-import"/></svg>Backups and reset</a>
+        <a class="navlink" href="about.html"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>About Brumel</a>
+      </nav>
+
+      <div class="webui__main">
+        <label class="ntp__search webui__search">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <span class="visually-hidden">Search settings</span>
+          <input type="search" placeholder="Search settings" autocomplete="off">
+        </label>
+
+        <section class="group" id="performance" aria-labelledby="perf-title">
+          <h2 id="perf-title" class="page-title">Performance</h2>
+          <p class="page-lede">Choose how Brumel balances speed, memory and battery. Changes apply at once and can be undone.</p>
+          <fieldset class="panel panel--fieldset" aria-label="Performance profile">
+            <label class="choice"><input type="radio" name="profile" value="balanced" checked><span><strong>Balanced</strong><span>Suspends tabs you have not used for a while and limits background work. Recommended for most devices.</span></span></label>
+            <label class="choice"><input type="radio" name="profile" value="performance"><span><strong>Performance</strong><span>Keeps more tabs loaded and preloads likely pages. Uses more memory and power.</span></span></label>
+            <label class="choice"><input type="radio" name="profile" value="battery"><span><strong>Battery saver</strong><span>Suspends tabs sooner, lowers background frame rates and turns off preloading.</span></span></label>
+          </fieldset>
+
+          <div class="panel">
+            <div class="row">
+              <div class="row__text"><strong id="susp-l">Suspend inactive tabs</strong><span id="susp-d">Tabs that play audio, hold unsaved form text, use the camera or microphone, or are pinned are never suspended.</span></div>
+              <label class="switch"><input type="checkbox" checked aria-labelledby="susp-l" aria-describedby="susp-d"><span class="switch__track" aria-hidden="true"></span></label>
+            </div>
+            <div class="row">
+              <div class="row__text"><strong id="after-l">Suspend after</strong><span>Counted from the last time you looked at the tab.</span></div>
+              <select class="select" aria-labelledby="after-l"><option>30 minutes</option><option selected>1 hour</option><option>4 hours</option></select>
+            </div>
+            <div class="row">
+              <div class="row__text"><strong id="low-l">Light mode for low-memory devices</strong><span id="low-d">Fewer animations, less preloading and earlier tab suspension. Suggested on devices with 8 GB of memory or less.</span></div>
+              <label class="switch"><input type="checkbox" aria-labelledby="low-l" aria-describedby="low-d"><span class="switch__track" aria-hidden="true"></span></label>
+            </div>
+          </div>
+
+          <div class="group">
+            <h3>Never suspend these sites</h3>
+            <div class="panel empty">
+              <p>No exceptions yet. Sites you add here stay loaded in the background.</p>
+              <button class="btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Add site</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="group" id="clean-web" aria-labelledby="cw-title">
+          <h2 id="cw-title" class="page-title">Clean Web</h2>
+          <p class="page-lede">Block ads, trackers and needless interruptions. Blocking runs on this device; filter lists are the only thing Clean Web downloads.</p>
+          <fieldset class="panel panel--fieldset" aria-label="Blocking level">
+            <label class="choice"><input type="radio" name="level" value="standard" checked><span><strong>Standard</strong><span>Blocks ads and trackers with widely used filter lists. Rarely breaks a site.</span></span></label>
+            <label class="choice"><input type="radio" name="level" value="strict"><span><strong>Strict</strong><span>Adds stricter lists. More sites may need an exception.</span></span></label>
+          </fieldset>
+
+          <div class="panel">
+            <div class="row"><div class="row__text"><strong id="pop-l">Block pop-ups and pop-unders</strong></div><label class="switch"><input type="checkbox" checked aria-labelledby="pop-l"><span class="switch__track" aria-hidden="true"></span></label></div>
+            <div class="row"><div class="row__text"><strong id="auto-l">Block autoplay with sound</strong><span>Video starts when you press play.</span></div><label class="switch"><input type="checkbox" checked aria-labelledby="auto-l"><span class="switch__track" aria-hidden="true"></span></label></div>
+            <div class="row"><div class="row__text"><strong id="notif-l">Quiet notification requests</strong><span>Sites cannot interrupt you to ask. Allow one from the address bar when you want it.</span></div><label class="switch"><input type="checkbox" checked aria-labelledby="notif-l"><span class="switch__track" aria-hidden="true"></span></label></div>
+            <div class="row"><div class="row__text"><strong id="param-l">Remove tracking parameters from links</strong><span>For example utm_source and fbclid, in links you open and links you copy.</span></div><label class="switch"><input type="checkbox" checked aria-labelledby="param-l"><span class="switch__track" aria-hidden="true"></span></label></div>
+          </div>
+
+          <div class="group">
+            <h3>Filter lists</h3>
+            <div class="panel table-wrap">
+              <table class="table table--stack">
+                <thead><tr><th scope="col">List</th><th scope="col">Blocks</th><th scope="col">Updated</th><th scope="col">On</th></tr></thead>
+                <tbody>
+                  <tr><td data-label="List">EasyList</td><td class="muted" data-label="Blocks">Ads</td><td class="muted num" data-label="Updated">Today</td><td data-label="On"><label class="switch"><input type="checkbox" checked aria-label="EasyList on"><span class="switch__track" aria-hidden="true"></span></label></td></tr>
+                  <tr><td data-label="List">EasyPrivacy</td><td class="muted" data-label="Blocks">Trackers</td><td class="muted num" data-label="Updated">Today</td><td data-label="On"><label class="switch"><input type="checkbox" checked aria-label="EasyPrivacy on"><span class="switch__track" aria-hidden="true"></span></label></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="group">
+            <h3>Sites where Clean Web is off</h3>
+            <div class="panel">
+              <div class="row"><div class="row__text"><strong>shop.example</strong><span>Turned off from the Clean Web panel</span></div><button class="btn btn--quiet" type="button">Turn back on</button></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note">The filter lists, the list update time and the site exception are sample content. The final list set is decided by SHD-001 and the native blocking ADR. Which profile is the default, and the suspension delays, are proposals to measure in Internal Alpha, not results.</p>
+
+  <section class="mock-section" aria-labelledby="states-settings">
+    <h2 id="states-settings">Data states</h2>
+    <div class="mock-grid">
+      <div class="mock-state">
+        <h3>Filter lists loading</h3>
+        <div class="panel" aria-busy="true" aria-label="Loading filter lists">
+          <div class="row"><span class="skeleton skeleton--w40"></span><span class="skeleton skeleton--w40"></span></div>
+          <div class="row"><span class="skeleton skeleton--w60"></span><span class="skeleton skeleton--w40"></span></div>
+        </div>
+      </div>
+      <div class="mock-state">
+        <h3>Filter lists failed to update</h3>
+        <div class="panel">
+          <div class="row">
+            <div class="status status--danger"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><p><strong>Could not reach the list server.</strong> Blocking keeps using the lists from the last update.</p></div>
+            <button class="btn" type="button">Retry</button>
+          </div>
+        </div>
+      </div>
+      <div class="mock-state">
+        <h3>Profile changed, with undo</h3>
+        <div class="panel">
+          <div class="row">
+            <div class="status status--success"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><p>Switched to Battery saver.</p></div>
+            <button class="btn btn--quiet" type="button">Undo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

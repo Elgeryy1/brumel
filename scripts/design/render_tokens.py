@@ -37,7 +37,7 @@ FORCED = {
     "frame": "Canvas", "toolbar": "Canvas", "surface": "Canvas", "raised": "Canvas",
     "hover": "Canvas", "selected": "Highlight", "ink": "CanvasText", "ink-muted": "CanvasText",
     "accent": "LinkText", "accent-fill": "ButtonText", "on-accent": "ButtonFace",
-    "focus": "Highlight", "control-border": "ButtonText", "divider": "GrayText",
+    "focus": "Highlight", "accent-fill-hover": "ButtonText", "control-border": "ButtonText", "divider": "GrayText",
     "danger": "CanvasText", "warning": "CanvasText", "success": "CanvasText",
 }
 
@@ -119,7 +119,7 @@ def render_css(data: dict, themes: dict[str, dict[str, str]]) -> str:
     out += [f"  {PREFIX}-color-{role}: {value};" for role, value in themes["light"].items()]
     out.append(f"  {PREFIX}-font-ui: {scale['font']['ui']};")
     out.append(f"  {PREFIX}-font-mono: {scale['font']['mono']};")
-    for group in ("text", "leading", "weight", "space", "radius", "control", "motion"):
+    for group in ("text", "leading", "weight", "space", "radius", "control", "motion", "shadow"):
         for key, value in scale[group].items():
             out.append(f"  {PREFIX}-{group}-{key}: {value};")
     out.append("}")

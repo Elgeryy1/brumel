@@ -1,0 +1,137 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>First run mockup | Brumel design</title>
+  <meta name="description" content="Brumel first run in three steps: choose the look, import from another browser, and finish without an account.">
+  <link rel="stylesheet" href="mockups.css">
+  <script src="mockups.js" defer></script>
+</head>
+<body>
+<!--ICONS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-reload" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.46-3.54"/><path d="M13 2.5v3h-3"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3.2-2.1 5.4-5 6.6-2.9-1.2-5-3.4-5-6.6v-4z"/></symbol>
+  <symbol id="i-extensions" viewBox="0 0 16 16"><path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2.5V10M4.5 7 8 10.5 11.5 7M3 13.5h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><circle cx="8" cy="3.5" r="0.6"/><circle cx="8" cy="8" r="0.6"/><circle cx="8" cy="12.5" r="0.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 16 16"><path d="M2.5 11.5a5.5 5.5 0 1 1 11 0"/><path d="m8 11.5 2.5-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.2 14 13H2z"/><path d="M8 6.5v3M8 11.3v.2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v4M8 4.8v.2"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M6.5 3v10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></symbol>
+  <symbol id="i-muted" viewBox="0 0 16 16"><path d="M2.5 6h2l3-2.5v9l-3-2.5h-2z"/><path d="m10.5 6 3 4M13.5 6l-3 4"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
+  <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
+</svg>
+<!--/ICONS-->
+<main class="mock">
+  <header class="mock-head">
+    <div>
+      <h1>First run</h1>
+      <p>Three steps at most and no account (CON-025): the look (UI-003, WRK-001), an optional import (CORE-044) and the finish, where the default-browser question is asked once (UI-019). Surfaces S-INS-04, S-INS-05 and S-INS-06.</p>
+    </div>
+    <fieldset class="segmented" aria-label="Mockup theme">
+      <label><input type="radio" name="mock-theme" value="system" checked>System</label>
+      <label><input type="radio" name="mock-theme" value="light">Light</label>
+      <label><input type="radio" name="mock-theme" value="dark">Dark</label>
+      <label><input type="radio" name="mock-theme" value="oled">OLED</label>
+    </fieldset>
+  </header>
+
+  <div class="window window--page" role="group" aria-label="First run mockup">
+    <div class="viewport firstrun">
+      <div class="firstrun__card">
+        <p class="firstrun__brand"><img class="logo-light" src="../../../assets/branding/logo/mark.svg" alt="" width="32" height="32"><img class="logo-dark" src="../../../assets/branding/logo/mark-dark.svg" alt="" width="32" height="32">Brumel</p>
+        <ol class="steps" aria-label="Setup steps">
+          <li data-step-marker aria-current="step"><b>1</b>Look</li>
+          <li data-step-marker><b>2</b>Import</li>
+          <li data-step-marker><b>3</b>Done</li>
+        </ol>
+
+        <section class="step" data-step data-active aria-labelledby="s1">
+          <h2 id="s1">How Brumel looks</h2>
+          <p>You can change all of this later in Settings.</p>
+          <div class="group">
+            <h3 id="theme-l">Theme</h3>
+            <fieldset class="segmented" aria-labelledby="theme-l">
+              <label><input type="radio" name="fr-theme" value="system" checked>Match system</label>
+              <label><input type="radio" name="fr-theme" value="light">Light</label>
+              <label><input type="radio" name="fr-theme" value="dark">Dark</label>
+            </fieldset>
+          </div>
+          <div class="group">
+            <h3 id="layout-l">Tabs</h3>
+          <fieldset class="panel panel--fieldset" aria-labelledby="layout-l">
+            <label class="choice"><input type="radio" name="layout" value="horizontal" checked><span><strong>Tabs on top</strong><span>The layout you know from other browsers.</span></span></label>
+            <label class="choice"><input type="radio" name="layout" value="vertical"><span><strong>Tabs on the side</strong><span>Easier with many tabs. Titles stay readable.</span></span></label>
+          </fieldset>
+          </div>
+          <div class="step__actions">
+            <span></span>
+            <button class="btn btn--primary" type="button" data-goto="1">Continue</button>
+          </div>
+        </section>
+
+        <section class="step" data-step aria-labelledby="s2">
+          <h2 id="s2">Bring your things</h2>
+          <p>Brumel copies what you choose from another browser on this device. Nothing is uploaded.</p>
+          <div class="field">
+            <label for="source">Import from</label>
+            <select class="select" id="source"><option>Microsoft Edge</option><option>Google Chrome</option><option>Mozilla Firefox</option></select>
+          </div>
+          <fieldset class="panel panel--fieldset" aria-label="What to import">
+            <label class="choice"><input type="checkbox" checked><span><strong>Bookmarks</strong></span></label>
+            <label class="choice"><input type="checkbox" checked><span><strong>History</strong></span></label>
+            <label class="choice"><input type="checkbox"><span><strong>Saved passwords</strong><span>Your system may ask you to confirm.</span></span></label>
+          </fieldset>
+          <div class="step__actions">
+            <button class="btn btn--quiet" type="button" data-goto="2">Skip</button>
+            <button class="btn btn--primary" type="button" data-goto="2">Import</button>
+          </div>
+        </section>
+
+        <section class="step" data-step aria-labelledby="s3">
+          <h2 id="s3">Ready</h2>
+          <p>Brumel works without an account. Nothing leaves this device unless you turn on a feature that needs it, and every connection Brumel makes is listed in Glass Box.</p>
+          <div class="panel">
+            <div class="row">
+              <div class="row__text"><strong>Use Brumel as your default browser?</strong><span>Asked once. You can change it in Settings.</span></div>
+              <button class="btn" type="button">Make default</button>
+            </div>
+          </div>
+          <div class="step__actions">
+            <button class="btn btn--quiet" type="button" data-goto="1">Back</button>
+            <button class="btn btn--primary" type="button">Start browsing</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note">The browsers in the import list are sample content; the real list shows only browsers found on the device. With scripting off, the three steps show one below the other. Glass Box arrives in Public Alpha (SHD-034); until then the last sentence links to the privacy documentation.</p>
+
+  <section class="mock-section" aria-labelledby="states-import">
+    <h2 id="states-import">Import states</h2>
+    <div class="mock-grid">
+      <div class="mock-state"><h3>Looking for browsers</h3><div class="panel" aria-busy="true" aria-label="Looking for browsers"><div class="row"><span class="skeleton skeleton--w60"></span></div><div class="row"><span class="skeleton skeleton--w40"></span></div></div></div>
+      <div class="mock-state"><h3>None found</h3><div class="panel empty"><p>No other browser was found on this device. You can import a bookmarks file instead.</p><button class="btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-import"/></svg>Choose a file</button></div></div>
+      <div class="mock-state"><h3>Source browser open</h3><div class="panel"><div class="row"><div class="status status--warning"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><p><strong>Close Microsoft Edge to import its history.</strong> Bookmarks can be copied now.</p></div><button class="btn" type="button">Try again</button></div></div></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

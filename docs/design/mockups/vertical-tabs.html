@@ -1,0 +1,176 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vertical tabs and Clean Web panel mockup | Brumel design</title>
+  <meta name="description" content="Brumel main window with the vertical tab sidebar and the per-site Clean Web panel open.">
+  <link rel="stylesheet" href="mockups.css">
+  <script src="mockups.js" defer></script>
+</head>
+<body>
+<!--ICONS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-reload" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.46-3.54"/><path d="M13 2.5v3h-3"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3.2-2.1 5.4-5 6.6-2.9-1.2-5-3.4-5-6.6v-4z"/></symbol>
+  <symbol id="i-extensions" viewBox="0 0 16 16"><path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2.5V10M4.5 7 8 10.5 11.5 7M3 13.5h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><circle cx="8" cy="3.5" r="0.6"/><circle cx="8" cy="8" r="0.6"/><circle cx="8" cy="12.5" r="0.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 16 16"><path d="M2.5 11.5a5.5 5.5 0 1 1 11 0"/><path d="m8 11.5 2.5-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.2 14 13H2z"/><path d="M8 6.5v3M8 11.3v.2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v4M8 4.8v.2"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M6.5 3v10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></symbol>
+  <symbol id="i-muted" viewBox="0 0 16 16"><path d="M2.5 6h2l3-2.5v9l-3-2.5h-2z"/><path d="m10.5 6 3 4M13.5 6l-3 4"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
+  <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
+</svg>
+<!--/ICONS-->
+<main class="mock">
+  <header class="mock-head">
+    <div>
+      <h1>Vertical tabs and the Clean Web panel</h1>
+      <p>The opt-in vertical layout (WRK-001) with the per-site Clean Web panel open (SHD-001, SHD-002, SHD-003, SHD-005, SHD-007). Surfaces S-WIN-02 and S-WIN-07.</p>
+    </div>
+    <fieldset class="segmented" aria-label="Mockup theme">
+      <label><input type="radio" name="mock-theme" value="system" checked>System</label>
+      <label><input type="radio" name="mock-theme" value="light">Light</label>
+      <label><input type="radio" name="mock-theme" value="dark">Dark</label>
+      <label><input type="radio" name="mock-theme" value="oled">OLED</label>
+    </fieldset>
+  </header>
+
+  <figure class="window window--vertical" aria-label="Brumel window mockup with vertical tabs">
+    <div class="toolbar">
+      <button class="icon-btn hide-narrow" type="button" aria-label="Collapse tab sidebar" aria-pressed="true"><svg class="icon"><use href="#i-sidebar"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Back"><svg class="icon"><use href="#i-back"/></svg></button>
+      <button class="icon-btn hide-phone" type="button" aria-label="Forward" disabled><svg class="icon"><use href="#i-forward"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Reload"><svg class="icon"><use href="#i-reload"/></svg></button>
+      <div class="omnibox">
+        <button class="omnibox__chip" type="button" aria-label="Site information for example.org: connection is secure"><svg class="icon"><use href="#i-tune"/></svg></button>
+        <span class="omnibox__url"><b>example.org</b></span>
+      </div>
+      <button class="cw-btn" type="button" aria-expanded="true" aria-controls="cw-panel" aria-label="Clean Web: nothing blocked on this page"><svg class="icon"><use href="#i-shield"/></svg></button>
+      <span class="toolbar__sep hide-narrow" aria-hidden="true"></span>
+      <button class="icon-btn hide-narrow" type="button" aria-label="Extensions"><svg class="icon"><use href="#i-extensions"/></svg></button>
+      <button class="icon-btn hide-narrow" type="button" aria-label="Downloads"><svg class="icon"><use href="#i-download"/></svg></button>
+      <button class="icon-btn" type="button" aria-label="Profile: Personal, local only"><span class="avatar" aria-hidden="true">G</span></button>
+      <button class="icon-btn" type="button" aria-label="Brumel menu"><svg class="icon"><use href="#i-more"/></svg></button>
+    </div>
+
+    <nav class="vtabs" aria-label="Tabs">
+      <div class="vtabs__pinned" role="tablist" aria-label="Pinned tabs">
+        <button class="tab" role="tab" aria-selected="false" type="button" aria-label="Pinned tab: Calendar"><span class="tab__fav" aria-hidden="true">C</span></button>
+        <button class="tab" role="tab" aria-selected="false" type="button" aria-label="Pinned tab: Mail"><span class="tab__fav" aria-hidden="true">M</span></button>
+      </div>
+      <div role="tablist" aria-label="Open tabs" aria-orientation="vertical">
+        <button class="tab" role="tab" aria-selected="true" type="button"><span class="tab__fav" aria-hidden="true">E</span><span class="tab__title">Example Domain</span><span class="icon-btn icon-btn--sm" aria-hidden="true"><svg class="icon"><use href="#i-close"/></svg></span></button>
+        <button class="tab" role="tab" aria-selected="false" type="button" aria-label="Podcast player, muted"><span class="tab__fav" aria-hidden="true">P</span><span class="tab__title">Podcast player</span><svg class="icon" aria-hidden="true"><use href="#i-muted"/></svg></button>
+        <p class="vtabs__group">Trip</p>
+        <button class="tab tab--grouped" role="tab" aria-selected="false" type="button" aria-label="Train times, in group Trip"><span class="tab__fav" aria-hidden="true">T</span><span class="tab__title">Train times</span></button>
+        <button class="tab tab--grouped tab--suspended" role="tab" aria-selected="false" type="button" aria-label="Hotel booking, suspended to save memory, in group Trip"><span class="tab__fav" aria-hidden="true">H</span><span class="tab__title">Hotel booking</span><span class="tab__state" aria-hidden="true">Suspended</span></button>
+      </div>
+      <button class="vtabs__new" type="button"><svg class="icon"><use href="#i-plus"/></svg>New tab</button>
+      <div class="vtabs__foot">
+        <button class="icon-btn" type="button" aria-label="Search tabs"><svg class="icon"><use href="#i-search"/></svg></button>
+        <button class="icon-btn" type="button" aria-label="Recently closed"><svg class="icon"><use href="#i-clock"/></svg></button>
+      </div>
+    </nav>
+
+    <div class="viewport viewport--web">
+      <article class="webpage" aria-label="Web content: example.org">
+        <h2>Example Domain</h2>
+        <p>This domain is for use in illustrative examples in documents.</p>
+      </article>
+
+      <section class="bubble bubble--anchored" id="cw-panel" aria-labelledby="cw-title">
+        <div class="bubble__head">
+          <div>
+            <h2 id="cw-title">Clean Web</h2>
+            <p>example.org</p>
+          </div>
+          <label class="switch" title="Clean Web on this site">
+            <input type="checkbox" checked aria-label="Clean Web on this site">
+            <span class="switch__track" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="status status--success">
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+          <p>Nothing to block on this page. No ads, trackers, pop-ups or autoplay were found.</p>
+        </div>
+        <div class="bubble__foot">
+          <a href="settings.html#clean-web">Clean Web settings</a>
+          <span class="muted">Counts reset when you leave the page</span>
+        </div>
+      </section>
+    </div>
+  </figure>
+
+  <p class="mock-note">The page text is the real content of example.org. Tab titles and the profile initial are sample content. The sidebar collapses to icons, and below a 60rem window the mockup hides it; the product keeps it and lets the user collapse it.</p>
+
+  <section class="mock-section" aria-labelledby="states-panel">
+    <h2 id="states-panel">Clean Web panel states</h2>
+    <p class="mock-note">Counts are sample values. Each row names what was blocked; the panel never shows a total of things the browser did not actually stop.</p>
+    <div class="mock-grid">
+      <div class="mock-state">
+        <h3>Items blocked</h3>
+        <section class="bubble" aria-label="Clean Web panel, items blocked">
+          <div class="bubble__head">
+            <div><h2>Clean Web</h2><p>news.example</p></div>
+            <label class="switch"><input type="checkbox" checked aria-label="Clean Web on this site"><span class="switch__track" aria-hidden="true"></span></label>
+          </div>
+          <dl class="facts">
+            <div><dt>Ads and trackers</dt><dd>11</dd></div>
+            <div><dt>Pop-ups</dt><dd>1</dd></div>
+            <div><dt>Autoplaying video</dt><dd>1</dd></div>
+            <div><dt>Notification requests</dt><dd>1</dd></div>
+            <div><dt>Tracking parameters removed</dt><dd>3</dd></div>
+          </dl>
+          <div class="bubble__foot"><a href="settings.html#clean-web">Clean Web settings</a><button class="btn btn--quiet" type="button">Allow pop-ups here</button></div>
+        </section>
+      </div>
+      <div class="mock-state">
+        <h3>Off for this site</h3>
+        <section class="bubble" aria-label="Clean Web panel, off for this site">
+          <div class="bubble__head">
+            <div><h2>Clean Web</h2><p>shop.example</p></div>
+            <label class="switch"><input type="checkbox" aria-label="Clean Web on this site"><span class="switch__track" aria-hidden="true"></span></label>
+          </div>
+          <div class="status status--warning">
+            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+            <p><strong>Off for this site.</strong> Ads, trackers and pop-ups load here. You turned this off; turn it back on at any time.</p>
+          </div>
+          <div class="bubble__foot"><a href="settings.html#clean-web">Clean Web settings</a></div>
+        </section>
+      </div>
+      <div class="mock-state">
+        <h3>Filter lists not loaded</h3>
+        <section class="bubble" aria-label="Clean Web panel, filter lists failed">
+          <div class="bubble__head">
+            <div><h2>Clean Web</h2><p>news.example</p></div>
+            <label class="switch"><input type="checkbox" checked aria-label="Clean Web on this site"><span class="switch__track" aria-hidden="true"></span></label>
+          </div>
+          <div class="status status--danger">
+            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+            <p><strong>Filter lists could not be updated.</strong> Blocking uses the lists from the last update. Brumel retries in the background.</p>
+          </div>
+          <div class="bubble__foot"><button class="btn" type="button">Retry now</button><a href="settings.html#clean-web">Clean Web settings</a></div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
