@@ -11,7 +11,7 @@ to the address to open a page in one theme.
 
 | Mockup | Surfaces | Catalog | Phase |
 |---|---|---|---|
-| [main-window.html](main-window.html) | Tab strip, toolbar, Clean Web button, New Tab page | UI-018, WRK-001, ENG-019, SHD-001, UI-022 | Internal Alpha |
+| [main-window.html](main-window.html) | Tab strip, toolbar pills, New Tab page with the wordmark and the day ledger | UI-018, WRK-001, ENG-019, SHD-001, UI-022 | Internal Alpha |
 | [vertical-tabs.html](vertical-tabs.html) | Vertical tab sidebar, per-site Clean Web panel | WRK-001, SHD-001, SHD-002, SHD-003, SHD-005, SHD-007 | Internal Alpha |
 | [settings.html](settings.html) | Settings shell, Performance, Clean Web | ENG-033, ENG-019, ENG-011, SHD-001 to SHD-007 | Internal Alpha |
 | [about.html](about.html) | About Brumel and the update states | CORE-004, CORE-051 | Technical Foundation |

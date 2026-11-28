@@ -39,6 +39,7 @@ FORCED = {
     "accent": "LinkText", "accent-fill": "ButtonText", "on-accent": "ButtonFace",
     "focus": "Highlight", "accent-fill-hover": "ButtonText", "control-border": "ButtonText", "divider": "GrayText",
     "danger": "CanvasText", "warning": "CanvasText", "success": "CanvasText",
+    "brand-field": "Canvas", "band-1": "CanvasText", "band-2": "GrayText",
 }
 
 
@@ -127,9 +128,10 @@ def render_css(data: dict, themes: dict[str, dict[str, str]]) -> str:
     out.append("@media (prefers-color-scheme: dark) {")
     out += block(':root:not([data-theme="light"]):not([data-theme="oled"])', themes["dark"], "  ")
     out.append("}")
-    out += block(':root[data-theme="light"]', themes["light"])
-    out += block(':root[data-theme="dark"]', themes["dark"])
-    out += block(':root[data-theme="oled"]', themes["oled"])
+    # A data-theme attribute on any element scopes a theme to it (theme previews, for example).
+    out += block(':root[data-theme="light"], [data-theme="light"]', themes["light"])
+    out += block(':root[data-theme="dark"], [data-theme="dark"]', themes["dark"])
+    out += block(':root[data-theme="oled"], [data-theme="oled"]', themes["oled"])
     out.append(':root[data-theme="light"] { color-scheme: light; }')
     out.append(':root[data-theme="dark"], :root[data-theme="oled"] { color-scheme: dark; }')
     out.append("")

@@ -35,6 +35,7 @@
   <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
   <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-rest" viewBox="0 0 16 16"><path d="M12.5 10.2A5 5 0 0 1 5.8 3.5a5 5 0 1 0 6.7 6.7z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
 </svg>
 <!--/ICONS-->
@@ -56,7 +57,7 @@
     <div class="viewport">
       <div class="webui__main">
         <div>
-          <h2 class="page-title">Brumel modules</h2>
+          <div class="page-head"><h2 class="page-title">Brumel modules</h2></div>
           <p class="page-lede">Each module is compiled in or out, available or not, and on or off. A module that is off creates nothing and runs nothing.</p>
         </div>
         <div class="panel empty">
@@ -76,10 +77,10 @@
       <table class="table table--stack">
         <thead><tr><th scope="col">Module</th><th scope="col">Catalog</th><th scope="col">Compiled</th><th scope="col">Available</th><th scope="col">On</th><th scope="col">Instance</th></tr></thead>
         <tbody>
-          <tr><td data-label="Module">Tab lifecycle</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-ENG-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Running</span></td></tr>
-          <tr><td data-label="Module">Clean Web</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-SHD-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Dormant</span></td></tr>
-          <tr><td data-label="Module">Brumel Store</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-MEM-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">No</td><td class="muted" data-label="Instance">Not created</td></tr>
-          <tr><td data-label="Module">Nano runtime</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-NANO-01</a></td><td data-label="Compiled">No</td><td class="muted" data-label="Available">n/a</td><td class="muted" data-label="On">n/a</td><td class="muted" data-label="Instance">Not created</td></tr>
+          <tr><td data-label="Module">Tab lifecycle</td><td data-label="Catalog"><a href="../../product/FEATURES.md"><code class="mono">EP-ENG-01</code></a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Running</span></td></tr>
+          <tr><td data-label="Module">Clean Web</td><td data-label="Catalog"><a href="../../product/FEATURES.md"><code class="mono">EP-SHD-01</code></a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Dormant</span></td></tr>
+          <tr><td data-label="Module">Brumel Store</td><td data-label="Catalog"><a href="../../product/FEATURES.md"><code class="mono">EP-MEM-01</code></a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">No</td><td class="muted" data-label="Instance">Not created</td></tr>
+          <tr><td data-label="Module">Nano runtime</td><td data-label="Catalog"><a href="../../product/FEATURES.md"><code class="mono">EP-NANO-01</code></a></td><td data-label="Compiled">No</td><td class="muted" data-label="Available">n/a</td><td class="muted" data-label="On">n/a</td><td class="muted" data-label="Instance">Not created</td></tr>
         </tbody>
       </table>
     </div>
