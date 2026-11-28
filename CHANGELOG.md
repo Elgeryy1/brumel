@@ -54,6 +54,10 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   build spike: these patches failed to apply before.
 - `scripts/build.py build --jobs N` limits parallel compile jobs, for machines
   with little free memory.
+- Measured build spike numbers in `docs/development/BUILDING.md`: unmodified
+  Chromium 158 `release` built in 1 h 54 min on an 8-core Linux machine, plus
+  `dev` full (1 h 55 min) and incremental (16 s) times. They replace the
+  planning assumptions.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 

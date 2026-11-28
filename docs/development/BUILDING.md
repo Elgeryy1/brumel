@@ -1,6 +1,6 @@
 # Building Brumel
 
-Status: **In Development** — Brumel cannot be built yet. The fetch, patch and build scripts exist (step 1 of the [Phase 1 plan](PHASE1_PLAN.md)), but they have **not yet been run against a real Chromium checkout**. The resource figures below are planning assumptions until the build spike ([#61](https://github.com/Elgeryy1/brumel/issues/61)) replaces them with measurements.
+Status: **In Development** — unmodified Chromium at the pin has been fetched and built with these scripts on Linux (`release` and `dev`, measured in section 3); the Windows `release` build was not finished. A branded, de-Googled Brumel build has not been made yet. The fetch, patch and build scripts are step 1 of the [Phase 1 plan](PHASE1_PLAN.md); the build spike is [#61](https://github.com/Elgeryy1/brumel/issues/61).
 
 Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003](../architecture/adr/0003-patch-based-repository.md) · [Infrastructure](INFRASTRUCTURE.md) · [`patches/README.md`](../../patches/README.md)
 
@@ -43,16 +43,52 @@ Brumel uses Chromium's standard toolchain:
 - Dependencies installed with upstream's `build/install-build-deps.sh`.
 - Sysroots downloaded by hooks for reproducible builds against a fixed glibc baseline.
 
-## 3. Resource requirements (to be validated)
+## 3. Resource requirements
 
-Upstream documentation and community experience indicate that Chromium builds are among the heaviest open-source builds. Brumel will measure and publish real values on its reference hardware in Phase 1. Until then, the following are **planning assumptions, not measurements**:
+### Measured (Phase 1 build spike, Chromium 158.0.8127.88)
+
+Unmodified Chromium at the pin (revision `0cefb182`, source tree `2c650cb2` on both
+machines), built with `scripts/build.py --jobs N` and the pre-branding GN profiles.
+The only change was the build-only patch
+`brumel/fixes/0001-limit-blink-bindings-parallelism`. Times are wall-clock. Peak RAM
+is the drop in available memory during the run, so it includes the file cache the
+build pushed out and is an upper bound.
+
+| Measurement | Linux: 8-core/16-thread desktop CPU, 28 GB RAM, NVMe, Ubuntu LTS | Windows: 12-core/24-thread laptop CPU, 32 GB RAM (about 13 GB free beside other apps), NVMe |
+| --- | --- | --- |
+| Fetch (`fetch.py`, no history) | 386 s (6.4 min) | Not timed precisely |
+| Checkout size, without `out/` | 29 GB | Not measured |
+| `release` full build | **6,869 s (1 h 54 min)**, `--jobs 12`, 57,721 steps; lowest free RAM 10.9 GB (peak ≈ 13.5 GB) | Not finished. Three segments, `--jobs 8`: 2,348 s, ~816 s (ended by sleep) and 980 s; lowest free RAM 2.75 GB |
+| `release` output directory | 23 GB; `chrome` binary 1.85 GB | — |
+| `dev` full build | **6,924 s (1 h 55 min)** in three segments: 2,110 s and 3,096 s with `--jobs 12`, then 1,718 s with `--jobs 16`; lowest free RAM 10.9 GB. Output directory 16 GB | Not run |
+| `dev` incremental (touch `chrome/browser/ui/browser.cc`) | **16 s**: one compile (10 s) and one link (2 s); peak RAM ≈ 3.4 GB | Not run |
+
+What the spike found:
+
+- **Parallelism, not CPU, is the limit on 32 GB machines.** Default parallelism (`-j`
+  equal to the logical CPU count) hung the Windows laptop. `--jobs` now also sets
+  GN's `action_pool_depth`, because GN actions are not limited by `-j`.
+- **Blink's bindings generators exhausted memory on their own.** About ten of them
+  run at once, and each starts one Python worker per CPU. The build-only patch
+  runs them one at a time with at most 8 workers (`BLINK_BINDINGS_JOBS` overrides).
+- **Keep 12–16 GB free for `--jobs 12`.** On the Linux machine free RAM never fell
+  below 10.9 GB with 12 jobs.
+- **The `dev` profile is for iteration, not for the first build.** Its full build costs
+  about as much as `release`, because the component build has more steps, but one
+  `.cc` change rebuilds in seconds. A change to a widely included header rebuilds far
+  more (not measured yet).
+- **16 jobs used the 16 hardware threads** on the Linux machine with 13 GB still free;
+  the CPU held about 4.9 GHz at its 95 °C design limit.
+- **A clean stop is resumable.** Stopping a build and running the same command later
+  continues where it stopped; no `gn clean` is needed.
+
+### Planning assumptions (still unmeasured)
 
 | Resource | Planning assumption | Notes |
 | --- | --- | --- |
-| Disk | Well over 100 GB free for checkout + one output directory; more for multiple configurations and caches | SSD/NVMe strongly recommended |
-| RAM | 32 GB or more for comfortable full builds; less works with fewer parallel jobs | Linker steps are memory-hungry |
-| CPU | As many cores as possible; full builds take hours on typical desktop hardware | Incremental builds are much faster |
-| Network | Initial fetch downloads many gigabytes | Shallow / no-history fetches reduce size |
+| Disk | Over 100 GB free for checkout, one output directory and caches; more for several configurations | SSD/NVMe strongly recommended |
+| RAM | 32 GB for comfortable full builds; 16 GB should work with `--jobs 4` or fewer (not measured) | Linker steps are memory-hungry |
+| CPU | As many cores as possible | Incremental builds are much faster |
 
 ## 4. Planned Brumel build flow
 
@@ -138,9 +174,9 @@ Brand and service arguments: Brumel builds use no Google API keys. Codec and Wid
 ## 7. Phase 1 validation checklist
 
 - [x] Write fetch, patch and build tooling with unit tests ([Phase 1 plan](PHASE1_PLAN.md), step 1).
-- [ ] Fetch pinned tag and measure download size and time.
-- [ ] Build unmodified Chromium at the pin on Windows and Linux reference machines; record disk, peak RAM and wall time.
+- [x] Fetch pinned tag and measure download time (Linux; size not measured).
+- [ ] Build unmodified Chromium at the pin on Windows and Linux reference machines; record disk, peak RAM and wall time (Linux done; Windows not finished).
 - [ ] Apply a minimal ungoogled subset and branding; build and smoke-test.
-- [ ] Measure incremental build times for typical Brumel changes.
+- [ ] Measure incremental build times for typical Brumel changes (one `.cc` file measured in section 3; headers and patch changes not yet).
 - [ ] Decide Ninja vs Siso per upstream defaults; evaluate a self-hosted cache.
 - [ ] Publish results in this document, replacing the planning assumptions.
