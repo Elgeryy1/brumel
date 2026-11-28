@@ -1,6 +1,6 @@
 # Building Brumel
 
-Status: **In Development** — unmodified Chromium at the pin has been fetched and built with these scripts on Linux (`release` and `dev`, measured in section 3); the Windows `release` build was not finished. A branded, de-Googled Brumel build has not been made yet. The fetch, patch and build scripts are step 1 of the [Phase 1 plan](PHASE1_PLAN.md); the build spike is [#61](https://github.com/Elgeryy1/brumel/issues/61).
+Status: **In Development** — unmodified Chromium at the pin has been fetched and built with these scripts on Linux (`release` and `dev`, measured in section 3). Branded, de-Googled builds exist for Linux (`dev`) and Windows x64 (`release`, cross-compiled on Linux). Both start with the sandbox on, and neither is published. The unmodified Windows `release` build was not finished. The fetch, patch and build scripts are step 1 of the [Phase 1 plan](PHASE1_PLAN.md); the build spike is [#61](https://github.com/Elgeryy1/brumel/issues/61).
 
 Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003](../architecture/adr/0003-patch-based-repository.md) · [Infrastructure](INFRASTRUCTURE.md) · [`patches/README.md`](../../patches/README.md)
 
@@ -10,14 +10,14 @@ Related: [Upstream Strategy](../architecture/UPSTREAM_STRATEGY.md) · [ADR-0003]
 | --- | --- |
 | Pinned upstream version (`config/upstream.json`) | Available (candidate pin; commit recorded after the first verified fetch, not yet built) |
 | Upstream version check (`scripts/upstream/check_upstream.py`) | Available |
-| Patch series (`patches/series`, conventions in `patches/README.md`) | In Development — 1 build fix, 15 ungoogled-chromium patches and 1 branding patch; they apply to the pin in order, not yet built |
+| Patch series (`patches/series`, conventions in `patches/README.md`) | In Development — 3 build fixes, 15 ungoogled-chromium patches and 1 branding patch; they apply to the pin in order. The Windows `release` build uses all 19; the Linux `dev` build used the first 17 |
 | Fetch script (`scripts/fetch.py`) | In Development — written and unit-tested, not yet run against Chromium |
 | Patch apply / refresh / check tooling (`scripts/patches.py`, [ADR-0013](../architecture/adr/0013-git-backed-patch-tooling.md)) | In Development — tested on small repositories; `check` runs in CI |
 | GN argument profiles ([`config/gn/`](../../config/gn/dev.gn)) | In Development — guard runs in CI; arguments not yet validated by a build |
 | Build wrapper (`scripts/build.py`) | In Development — not yet run against Chromium |
 | Brumel source overlay (`scripts/overlay.py`: `src/` → `//brumel`) | In Development — tested; `src/` holds the `BRANDING` file and no browser code yet |
 | Branding: `BRANDING` through `branding_file_path`, strings through `scripts/rebrand.py` ([ADR-0015](../architecture/adr/0015-branding-without-string-patches.md)) | In Development — dry run against the pinned checkout; not yet built |
-| Packaging (Windows installer, Linux packages) | Planned |
+| Packaging (Windows installer, Linux packages) | Planned — Chromium's `mini_installer` target builds an unsigned Windows installer; it has not been installed yet |
 | CI build pipeline | Planned |
 
 ## 2. Upstream toolchain
@@ -101,6 +101,28 @@ What the spike found:
 - **A clean stop is resumable.** Stopping a build and running the same command later
   continues where it stopped; no `gn clean` is needed.
 
+### Branded Windows `release`, cross-compiled on Linux
+
+Built on the Linux machine above with `--jobs 16`, targets `chrome` and
+`mini_installer`, and the 19-patch series, overlay and rebrand. This is not the
+unmodified build in the table, so do not compare the two directly.
+
+- **Time:** 7,805 s (2 h 10 min) in three segments: 1,268 s, 4,327 s and 2,210 s.
+  The first two stopped on the errors below, so a clean run was not measured.
+- **Memory:** lowest free RAM was 9.7 GB.
+- **Output:** 24 GB directory; `chrome.dll` 354 MB, `mini_installer.exe` 136 MB.
+- **First stop, too many open files:** see
+  [the cross-compilation steps](#cross-compiling-windows-from-linux).
+- **Second stop, unreachable code on Windows:** fixed by
+  `brumel/fixes/0003-crashpad-without-unreachable-code`. Warnings stay errors.
+- **Smoke test on Windows 11:** the browser was unpacked from the installer and
+  run headless, without installing it. `chrome://version` reports
+  "Brumel 158.0.8127.88", and `chrome://sandbox` shows the renderers in Lockdown
+  at Untrusted integrity. The network service is not sandboxed: its feature flag
+  is off by default upstream, and no Brumel patch changes it. `chrome.exe` and
+  `chrome.dll` have ASLR, DEP and CFG set. Installing, uninstalling, the visible
+  window and browsing real sites are not tested yet.
+
 ### Planning assumptions (still unmeasured)
 
 | Resource | Planning assumption | Notes |
@@ -159,6 +181,37 @@ python3 scripts/build.py args --profile release
 
 On Windows the scripts set `DEPOT_TOOLS_WIN_TOOLCHAIN=0`, so depot_tools uses the locally installed Visual Studio instead of Google's internal toolchain package.
 
+### Cross-compiling Windows from Linux
+
+This follows Chromium's own support for Windows cross-builds. The scripts do not
+automate it yet.
+
+1. **Package the toolchain on Windows.** Use a machine with the Visual Studio and
+   SDK versions that `build/vs_toolchain.py` expects:
+   `python3 depot_tools/win_toolchain/package_from_installed.py 2026 -w 10.0.28000.0 --noarm`.
+   Add `--allow_multiple_vs_installs` if several versions are installed. The
+   result, `<hash>.zip`, contains Microsoft files: keep it private and follow
+   the Visual Studio license terms.
+2. **Point depot_tools at the package.** On Linux, put the zip in a directory and
+   set these variables for `gclient runhooks`, `gn gen` and the build:
+   `DEPOT_TOOLS_WIN_TOOLCHAIN_BASE_URL=<directory>` and
+   `GYP_MSVS_HASH_<TOOLCHAIN_HASH>=<hash>`. `TOOLCHAIN_HASH` is in
+   `build/vs_toolchain.py`.
+3. **Get the Windows dependencies.** Revert the rebrand, because a sync resets
+   nested repositories. Add `target_os = ["win"]` to `.gclient`, then run
+   `gclient sync --nohooks` and `gclient runhooks`. Afterwards run
+   `patches.py apply --reset`, `overlay.py sync` and `rebrand.py apply`.
+   `--reset` discards local changes.
+4. **Raise the open-file limit.** The hooks mount the toolchain through `ciopfs`, a
+   case-insensitive FUSE file system that inherits the shell's limit. With a
+   limit of 1,024, a 16-job build failed with "Too many open files". Run
+   `ulimit -n 524288` before `gclient runhooks`. If the toolchain is already
+   mounted, unmount `vs_files` with `fusermount -u` and mount it again from a
+   shell with the higher limit.
+5. **Build.** Use the `release` arguments plus `target_os = "win"` and
+   `target_cpu = "x64"`, with the targets `chrome` and `mini_installer`. The
+   Windows profile is still local and not in `config/gn/`.
+
 Packaging (`scripts/package.py`) is Planned (CORE-009, CORE-010).
 
 ### GN argument profiles
@@ -198,7 +251,9 @@ Brand and service arguments: Brumel builds use no Google API keys. Codec and Wid
 - [ ] Apply a minimal ungoogled subset and branding; build and smoke-test. Linux `dev` done: the
   series applied with no conflicts, the build took 124 s after the unmodified `dev` build,
   `chrome://version` reports "Brumel 158.0.8127.88" and `chrome://sandbox` reports "adequately
-  sandboxed" (namespaces and seccomp-BPF). Browsing, icons, `release` and Windows are still open.
+  sandboxed" (namespaces and seccomp-BPF). Windows x64 `release` was cross-compiled and
+  smoke-tested headless (section 3). Browsing, icons, installing on Windows and the Linux
+  branded `release` are still open.
 - [ ] Measure incremental build times for typical Brumel changes (one `.cc` file measured in section 3; headers and patch changes not yet).
 - [ ] Decide Ninja vs Siso per upstream defaults; evaluate a self-hosted cache.
 - [ ] Publish results in this document, replacing the planning assumptions.
