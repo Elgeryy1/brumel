@@ -1,6 +1,6 @@
 # Patches
 
-This directory will contain the ordered series of patches that Brumel applies on top of the pinned Chromium tag ([`config/upstream.json`](../config/upstream.json)). The series holds one build fix, 15 selected ungoogled-chromium patches ([why these](../docs/privacy/DEGOOGLING_AUDIT.md#selection-of-ungoogled-chromium-patches)) and one branding patch. All of them apply to the pin in order, but they have **not yet been built**. Brumel is in pre-development.
+This directory will contain the ordered series of patches that Brumel applies on top of the pinned Chromium tag ([`config/upstream.json`](../config/upstream.json)). The series holds three build fixes, 15 selected ungoogled-chromium patches ([why these](../docs/privacy/DEGOOGLING_AUDIT.md#selection-of-ungoogled-chromium-patches)) and one branding patch. All of them apply to the pin in order. The Windows x64 `release` build uses all 19; the Linux `dev` build used the first 17 ([BUILDING.md](../docs/development/BUILDING.md)). Brumel is in pre-development.
 
 Background: [ADR-0003](../docs/architecture/adr/0003-patch-based-repository.md) · [Upstream Strategy](../docs/architecture/UPSTREAM_STRATEGY.md) · [Licensing](../docs/architecture/adr/0004-licensing.md)
 

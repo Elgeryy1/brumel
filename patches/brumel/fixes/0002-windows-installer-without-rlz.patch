@@ -1,0 +1,81 @@
+Description: Build the Windows installer without RLZ. The ungoogled-chromium
+ patch 0021-disable-rlz turns off enable_rlz_support, which removes the //rlz
+ library targets, but the Windows setup.exe still depended on
+ //rlz:rlz_lib_no_network to clear RLZ state on uninstall, and the rlz_id
+ example tool still depended on //rlz:rlz_lib, so gn gen failed on Windows.
+ Brumel never writes RLZ state, so the uninstall step is removed and rlz_id is
+ built only when RLZ support is on.
+Origin: brumel
+Module: fixes
+Feature: CORE-006
+Upstreamable: no
+SPDX-License-Identifier: BSD-3-Clause
+diff --git a/chrome/installer/setup/BUILD.gn b/chrome/installer/setup/BUILD.gn
+index e7e695f652..8ef2f674cd 100644
+--- a/chrome/installer/setup/BUILD.gn
++++ b/chrome/installer/setup/BUILD.gn
+@@ -43,7 +43,6 @@ if (is_win) {
+       "//components/crash/core/app:crash_export_thunks",
+       "//components/crash/core/app:run_as_crashpad_handler",
+       "//content/public/common:static_switches",
+-      "//rlz:rlz_lib_no_network",
+       "//services/webnn:buildflags",
+       "//url",
+     ]
+diff --git a/chrome/installer/setup/uninstall.cc b/chrome/installer/setup/uninstall.cc
+index 823e20d1eb..a34e3e3c8f 100644
+--- a/chrome/installer/setup/uninstall.cc
++++ b/chrome/installer/setup/uninstall.cc
+@@ -67,8 +67,6 @@
+ #include "chrome/installer/util/work_item.h"
+ #include "chrome/windows_services/elevated_tracing_service/service_integration.h"
+ #include "content/public/common/result_codes.h"
+-#include "rlz/lib/rlz_lib_clear.h"
+-#include "rlz/lib/supplementary_branding.h"
+ 
+ using base::win::RegKey;
+ 
+@@ -105,22 +103,6 @@ void ProcessChromeWorkItems(const InstallerState& installer_state) {
+   work_item_list->Do();
+ }
+ 
+-void ClearRlzProductState() {
+-  const rlz_lib::AccessPoint points[] = {rlz_lib::CHROME_OMNIBOX,
+-                                         rlz_lib::CHROME_HOME_PAGE,
+-                                         rlz_lib::CHROME_APP_LIST};
+-
+-  rlz_lib::ClearProductState(rlz_lib::CHROME, points);
+-
+-  // If chrome has been reactivated, clear all events for this brand as well.
+-  std::wstring reactivation_brand_wide;
+-  if (GoogleUpdateSettings::GetReactivationBrand(&reactivation_brand_wide)) {
+-    std::string reactivation_brand(base::WideToASCII(reactivation_brand_wide));
+-    rlz_lib::SupplementaryBranding branding(reactivation_brand.c_str());
+-    rlz_lib::ClearProductState(rlz_lib::CHROME, points);
+-  }
+-}
+-
+ // Removes all files from the installer directory. Returns false in case of an
+ // error.
+ bool RemoveInstallerFiles(const base::FilePath& installer_directory) {
+@@ -936,7 +918,6 @@ InstallStatus UninstallProduct(const ModifyParams& modify_params,
+   // Chrome is not in use so lets uninstall Chrome by deleting various files
+   // and registry entries. Here we will just make best effort and keep going
+   // in case of errors.
+-  ClearRlzProductState();
+ 
+   auto_launch_util::DisableStartAtLogin();
+ 
+diff --git a/rlz/BUILD.gn b/rlz/BUILD.gn
+index 64bb823a40..9254cc7062 100644
+--- a/rlz/BUILD.gn
++++ b/rlz/BUILD.gn
+@@ -201,7 +201,7 @@ if (enable_rlz_support) {
+   }
+ }
+ 
+-if (!is_ios && !is_android) {
++if (enable_rlz_support && !is_ios && !is_android) {
+   executable("rlz_id") {
+     sources = [ "examples/rlz_id.cc" ]
+     deps = [

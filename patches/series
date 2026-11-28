@@ -19,3 +19,6 @@ upstream-ungoogled/core/ungoogled-chromium/remove-navigation-source-param.patch
 upstream-ungoogled/core/ungoogled-chromium/toggle-translation-via-switch.patch
 # --- branding ---
 brumel/branding/0001-windows-install-mode.patch
+# --- fixes for the selected patches ---
+brumel/fixes/0002-windows-installer-without-rlz.patch
+brumel/fixes/0003-crashpad-without-unreachable-code.patch
