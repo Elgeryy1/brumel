@@ -42,6 +42,25 @@ Brumel uses Chromium's standard toolchain:
 - A recent x64 distribution supported by upstream instructions (Ubuntu LTS is the common choice).
 - Dependencies installed with upstream's `build/install-build-deps.sh`.
 - Sysroots downloaded by hooks for reproducible builds against a fixed glibc baseline.
+- **Ubuntu 23.10 and later block unprivileged user namespaces with AppArmor**, so a locally
+  built browser stops at start with "No usable sandbox!". Never work around it with
+  `--no-sandbox`. Give the build output its own AppArmor profile instead, the same rule
+  Ubuntu ships for Google Chrome (`/etc/apparmor.d/chrome`), as described in upstream's
+  [AppArmor user namespace restrictions](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md):
+
+  ```text
+  # /etc/apparmor.d/brumel-dev  (load with: sudo apparmor_parser -r /etc/apparmor.d/brumel-dev)
+  abi <abi/5.0>,
+  include <tunables/global>
+
+  profile brumel-dev /path/to/checkout/src/out/*/chrome flags=(unconfined) {
+    userns,
+    @{exec_path} mr,
+    include if exists <local/brumel-dev>
+  }
+  ```
+
+  Do not turn the restriction off system-wide (`kernel.apparmor_restrict_unprivileged_userns=0`).
 
 ## 3. Resource requirements
 
@@ -176,7 +195,10 @@ Brand and service arguments: Brumel builds use no Google API keys. Codec and Wid
 - [x] Write fetch, patch and build tooling with unit tests ([Phase 1 plan](PHASE1_PLAN.md), step 1).
 - [x] Fetch pinned tag and measure download time (Linux; size not measured).
 - [ ] Build unmodified Chromium at the pin on Windows and Linux reference machines; record disk, peak RAM and wall time (Linux done; Windows not finished).
-- [ ] Apply a minimal ungoogled subset and branding; build and smoke-test.
+- [ ] Apply a minimal ungoogled subset and branding; build and smoke-test. Linux `dev` done: the
+  series applied with no conflicts, the build took 124 s after the unmodified `dev` build,
+  `chrome://version` reports "Brumel 158.0.8127.88" and `chrome://sandbox` reports "adequately
+  sandboxed" (namespaces and seccomp-BPF). Browsing, icons, `release` and Windows are still open.
 - [ ] Measure incremental build times for typical Brumel changes (one `.cc` file measured in section 3; headers and patch changes not yet).
 - [ ] Decide Ninja vs Siso per upstream defaults; evaluate a self-hosted cache.
 - [ ] Publish results in this document, replacing the planning assumptions.

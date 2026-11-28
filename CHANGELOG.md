@@ -58,6 +58,10 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   Chromium 158 `release` built in 1 h 54 min on an 8-core Linux machine, plus
   `dev` full (1 h 55 min) and incremental (16 s) times. They replace the
   planning assumptions.
+- First branded, de-Googled build (Linux, `dev` profile): the 17-patch series,
+  overlay and rebrand apply cleanly, and the browser starts as "Brumel" with
+  the sandbox on. `BUILDING.md` documents the AppArmor profile Ubuntu needs
+  instead of `--no-sandbox`.
 - Scheduled `Upstream check` workflow: keeps one "Upstream update available" issue
   in sync with Chromium stable and ungoogled-chromium tags (CORE-003).
 
