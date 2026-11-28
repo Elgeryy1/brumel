@@ -51,6 +51,7 @@ Public documentation is written in English. Corrections are welcome through pull
 | Document | Purpose |
 |---|---|
 | [PHASE1_PLAN.md](development/PHASE1_PLAN.md) | Step-by-step plan for Phase 1 — Technical Foundation |
+| [PHASE2_PLAN.md](development/PHASE2_PLAN.md) | First feature round for Phase 2 — Internal Alpha |
 | [BUILDING.md](development/BUILDING.md) | Build strategy, tooling and requirements to validate |
 | [INFRASTRUCTURE.md](development/INFRASTRUCTURE.md) | Services, runners, signing, costs and alternatives |
 | [BENCHMARKS.md](benchmarks/BENCHMARKS.md) | Reproducible performance methodology |
