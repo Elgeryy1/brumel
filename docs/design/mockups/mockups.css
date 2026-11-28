@@ -1,11 +1,14 @@
-/* Hallmark · shape: app screen · genre: modern-minimal · theme: brand (docs/design/DESIGN_SYSTEM.md) · redesign: restyle
+/* Hallmark · shape: app screen · genre: modern-minimal · theme: brand (docs/design/DESIGN_SYSTEM.md) · redesign: full
  * paper: oklch(97.3% 0.006 265) · accent: oklch(48.4% 0.097 258) light, oklch(78.0% 0.076 259) dark · display: system UI · body: system UI
  * nav: browser tab strip and toolbar; settings side nav · signature: tabs that show their real state (suspended, pinned, muted) · states: default, hover, focus, active, disabled, loading, empty, error
  * axes: light/grotesk-sans/cool · posture: restrained · contrast: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3 · weakest: V, a browser shell must look like a browser (UI-018); variety goes into honest state, not layout */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: S on settings and vertical tabs, which stay familiar by rule (UI-018); the brand lives in the frame tint, the active-tab bands, the pills, the New Tab lockup and ledger, and the identity blocks */
 /* Hallmark · waive 24b · .tabstrip trailing 138px · reserves the Windows caption-button area of the tab strip, an OS metric rather than a spacing choice */
-/* Hallmark · waive 39b · button.shortcut is a 90px New Tab tile · the whole shortcut tile, monogram and name, is the hit target as on every browser New Tab page */
-/* Hallmark · finish-review: subagent · fix · 8 findings · 8 resolved after one scoring round (5 resolved, 3 partial, then fixed and checked in recaptures) · gap: none */
+/* Hallmark · waive 39b · button.shortcut is a 92px New Tab tile and .pill is 28px · the shortcut tile is its own hit target, and each toolbar pill extends its hit area to 44px with ::before inside a 40px toolbar */
+/* Hallmark · waive 71 · h3 Theme in first-run.html and the state-sheet h3s · the space under Theme holds colour swatches with no text, and a state-sheet h3 labels the specimen below it */
+/* Hallmark · dismissed F7 · .omnibox and .ntp__search are text fields, .tab-group is a tab-strip control and .avatar is a round profile image, so the pill radius marks controls */
+/* Hallmark · reworded "Clean Web button" to "Toolbar pills" · the state sheet now shows the Clean Web pill and the new resting pill */
+/* Hallmark · finish-review: subagent · fix · 7 findings · 7 resolved (ghost mark removed, previews framed, sample badge, rule kept to brand moments, steps under the head, stamp updated, head is the slogan) · weakest left: vertical tabs and settings stay familiar by rule */
 /* Hallmark · dismissed F5 · .shortcut__icon is the monogram Chromium draws for a site without a favicon, standing in for the site's own icon */
 /* SPDX-License-Identifier: MPL-2.0 */
 
@@ -383,3 +386,128 @@ button.shortcut { border: 0; background: transparent; cursor: pointer; }
 /* Finish-review fixes: option titles in ink; the group chip is a raised tile on the strip */
 .choice strong { color: var(--brumel-color-ink); }
 .tab-group { background: var(--brumel-color-raised); box-shadow: inset 0 0 0 1px var(--brumel-color-divider); }
+
+/* ==========================================================================
+   Round 2: Haze personality. Mist becomes visible: a tinted frame, the two
+   bands of the mark on the active tab, pill controls that say what Brumel is
+   doing, and brand fields on the New Tab page, first run and About.
+   ========================================================================== */
+
+/* The Haze rule: the mark's two offset bands, the brand's one ornament */
+.haze-rule { display: grid; gap: var(--brumel-space-1); width: 112px; }
+.haze-rule::before, .haze-rule::after { content: ""; display: block; height: 4px; border-radius: var(--brumel-radius-full); }
+.haze-rule::before { background: var(--brumel-color-band-1); width: 100%; transform: translateX(8px); }
+.haze-rule::after { background: var(--brumel-color-band-2); width: 82%; }
+
+/* Tabs: rounder, and the active tab carries the bands */
+.tab { border-radius: 10px 10px 0 0; }
+.tab[aria-selected="true"]::after { content: ""; position: absolute; inset-inline: var(--brumel-space-4); inset-block-start: 0; height: 3px; border-radius: 0 0 var(--brumel-radius-sm) var(--brumel-radius-sm); background: var(--brumel-color-band-1); }
+.tab[aria-selected="true"]::before { content: ""; position: absolute; inset-inline: var(--brumel-space-6) var(--brumel-space-5); inset-block-start: 5px; height: 2px; border-radius: var(--brumel-radius-full); background: var(--brumel-color-band-2); }
+.tab--pinned[aria-selected="true"]::before, .tab--pinned[aria-selected="true"]::after { inset-inline: var(--brumel-space-3); }
+.tab--grouped { box-shadow: inset 0 -2px 0 var(--brumel-color-band-2); }
+
+/* Vertical tabs: the active row carries the band on its leading edge */
+.vtabs .tab[aria-selected="true"] { box-shadow: none; border-radius: var(--brumel-radius-md); }
+.vtabs .tab[aria-selected="true"]::after { inset: var(--brumel-space-2) auto var(--brumel-space-2) 0; width: 3px; height: auto; border-radius: var(--brumel-radius-full); }
+.vtabs .tab[aria-selected="true"]::before { display: none; }
+.vtabs .tab--grouped { box-shadow: inset 2px 0 0 var(--brumel-color-band-2); }
+
+/* Toolbar: a pill omnibox, and pills that report what Brumel did on this page */
+.omnibox { border-radius: var(--brumel-radius-full); padding-inline-start: var(--brumel-space-3); }
+.pill { display: inline-flex; align-items: center; gap: var(--brumel-space-2); height: 28px; padding-inline: var(--brumel-space-3) var(--brumel-space-4); border: 1px solid transparent; border-radius: var(--brumel-radius-full); background: transparent; color: var(--brumel-color-ink-muted); font-size: var(--brumel-text-sm); white-space: nowrap; cursor: pointer; flex-shrink: 0; position: relative; transition: background-color var(--brumel-motion-quick) var(--brumel-motion-ease), transform var(--brumel-motion-quick) var(--brumel-motion-ease); }
+.pill::before { content: ""; position: absolute; inset: -8px -2px; }
+.pill:hover { background: var(--brumel-color-hover); color: var(--brumel-color-ink); }
+.pill:active { transform: translateY(1px); }
+.pill:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.pill[aria-expanded="true"] { border-color: var(--brumel-color-accent); }
+.pill--on { background: var(--brumel-color-selected); color: var(--brumel-color-accent); font-weight: var(--brumel-weight-medium); }
+.pill--on:hover { background: var(--brumel-color-selected); border-color: var(--brumel-color-accent); color: var(--brumel-color-accent); }
+.pill--off { border-color: var(--brumel-color-control-border); }
+
+/* New Tab page: the brand field, the mark at size, and today's ledger */
+.ntp { background: var(--brumel-color-brand-field); justify-items: start; align-content: center; gap: var(--brumel-space-7); padding: var(--brumel-space-8) clamp(24px, 8%, 120px); }
+.ntp__id { display: grid; gap: var(--brumel-space-4); }
+.ntp__id img { width: 232px; height: auto; }
+.ntp__search { max-width: 640px; height: 52px; border-radius: var(--brumel-radius-full); padding-inline: var(--brumel-space-6); box-shadow: var(--brumel-shadow-raised); }
+.shortcuts { grid-template-columns: repeat(5, minmax(0, 104px)); }
+.shortcut { background: var(--brumel-color-raised); border: 1px solid var(--brumel-color-divider); }
+.shortcut:hover { background: var(--brumel-color-raised); border-color: var(--brumel-color-accent); }
+button.shortcut.shortcut--add { background: transparent; border: 1px dashed var(--brumel-color-control-border); }
+.ledger { width: 100%; max-width: 880px; display: grid; gap: var(--brumel-space-4); padding-block-start: var(--brumel-space-5); border-block-start: 1px solid var(--brumel-color-divider); }
+.ledger__head { display: flex; justify-content: space-between; align-items: center; gap: var(--brumel-space-4); }
+.ledger__head h2 { font-size: var(--brumel-text-md); font-weight: var(--brumel-weight-medium); color: var(--brumel-color-ink); }
+.ledger dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+.ledger dl > div { display: flex; flex-direction: column; gap: var(--brumel-space-2); padding-inline: var(--brumel-space-5); border-inline-start: 1px solid var(--brumel-color-divider); }
+.ledger dl > div:first-child { padding-inline-start: 0; border-inline-start: 0; }
+.ledger dd { margin: 0; }
+.ledger .ledger__figure { order: -1; font-size: var(--brumel-text-3xl); font-weight: var(--brumel-weight-strong); line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; color: var(--brumel-color-ink); }
+.ledger dt { font-size: var(--brumel-text-sm); color: var(--brumel-color-ink-muted); max-width: 28ch; }
+.ledger a { font-size: var(--brumel-text-sm); }
+.ntp__corner { inset-block-start: var(--brumel-space-5); inset-block-end: auto; }
+
+/* Page titles on internal pages carry the Haze rule */
+.page-head { display: grid; gap: var(--brumel-space-3); }
+.page-title { font-size: var(--brumel-text-3xl); letter-spacing: -0.01em; line-height: 1.15; }
+.navlink[aria-current="page"] { position: relative; }
+.navlink[aria-current="page"]::before { content: ""; position: absolute; inset-block: var(--brumel-space-3); inset-inline-start: 0; width: 3px; border-radius: var(--brumel-radius-full); background: var(--brumel-color-band-1); }
+
+/* Identity block: About opens on the brand field */
+.identity { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--brumel-space-6); padding: var(--brumel-space-7); border-radius: var(--brumel-radius-lg); background: var(--brumel-color-brand-field); }
+.identity img { width: 96px; height: 96px; }
+.identity h2 { font-size: var(--brumel-text-3xl); letter-spacing: -0.01em; }
+.identity p { color: var(--brumel-color-ink-muted); }
+.slogan { color: var(--brumel-color-accent); font-size: var(--brumel-text-lg); font-weight: var(--brumel-weight-medium); }
+.identity .slogan { color: var(--brumel-color-accent); }
+
+/* First run: a brand panel beside the steps */
+.firstrun { padding: 0; place-items: stretch; }
+.firstrun__split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: 100%; }
+.firstrun__brandpanel { display: grid; align-content: space-between; gap: var(--brumel-space-7); padding: var(--brumel-space-8) var(--brumel-space-7); background: var(--brumel-color-brand-field); }
+.firstrun__brandpanel img { width: 128px; height: 128px; }
+.firstrun__brandpanel h2 { font-size: var(--brumel-text-3xl); letter-spacing: -0.01em; }
+.firstrun__brandpanel .steps { flex-direction: column; gap: var(--brumel-space-4); font-size: var(--brumel-text-md); }
+.firstrun__main { display: grid; align-content: center; padding: var(--brumel-space-8) var(--brumel-space-7); }
+.firstrun__main .firstrun__card { max-width: 560px; }
+.themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--brumel-space-4); margin: 0; padding: 0; border: 0; min-inline-size: 0; }
+.theme-card { display: grid; gap: var(--brumel-space-3); padding: var(--brumel-space-3); border: 1px solid var(--brumel-color-control-border); border-radius: var(--brumel-radius-lg); background: var(--brumel-color-raised); color: var(--brumel-color-ink); cursor: pointer; position: relative; transition: border-color var(--brumel-motion-quick) var(--brumel-motion-ease); }
+.theme-card:hover { border-color: var(--brumel-color-ink); }
+.theme-card:active { transform: translateY(1px); }
+.theme-card:has(input:checked) { border-color: var(--brumel-color-accent); box-shadow: inset 0 0 0 1px var(--brumel-color-accent); }
+.theme-card:has(input:focus-visible) { outline: 2px solid var(--brumel-color-focus); outline-offset: 2px; }
+.theme-card input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.theme-card > span { font-size: var(--brumel-text-sm); font-weight: var(--brumel-weight-medium); }
+/* A swatch scopes a theme with data-theme and paints that theme's frame and toolbar */
+.swatch { display: grid; grid-template-rows: 12px 20px; border-radius: var(--brumel-radius-md); overflow: hidden; border: 1px solid var(--brumel-color-divider); }
+.swatch i { display: block; }
+.swatch i:first-child { background: var(--brumel-color-frame); }
+.swatch i:last-child { background: var(--brumel-color-toolbar); }
+.swatch--system { grid-template-columns: 1fr 1fr; grid-template-rows: 32px; border: 0; gap: 0; }
+.swatch--system > .swatch { border-radius: 0; border: 0; }
+
+@media (max-width: 60rem) {
+  .firstrun__split { grid-template-columns: minmax(0, 1fr); }
+  .firstrun__brandpanel { padding: var(--brumel-space-6); gap: var(--brumel-space-5); }
+  .firstrun__brandpanel img { width: 64px; height: 64px; }
+  .firstrun__brandpanel .steps { flex-direction: row; }
+  .firstrun__main { padding: var(--brumel-space-6); }
+  .ledger dl { grid-template-columns: minmax(0, 1fr); gap: var(--brumel-space-4); }
+  .ledger dl > div { padding-inline: 0; border-inline-start: 0; }
+  .identity { grid-template-columns: minmax(0, 1fr); padding: var(--brumel-space-6); }
+  .shortcuts { grid-template-columns: repeat(3, minmax(0, 104px)); }
+  .pill__word { display: none; }
+  .ntp__id img { width: 168px; }
+}
+@media (forced-colors: active) {
+  .tab[aria-selected="true"]::before, .tab[aria-selected="true"]::after, .navlink[aria-current="page"]::before { background: Highlight; }
+  .pill--on { border-color: Highlight; }
+}
+.table code.mono { font-size: var(--brumel-text-sm); }
+
+
+/* Review round 2: steps sit under the brand head; theme previews keep their own edge */
+.firstrun__brandpanel { align-content: start; }
+.swatch { grid-template-rows: 12px 20px 4px; border: 1px solid var(--brumel-color-control-border); background: var(--brumel-color-toolbar); }
+.swatch i:nth-child(2) { background: var(--brumel-color-toolbar); border-block-start: 1px solid var(--brumel-color-divider); }
+.swatch i:nth-child(3) { background: var(--brumel-color-band-1); }
+.swatch-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--brumel-space-2); }
+.ledger__head h2 { display: flex; align-items: center; gap: var(--brumel-space-3); flex-wrap: wrap; }

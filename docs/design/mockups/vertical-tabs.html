@@ -35,6 +35,7 @@
   <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
   <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
   <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-rest" viewBox="0 0 16 16"><path d="M12.5 10.2A5 5 0 0 1 5.8 3.5a5 5 0 1 0 6.7 6.7z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
 </svg>
 <!--/ICONS-->
@@ -62,7 +63,8 @@
         <button class="omnibox__chip" type="button" aria-label="Site information for example.org: connection is secure"><svg class="icon"><use href="#i-tune"/></svg></button>
         <span class="omnibox__url"><b>example.org</b></span>
       </div>
-      <button class="cw-btn" type="button" aria-expanded="true" aria-controls="cw-panel" aria-label="Clean Web: nothing blocked on this page"><svg class="icon"><use href="#i-shield"/></svg></button>
+      <button class="pill hide-phone" type="button" aria-label="1 tab resting to save memory"><svg class="icon" aria-hidden="true"><use href="#i-rest"/></svg><span class="num">1</span><span class="pill__word">resting</span></button>
+      <button class="pill" type="button" aria-expanded="true" aria-controls="cw-panel" aria-label="Clean Web: nothing blocked on this page"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span class="pill__word">Clean</span></button>
       <span class="toolbar__sep hide-narrow" aria-hidden="true"></span>
       <button class="icon-btn hide-narrow" type="button" aria-label="Extensions"><svg class="icon"><use href="#i-extensions"/></svg></button>
       <button class="icon-btn hide-narrow" type="button" aria-label="Downloads"><svg class="icon"><use href="#i-download"/></svg></button>

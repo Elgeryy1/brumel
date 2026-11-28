@@ -4,12 +4,12 @@
 
 :root {
   color-scheme: light dark;
-  --brumel-color-frame: #E6EAF1;
+  --brumel-color-frame: #E0E8F5;
   --brumel-color-toolbar: #FFFFFF;
   --brumel-color-surface: #F4F6FA;
   --brumel-color-raised: #FFFFFF;
-  --brumel-color-hover: #E9EDF4;
-  --brumel-color-selected: #E3EAF6;
+  --brumel-color-hover: #DBE4F3;
+  --brumel-color-selected: #DAE4F5;
   --brumel-color-ink: #11151C;
   --brumel-color-ink-muted: #56677F;
   --brumel-color-accent: #3B5F95;
@@ -18,10 +18,13 @@
   --brumel-color-on-accent: #FFFFFF;
   --brumel-color-focus: #3B5F95;
   --brumel-color-control-border: #71829A;
-  --brumel-color-divider: #DCE2EB;
+  --brumel-color-divider: #D4DCE8;
   --brumel-color-danger: #B42318;
   --brumel-color-warning: #8A5300;
   --brumel-color-success: #1E6B43;
+  --brumel-color-brand-field: #E4ECF8;
+  --brumel-color-band-1: #9AB9E8;
+  --brumel-color-band-2: #7F93AE;
   --brumel-font-ui: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Cantarell", "Noto Sans", sans-serif;
   --brumel-font-mono: ui-monospace, "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
   --brumel-text-xs: 12px;
@@ -63,12 +66,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="oled"]) {
-    --brumel-color-frame: #0B0E13;
-    --brumel-color-toolbar: #1A202A;
+    --brumel-color-frame: #0E1420;
+    --brumel-color-toolbar: #1A2230;
     --brumel-color-surface: #11151C;
-    --brumel-color-raised: #1A202A;
-    --brumel-color-hover: #232A36;
-    --brumel-color-selected: #233149;
+    --brumel-color-raised: #1A2230;
+    --brumel-color-hover: #232D3E;
+    --brumel-color-selected: #22304A;
     --brumel-color-ink: #F4F6FA;
     --brumel-color-ink-muted: #8C9BB0;
     --brumel-color-accent: #9AB9E8;
@@ -77,19 +80,22 @@
     --brumel-color-on-accent: #11151C;
     --brumel-color-focus: #9AB9E8;
     --brumel-color-control-border: #6B7D95;
-    --brumel-color-divider: #262E3A;
+    --brumel-color-divider: #273142;
     --brumel-color-danger: #F4A097;
     --brumel-color-warning: #E9C46A;
     --brumel-color-success: #7CCB9E;
+    --brumel-color-brand-field: #17233A;
+    --brumel-color-band-1: #9AB9E8;
+    --brumel-color-band-2: #7F93AE;
   }
 }
-:root[data-theme="light"] {
-  --brumel-color-frame: #E6EAF1;
+:root[data-theme="light"], [data-theme="light"] {
+  --brumel-color-frame: #E0E8F5;
   --brumel-color-toolbar: #FFFFFF;
   --brumel-color-surface: #F4F6FA;
   --brumel-color-raised: #FFFFFF;
-  --brumel-color-hover: #E9EDF4;
-  --brumel-color-selected: #E3EAF6;
+  --brumel-color-hover: #DBE4F3;
+  --brumel-color-selected: #DAE4F5;
   --brumel-color-ink: #11151C;
   --brumel-color-ink-muted: #56677F;
   --brumel-color-accent: #3B5F95;
@@ -98,18 +104,21 @@
   --brumel-color-on-accent: #FFFFFF;
   --brumel-color-focus: #3B5F95;
   --brumel-color-control-border: #71829A;
-  --brumel-color-divider: #DCE2EB;
+  --brumel-color-divider: #D4DCE8;
   --brumel-color-danger: #B42318;
   --brumel-color-warning: #8A5300;
   --brumel-color-success: #1E6B43;
+  --brumel-color-brand-field: #E4ECF8;
+  --brumel-color-band-1: #9AB9E8;
+  --brumel-color-band-2: #7F93AE;
 }
-:root[data-theme="dark"] {
-  --brumel-color-frame: #0B0E13;
-  --brumel-color-toolbar: #1A202A;
+:root[data-theme="dark"], [data-theme="dark"] {
+  --brumel-color-frame: #0E1420;
+  --brumel-color-toolbar: #1A2230;
   --brumel-color-surface: #11151C;
-  --brumel-color-raised: #1A202A;
-  --brumel-color-hover: #232A36;
-  --brumel-color-selected: #233149;
+  --brumel-color-raised: #1A2230;
+  --brumel-color-hover: #232D3E;
+  --brumel-color-selected: #22304A;
   --brumel-color-ink: #F4F6FA;
   --brumel-color-ink-muted: #8C9BB0;
   --brumel-color-accent: #9AB9E8;
@@ -118,12 +127,15 @@
   --brumel-color-on-accent: #11151C;
   --brumel-color-focus: #9AB9E8;
   --brumel-color-control-border: #6B7D95;
-  --brumel-color-divider: #262E3A;
+  --brumel-color-divider: #273142;
   --brumel-color-danger: #F4A097;
   --brumel-color-warning: #E9C46A;
   --brumel-color-success: #7CCB9E;
+  --brumel-color-brand-field: #17233A;
+  --brumel-color-band-1: #9AB9E8;
+  --brumel-color-band-2: #7F93AE;
 }
-:root[data-theme="oled"] {
+:root[data-theme="oled"], [data-theme="oled"] {
   --brumel-color-frame: #000000;
   --brumel-color-toolbar: #0B0D11;
   --brumel-color-surface: #000000;
@@ -142,6 +154,9 @@
   --brumel-color-danger: #F4A097;
   --brumel-color-warning: #E9C46A;
   --brumel-color-success: #7CCB9E;
+  --brumel-color-brand-field: #0B1322;
+  --brumel-color-band-1: #9AB9E8;
+  --brumel-color-band-2: #7F93AE;
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"], :root[data-theme="oled"] { color-scheme: dark; }
@@ -166,6 +181,9 @@
     --brumel-color-danger: CanvasText;
     --brumel-color-warning: CanvasText;
     --brumel-color-success: CanvasText;
+    --brumel-color-brand-field: Canvas;
+    --brumel-color-band-1: CanvasText;
+    --brumel-color-band-2: GrayText;
   }
 }
 

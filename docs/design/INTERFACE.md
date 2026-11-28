@@ -52,9 +52,12 @@ here disables or weakens a mitigation.
 [brumel.tokens.json](tokens/brumel.tokens.json) holds the brand primitives from the design
 system and **semantic roles** that surfaces use: `frame`, `toolbar`, `surface`, `raised`,
 `hover`, `selected`, `ink`, `ink-muted`, `accent`, `accent-fill`, `accent-fill-hover`,
-`on-accent`, `focus`, `control-border`, `divider`, `danger`, `warning` and `success`. Each
+`on-accent`, `focus`, `control-border`, `divider`, `danger`, `warning`, `success`, and three
+brand roles: `brand-field` (the mist surface of the New Tab page, first run and About) and
+`band-1` and `band-2` (the two bands of the Haze mark, used as ornament and never as text). Each
 role has a value in the light, dark and OLED themes, and a forced-colours mapping to CSS system
-colours.
+colours. A `data-theme` attribute on any element scopes a theme to it, which is how the first-run
+theme cards preview the light and dark frames.
 
 `render_tokens.py` measures every required pair with the WCAG 2.x formula and fails if one
 falls short: 4.5:1 for text, 3:1 for focus rings and control borders. The results are in
@@ -70,7 +73,7 @@ them. The upstream IDs below are the likely targets and must be checked on the p
 
 | Role | Brumel colour ID | Upstream IDs it feeds (to verify) |
 |---|---|---|
-| `frame` | `kColorBrumelFrame` | `kColorFrameActive`, `kColorFrameInactive`, `kColorTabBackgroundInactiveFrameActive` |
+| `frame` (mist-tinted) | `kColorBrumelFrame` | `kColorFrameActive`, `kColorFrameInactive`, `kColorTabBackgroundInactiveFrameActive` |
 | `toolbar` | `kColorBrumelToolbar` | `kColorToolbar`, `kColorTabBackgroundActiveFrameActive` |
 | `hover` | `kColorBrumelHover` | `kColorTabBackgroundInactiveHoverFrameActive`, `kColorToolbarInkDrop` (as a base) |
 | `ink`, `ink-muted` | `kColorBrumelInk`, `kColorBrumelInkMuted` | `kColorTabForegroundActiveFrameActive`, `kColorTabForegroundInactiveFrameActive`, `kColorToolbarButtonIcon` |
@@ -78,18 +81,57 @@ them. The upstream IDs below are the likely targets and must be checked on the p
 | `raised` | `kColorBrumelRaised` | `kColorBubbleBackground`, `kColorDialogBackground` |
 | `control-border` | `kColorBrumelControlBorder` | `kColorTextfieldOutline` |
 | `accent`, `accent-fill`, `on-accent` | `kColorBrumelAccent`, `kColorBrumelAccentFill`, `kColorBrumelOnAccent` | `kColorButtonBackgroundProminent`, `kColorButtonForegroundProminent`, `kColorLinkForeground` |
+| `band-1`, `band-2` | `kColorBrumelBand1`, `kColorBrumelBand2` | None: new IDs, read only by Brumel painting code |
 
 WebUI already reads many upstream colours as CSS variables (`--color-*` generated from
 `ui/color`). Where an upstream WebUI page is only restyled, the mixer is enough; Brumel pages
 import `tokens.css` as well so they share one vocabulary.
 
-## 4. The main window
+## 4. Personality: where Brumel shows itself
+
+The first round was familiar and correct, and read as Chrome with another name. The second
+round keeps the layout people know (UI-018) and the security rules, and makes the brand and
+Brumel's work visible in five places. Each is a token or a small surface, so it can be turned
+down without touching the rest.
+
+1. **Mist frame.** The window frame and tab strip take a mist tint instead of neutral grey, in
+   light and dark. Recognisable from across the room, and it costs one mixer value.
+2. **The bands of the mark.** The active tab carries the two bands of the Haze mark along its
+   top edge; in vertical tabs a single band runs down its leading edge. The same bands make a
+   short rule under page titles and the New Tab wordmark, and mark the current settings section.
+   It is the brand's one ornament, used nowhere else.
+3. **Pills that report.** Beside the omnibox, the Clean Web pill fills with mist and shows a
+   count only when something was blocked on the page, and says "Off here" when the user turned
+   it off. A resting pill appears only while tabs are suspended. Both can be hidden (UI-012).
+4. **A New Tab page with presence** (UI-022). The wordmark at size, a pill search field, the
+   user's shortcuts as tiles, the mark cropped large at the trailing edge, and a ledger,
+   *Today on this device*: what Clean Web blocked, how many tabs rest, and how many
+   connections Brumel made on its own (Glass Box). The figures are counted on the device, each
+   appears only once its feature exists, and the whole ledger can be hidden.
+5. **Identity blocks.** About and first run open on the mist brand field with the mark, the
+   slogan and the band rule. First run previews themes with real frame and toolbar colours.
+
+### What each idea costs in Chromium
+
+| Idea | Where (to verify) | Patch |
+|---|---|---|
+| Mist frame | Colour mixer only | Small |
+| Bands on the active tab | Tab painting (`chrome/browser/ui/views/tabs/tab_style_views.cc`) | **Medium.** Tab painting changes upstream often, so this patch will need care at every rebase. A fallback is a single band drawn by the existing active-tab indicator, which is a colour-only change |
+| Bands in vertical tabs and settings | Vertical tab strip view; WebUI CSS | Small |
+| Clean Web and resting pills | Toolbar actions with a label (the pinned toolbar actions framework) | Small to medium, depending on label support on the pin |
+| New Tab ledger | New Tab WebUI plus a Mojo interface that reads local counters from the Clean Web, tab lifecycle and Glass Box modules | **Medium.** The page stays offline; the counters are local. Each figure ships with its module |
+| Mark at size, identity blocks, theme previews | WebUI only | Small |
+
+None of these touches a security surface or a mitigation.
+
+## 5. The main window
 
 Mockups: [main-window.html](mockups/main-window.html) and
 [vertical-tabs.html](mockups/vertical-tabs.html).
 
 - **Familiar by default** (UI-018). Horizontal tabs on top, back, forward and reload, the
-  omnibox, then Clean Web, extensions, downloads, the profile and the menu. Vertical tabs are
+  pill omnibox, then the resting and Clean Web pills, extensions, downloads, the profile and
+  the menu. Vertical tabs are
   opt-in (WRK-001) and extend Chromium's own vertical tab strip.
 - **Metrics.** Tabs 34 px tall in a 42 px strip, toolbar 40 px with 32 px buttons and a 44 px
   hit target, omnibox 32 px. The tab strip keeps its right end free for the Windows caption
@@ -100,14 +142,14 @@ Mockups: [main-window.html](mockups/main-window.html) and
   "suspended". Chromium already marks discarded tabs; Brumel restyles that marker rather than
   adding a new one. Pinned, muted and grouped tabs are told apart by shape, an icon and text,
   never by colour alone.
-- **Clean Web button** (S-WIN-07). Shows a count only when something was blocked on the
-  page, says "Off" when the user turned Clean Web off for the site, and opens a per-site panel
-  that names each kind of item blocked. Built as a toolbar action through Chromium's actions
+- **Clean Web pill** (S-WIN-07). Shows a count only when something was blocked on the
+  page, says "Off here" when the user turned Clean Web off for the site, and opens a per-site
+  panel that names each kind of item blocked. Built as a toolbar action through Chromium's actions
   framework, so the toolbar patch is a registration, not a new layout.
 - **Bubbles.** One raised surface, 12 px radius, a hairline, one shadow token. Every bubble
   has a heading, the state in words, and at most one primary action.
 
-## 5. Internal pages
+## 6. Internal pages
 
 Mockups: [settings.html](mockups/settings.html), [about.html](mockups/about.html),
 [modules.html](mockups/modules.html) and the New Tab page inside
@@ -125,21 +167,22 @@ Mockups: [settings.html](mockups/settings.html), [about.html](mockups/about.html
   about it and a retry) and full. Each mockup carries a state sheet below the window.
 - **Undo, not confirmation.** Changing a profile or turning a feature off happens at once and
   offers undo (MEM-020); destructive actions on data confirm.
-- **New Tab page** (UI-022). A search field, the user's own shortcuts and a quiet
-  "Customize" action. No feed, no sponsored tiles, no request until the user acts.
+- **New Tab page** (UI-022). See § 4. No feed, no sponsored tiles, no request until the
+  user acts, and every element can be hidden.
 - **chrome://brumel** (CORE-005). Lists modules with the three gates from
   [MODULE_SYSTEM.md](../architecture/MODULE_SYSTEM.md) and whether an instance exists. A
   Phase 1 build shows the empty state, because no optional module is compiled in yet.
 
-## 6. First run
+## 7. First run
 
-Mockup: [first-run.html](mockups/first-run.html). Three steps at most, no account
+Mockup: [first-run.html](mockups/first-run.html). A mist brand panel with the mark, the
+slogan and the steps sits beside the current step. Three steps at most, no account
 (CON-025): the look (theme and tab layout), an optional import (CORE-044), and the finish,
 where the default-browser question is asked once and never again (UI-019). It replaces the
 sign-in steps of Chromium's first-run flow. The Windows installer stays silent, as Chromium's
 `mini_installer` is, so first run carries all the setup.
 
-## 7. Patch plan for the first screens
+## 8. Patch plan for the first screens
 
 Hooks to verify on the pinned Chromium before writing patches. "New" means code under
 `//brumel` reached through the overlay.
@@ -155,7 +198,7 @@ Hooks to verify on the pinned Chromium before writing patches. "New" means code 
 | New Tab page (S-WEB-01) | `chrome/browser/search/` and the New Tab page WebUI | Point the NTP at a Brumel WebUI page | Medium: the riskiest patch here |
 | First run (S-INS-04) | `chrome/browser/ui/webui/intro/` | Replace the sign-in step with the three Brumel steps | Medium |
 
-## 8. Accessibility and motion
+## 9. Accessibility and motion
 
 Every mockup meets the [design-system baseline](DESIGN_SYSTEM.md#10-accessibility-baseline-acceptance-criteria-for-any-ui-change):
 measured contrast in light, dark and OLED, a visible focus ring on every control, keyboard
@@ -168,7 +211,7 @@ a finish review in fresh context; the record sits in the header of
 [mockups.css](mockups/mockups.css). That is a check of the mockups, not of Brumel: the
 product still needs its own audit with Narrator, NVDA and Orca (Public Beta exit criteria).
 
-## 9. Open questions
+## 10. Open questions
 
 1. **New Tab page patch size.** Replacing the upstream page may touch Google-specific code
    that ungoogled-chromium already removes. Measure before committing to it.
@@ -176,4 +219,8 @@ product still needs its own audit with Narrator, NVDA and Orca (Public Beta exit
 3. **Resource monitor** (ENG-031). Extend the native task manager or build a WebUI page.
 4. **Brand typeface.** Chrome uses the system font. Inter or Geist for WebUI headings is
    decided after rendering tests, and only if the gain is worth bundling a font.
-5. **Final logo and icon set.** The mark is provisional; app icons wait for it.
+5. **Final logo and icon set.** The mark is provisional; app icons wait for it, and so do
+   the brand moments in § 4, which use the mark as it stands.
+6. **A second accent.** Personality here comes from making Mist visible, not from a new hue.
+   If the owner wants more, a warm second signal (light through mist) could mark Brumel's own
+   work, but it would collide with the warning colour and needs its own contrast pass.
