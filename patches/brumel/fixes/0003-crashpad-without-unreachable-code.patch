@@ -1,0 +1,45 @@
+Description: Let the crash-reporter patch compile on Windows. The
+ ungoogled-chromium patch disable-crash-reporter adds an unconditional return on
+ every platform except Linux, and Clang rejects the code after it with
+ -Wunreachable-code, which Chromium treats as an error. The same early return
+ now tests a named constant. Behavior does not change on any platform, and
+ warnings stay errors.
+Origin: brumel
+Module: fixes
+Feature: CORE-006
+Upstreamable: no
+SPDX-License-Identifier: BSD-3-Clause
+
+diff --git a/components/crash/core/app/crashpad.cc b/components/crash/core/app/crashpad.cc
+index f2765a76c9..5b10bbf725 100644
+--- a/components/crash/core/app/crashpad.cc
++++ b/components/crash/core/app/crashpad.cc
+@@ -66,6 +66,12 @@ void InitializeDatabasePath(const base::FilePath& database_path) {
+   g_database_path = new base::FilePath(database_path);
+ }
+ 
++// Crashpad is needed on Linux because it's used as a WASM signal handler.
++// This is not the case on other platforms, and so it can remain entirely
++// disabled there. A named constant, because Clang reports the code after an
++// unconditional return as unreachable.
++constexpr bool kCrashpadEnabled = BUILDFLAG(IS_LINUX);
++
+ bool InitializeCrashpadImpl(bool initial_client,
+                             const std::string& process_type,
+                             const std::string& user_data_dir,
+@@ -73,12 +79,9 @@ bool InitializeCrashpadImpl(bool initial_client,
+                             const std::vector<std::string>& initial_arguments,
+                             bool embedded_handler,
+                             const std::vector<base::FilePath>& attachments) {
+-// Crashpad is needed on Linux because it's used as a WASM signal handler.
+-// This is not the case on other platforms, and so it can remain entirely
+-// disabled there.
+-#if !BUILDFLAG(IS_LINUX)
+-  return false;
+-#endif
++  if (!kCrashpadEnabled) {
++    return false;
++  }
+ 
+   static bool initialized = false;
+   DCHECK(!initialized);
