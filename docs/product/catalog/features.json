@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_note": "Canonical Brumel feature catalog. IDs are stable and never renumbered. Render docs/product/FEATURES.md with scripts/catalog/render_features.py.",
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "features": [
     {
       "id": "CORE-001",
@@ -15708,7 +15708,8 @@
       "evidence": "Competitor precedent; visual preferences validated through community feedback.",
       "acceptance": [
         "Suggestions rate-limited and dismissible forever",
-        "Local logic only, no telemetry required"
+        "Local logic only, no telemetry required",
+        "The default-browser question is asked at most once, at first run, and never repeated"
       ],
       "origin": "H",
       "duplicate_of": null,
@@ -15813,6 +15814,58 @@
       "origin": "R52-33",
       "duplicate_of": null,
       "limitations": "Validating that a recipe contains no personal data is hard (URLs, names in rules); applying third-party recipes can weaken privacy settings."
+    },
+    {
+      "id": "UI-022",
+      "name": "Quiet New Tab page",
+      "module": "UI",
+      "epic": "EP-UI-01",
+      "pillar": "Everyday Tools",
+      "tier": "Essential",
+      "status": "Planned",
+      "priority": "P1",
+      "impact": "High",
+      "complexity": "S",
+      "phase": 2,
+      "description": "A calm New Tab page with a search box, the user's own shortcuts and an optional resume strip, with no feed, no sponsored tiles and no remote content by default.",
+      "problem": "Mainstream New Tab pages carry news feeds, sponsored tiles and remote content that add noise and network requests.",
+      "use_case": "A user opens a new tab and sees only the search box and the sites they pinned; nothing loads from the network until they type.",
+      "segments": [
+        "Everyday users",
+        "Power users"
+      ],
+      "dependencies": [
+        "UI-001",
+        "UI-018"
+      ],
+      "platforms": {
+        "windows": "Planned",
+        "linux": "Planned",
+        "macos": "Deferred",
+        "android": "Deferred"
+      },
+      "ai": "None",
+      "resource_cost": "Low — must respect GPU/battery budgets (animations, transparency).",
+      "infra_cost": "None",
+      "security_risk": "Low",
+      "privacy_risk": "Low",
+      "competitors": [
+        "Chrome",
+        "Edge",
+        "Brave",
+        "Vivaldi",
+        "Firefox"
+      ],
+      "evidence": "Competitor precedent: Firefox and Brave let users turn off New Tab content; Edge and Chrome ship feeds by default.",
+      "acceptance": [
+        "No network request is made by the New Tab page itself until the user acts",
+        "No sponsored or remote content, on by default or otherwise",
+        "Every element can be hidden, including the shortcuts",
+        "Meets the design-system accessibility baseline in light, dark and forced-colours modes"
+      ],
+      "origin": "H",
+      "duplicate_of": null,
+      "limitations": "Upstream Chromium's New Tab page is tied to Google services; Brumel replaces it with its own WebUI page, which is a larger patch than restyling."
     },
     {
       "id": "DEV-001",

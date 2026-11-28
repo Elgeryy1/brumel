@@ -1,0 +1,171 @@
+/* SPDX-License-Identifier: MPL-2.0 */
+/* GENERATED FILE: do not edit by hand. Source: docs/design/tokens/brumel.tokens.json.
+   Regenerate: python3 scripts/design/render_tokens.py */
+
+:root {
+  color-scheme: light dark;
+  --brumel-color-frame: #E6EAF1;
+  --brumel-color-toolbar: #FFFFFF;
+  --brumel-color-surface: #F4F6FA;
+  --brumel-color-raised: #FFFFFF;
+  --brumel-color-hover: #E9EDF4;
+  --brumel-color-selected: #E3EAF6;
+  --brumel-color-ink: #11151C;
+  --brumel-color-ink-muted: #56677F;
+  --brumel-color-accent: #3B5F95;
+  --brumel-color-accent-fill: #3B5F95;
+  --brumel-color-on-accent: #FFFFFF;
+  --brumel-color-focus: #3B5F95;
+  --brumel-color-control-border: #71829A;
+  --brumel-color-divider: #DCE2EB;
+  --brumel-color-danger: #B42318;
+  --brumel-color-warning: #8A5300;
+  --brumel-color-success: #1E6B43;
+  --brumel-font-ui: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Cantarell", "Noto Sans", sans-serif;
+  --brumel-font-mono: ui-monospace, "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+  --brumel-text-xs: 12px;
+  --brumel-text-sm: 13px;
+  --brumel-text-md: 14px;
+  --brumel-text-lg: 16px;
+  --brumel-text-xl: 20px;
+  --brumel-text-2xl: 24px;
+  --brumel-text-3xl: 32px;
+  --brumel-leading-ui: 1.4;
+  --brumel-leading-prose: 1.6;
+  --brumel-weight-regular: 400;
+  --brumel-weight-medium: 500;
+  --brumel-weight-strong: 600;
+  --brumel-space-1: 2px;
+  --brumel-space-2: 4px;
+  --brumel-space-3: 8px;
+  --brumel-space-4: 12px;
+  --brumel-space-5: 16px;
+  --brumel-space-6: 24px;
+  --brumel-space-7: 32px;
+  --brumel-space-8: 48px;
+  --brumel-space-9: 64px;
+  --brumel-radius-sm: 4px;
+  --brumel-radius-md: 8px;
+  --brumel-radius-lg: 12px;
+  --brumel-radius-xl: 16px;
+  --brumel-radius-full: 9999px;
+  --brumel-control-height: 32px;
+  --brumel-control-height-lg: 40px;
+  --brumel-control-hit: 44px;
+  --brumel-motion-quick: 120ms;
+  --brumel-motion-standard: 200ms;
+  --brumel-motion-gentle: 320ms;
+  --brumel-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --brumel-motion-ease-gentle: cubic-bezier(0.3, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="oled"]) {
+    --brumel-color-frame: #0B0E13;
+    --brumel-color-toolbar: #1A202A;
+    --brumel-color-surface: #11151C;
+    --brumel-color-raised: #1A202A;
+    --brumel-color-hover: #232A36;
+    --brumel-color-selected: #233149;
+    --brumel-color-ink: #F4F6FA;
+    --brumel-color-ink-muted: #8C9BB0;
+    --brumel-color-accent: #9AB9E8;
+    --brumel-color-accent-fill: #9AB9E8;
+    --brumel-color-on-accent: #11151C;
+    --brumel-color-focus: #9AB9E8;
+    --brumel-color-control-border: #6B7D95;
+    --brumel-color-divider: #262E3A;
+    --brumel-color-danger: #F4A097;
+    --brumel-color-warning: #E9C46A;
+    --brumel-color-success: #7CCB9E;
+  }
+}
+:root[data-theme="light"] {
+  --brumel-color-frame: #E6EAF1;
+  --brumel-color-toolbar: #FFFFFF;
+  --brumel-color-surface: #F4F6FA;
+  --brumel-color-raised: #FFFFFF;
+  --brumel-color-hover: #E9EDF4;
+  --brumel-color-selected: #E3EAF6;
+  --brumel-color-ink: #11151C;
+  --brumel-color-ink-muted: #56677F;
+  --brumel-color-accent: #3B5F95;
+  --brumel-color-accent-fill: #3B5F95;
+  --brumel-color-on-accent: #FFFFFF;
+  --brumel-color-focus: #3B5F95;
+  --brumel-color-control-border: #71829A;
+  --brumel-color-divider: #DCE2EB;
+  --brumel-color-danger: #B42318;
+  --brumel-color-warning: #8A5300;
+  --brumel-color-success: #1E6B43;
+}
+:root[data-theme="dark"] {
+  --brumel-color-frame: #0B0E13;
+  --brumel-color-toolbar: #1A202A;
+  --brumel-color-surface: #11151C;
+  --brumel-color-raised: #1A202A;
+  --brumel-color-hover: #232A36;
+  --brumel-color-selected: #233149;
+  --brumel-color-ink: #F4F6FA;
+  --brumel-color-ink-muted: #8C9BB0;
+  --brumel-color-accent: #9AB9E8;
+  --brumel-color-accent-fill: #9AB9E8;
+  --brumel-color-on-accent: #11151C;
+  --brumel-color-focus: #9AB9E8;
+  --brumel-color-control-border: #6B7D95;
+  --brumel-color-divider: #262E3A;
+  --brumel-color-danger: #F4A097;
+  --brumel-color-warning: #E9C46A;
+  --brumel-color-success: #7CCB9E;
+}
+:root[data-theme="oled"] {
+  --brumel-color-frame: #000000;
+  --brumel-color-toolbar: #0B0D11;
+  --brumel-color-surface: #000000;
+  --brumel-color-raised: #0B0D11;
+  --brumel-color-hover: #171B22;
+  --brumel-color-selected: #1A2638;
+  --brumel-color-ink: #F4F6FA;
+  --brumel-color-ink-muted: #8C9BB0;
+  --brumel-color-accent: #9AB9E8;
+  --brumel-color-accent-fill: #9AB9E8;
+  --brumel-color-on-accent: #11151C;
+  --brumel-color-focus: #9AB9E8;
+  --brumel-color-control-border: #6B7D95;
+  --brumel-color-divider: #1C222C;
+  --brumel-color-danger: #F4A097;
+  --brumel-color-warning: #E9C46A;
+  --brumel-color-success: #7CCB9E;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"], :root[data-theme="oled"] { color-scheme: dark; }
+
+@media (forced-colors: active) {
+  :root, :root[data-theme] {
+    --brumel-color-frame: Canvas;
+    --brumel-color-toolbar: Canvas;
+    --brumel-color-surface: Canvas;
+    --brumel-color-raised: Canvas;
+    --brumel-color-hover: Canvas;
+    --brumel-color-selected: Highlight;
+    --brumel-color-ink: CanvasText;
+    --brumel-color-ink-muted: CanvasText;
+    --brumel-color-accent: LinkText;
+    --brumel-color-accent-fill: ButtonText;
+    --brumel-color-on-accent: ButtonFace;
+    --brumel-color-focus: Highlight;
+    --brumel-color-control-border: ButtonText;
+    --brumel-color-divider: GrayText;
+    --brumel-color-danger: CanvasText;
+    --brumel-color-warning: CanvasText;
+    --brumel-color-success: CanvasText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --brumel-motion-quick: 0ms;
+    --brumel-motion-standard: 0ms;
+    --brumel-motion-gentle: 0ms;
+  }
+}

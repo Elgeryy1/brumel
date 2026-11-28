@@ -47,7 +47,7 @@ This catalog is the single source of truth for what Brumel might become. It keep
 
 ## Summary
 
-The catalog holds **339 entries** grouped in **40 epics**. **33** of them are technical duplicates tracked under a primary entry, so the number of distinct implementation items is **306**.
+The catalog holds **340 entries** grouped in **40 epics**. **33** of them are technical duplicates tracked under a primary entry, so the number of distinct implementation items is **307**.
 
 ### By module
 
@@ -61,33 +61,33 @@ The catalog holds **339 entries** grouped in **40 epics**. **33** of them are te
 | [NANO](features/nano.md) — Brumel Nano | 30 |
 | [CON](features/connect.md) — Brumel Connect | 28 |
 | [TLS](features/tools.md) — Brumel Tools | 39 |
-| [UI](features/interface.md) — Personalization and interface | 21 |
+| [UI](features/interface.md) — Personalization and interface | 22 |
 | [DEV](features/dev.md) — Brumel Dev | 17 |
-| **Total** | **339** |
+| **Total** | **340** |
 
 ### By tier
 
 | Tier | Entries |
 | --- | ---: |
-| Essential | 104 |
+| Essential | 105 |
 | Flagship | 57 |
 | Secondary | 130 |
 | Experimental | 34 |
 | Community | 2 |
 | Deferred | 7 |
 | Rejected | 5 |
-| **Total** | **339** |
+| **Total** | **340** |
 
 ### By status
 
 | Status | Entries |
 | --- | ---: |
 | In Development | 2 |
-| Planned | 193 |
+| Planned | 194 |
 | Research | 125 |
 | Deferred | 14 |
 | Rejected | 5 |
-| **Total** | **339** |
+| **Total** | **340** |
 
 ### By proposed phase
 
@@ -95,22 +95,22 @@ The catalog holds **339 entries** grouped in **40 epics**. **33** of them are te
 | --- | ---: |
 | 0 — Pre-development | 6 |
 | 1 — Technical Foundation | 17 |
-| 2 — Internal Alpha | 65 |
+| 2 — Internal Alpha | 66 |
 | 3 — Public Alpha | 101 |
 | 4 — Public Beta | 130 |
 | 5 — Version 1.0 | 1 |
 | 6 — Future | 19 |
-| **Total** | **339** |
+| **Total** | **340** |
 
 ### By priority
 
 | Priority | Entries |
 | --- | ---: |
 | P0 | 53 |
-| P1 | 90 |
+| P1 | 91 |
 | P2 | 118 |
 | P3 | 78 |
-| **Total** | **339** |
+| **Total** | **340** |
 
 ## Epics
 
@@ -154,7 +154,7 @@ Epics group features for planning and are mirrored as GitHub issues. The epic ph
 | EP-TLS-03 | Capture, reading and accessibility | 3 — Public Alpha | P2 | 16 | EP-CORE-04 |
 | EP-TLS-04 | Everyday web and file utilities | 3 — Public Alpha | P1 | 8 | EP-CORE-04 |
 | EP-TLS-05 | Migration and coexistence | 3 — Public Alpha | P1 | 3 | EP-CORE-04 |
-| EP-UI-01 | UI shell, design system and progressive discovery | 2 — Internal Alpha | P0 | 10 | EP-CORE-02 |
+| EP-UI-01 | UI shell, design system and progressive discovery | 2 — Internal Alpha | P0 | 11 | EP-CORE-02 |
 | EP-UI-02 | Themes and customization | 3 — Public Alpha | P2 | 9 | EP-UI-01 |
 | EP-DEV-01 | Developer tools | 4 — Public Beta | P3 | 9 | EP-CORE-04 |
 | EP-DEV-02 | Automation and privileged integrations (deferred) | 6 — Future | P3 | 6 | EP-SHD-05 |
@@ -173,7 +173,7 @@ Full cards — problem, use case, segments, dependencies, platforms, AI need, re
 | [Brumel Nano — local AI](features/nano.md) | 30 |
 | [Brumel Connect — continuity between devices](features/connect.md) | 28 |
 | [Brumel Tools — media and everyday utilities](features/tools.md) | 39 |
-| [Personalization and interface](features/interface.md) | 21 |
+| [Personalization and interface](features/interface.md) | 22 |
 | [Brumel Dev — developers](features/dev.md) | 17 |
 
 ## The 52 research proposals
@@ -561,6 +561,7 @@ Each of the 52 proposals from the product research appears exactly once in the c
 | [UI-019](features/interface.md#ui-019) | Progressive disclosure | UI | Essential | Planned | P1 | 3 |
 | [UI-020](features/interface.md#ui-020) | Progressive Discovery *(→ UI-019)* | UI | Essential | Planned | P1 | 3 |
 | [UI-021](features/interface.md#ui-021) | Configuration Recipes | UI | Community | Research | P3 | 4 |
+| [UI-022](features/interface.md#ui-022) | Quiet New Tab page | UI | Essential | Planned | P1 | 2 |
 | [DEV-001](features/dev.md#dev-001) | REST API client | DEV | Secondary | Deferred | P3 | 6 |
 | [DEV-002](features/dev.md#dev-002) | WebSocket client | DEV | Secondary | Deferred | P3 | 6 |
 | [DEV-003](features/dev.md#dev-003) | JSON viewer and editor | DEV | Secondary | Planned | P3 | 4 |

@@ -27,7 +27,7 @@ tracked with `duplicate_of`):
 
 | Phase | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---|---|---|---|---|---|---|
-| Catalog entries | 6 | 17 | 65 | 101 | 130 | 1 | 19 |
+| Catalog entries | 6 | 17 | 66 | 101 | 130 | 1 | 19 |
 
 Phase 4 is intentionally large: many items there are **Research** and will be split, re-phased
 or deferred once Phases 2–3 produce real measurements. Rejected items keep phase 0 and are listed
