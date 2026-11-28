@@ -20,6 +20,9 @@ Phase 0 — Pre-development. No browser code or binaries exist yet.
   `--execute`.
 - GN argument profiles `dev`, `release` and `minimal` in `config/gn/`.
 - Phase 1 plan: `docs/development/PHASE1_PLAN.md`.
+- Phase 2 plan: `docs/development/PHASE2_PLAN.md`, the first Internal Alpha
+  feature round (secure defaults, Clean Web, tab suspension, performance
+  profiles, tabs, New Tab page) and issues #92 to #101.
 - CI checks for the patch series and the GN profiles.
 - `scripts/overlay.py`: checks Brumel's own sources in `src/` and mirrors them
   into a checkout as `//brumel`.
