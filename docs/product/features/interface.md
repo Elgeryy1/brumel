@@ -4,7 +4,7 @@
 
 > **Project status: Pre-development.** Nothing listed here is available yet. Statuses, priorities and phases are proposals. See the [catalog index and legend](../FEATURES.md#legend).
 
-21 entries. Epics in this module:
+22 entries. Epics in this module:
 
 - **EP-UI-01** UI shell, design system and progressive discovery — phase 2 (Internal Alpha), P0
 - **EP-UI-02** Themes and customization — phase 3 (Public Alpha), P2
@@ -32,6 +32,7 @@
 | [UI-019](#ui-019) | Progressive disclosure | Essential | Planned | P1 | 3 |
 | [UI-020](#ui-020) | Progressive Discovery *(→ UI-019)* | Essential | Planned | P1 | 3 |
 | [UI-021](#ui-021) | Configuration Recipes | Community | Research | P3 | 4 |
+| [UI-022](#ui-022) | Quiet New Tab page | Essential | Planned | P1 | 2 |
 
 <a id="ui-001"></a>
 
@@ -480,6 +481,7 @@ Advanced features revealed gradually based on use and explicit choice, not all a
 - **Acceptance criteria:**
   - Suggestions rate-limited and dismissible forever
   - Local logic only, no telemetry required
+  - The default-browser question is asked at most once, at first run, and never repeated
 - **Origin:** H · **Duplicate of:** —
 - **Limitations / notes:** Usage-based suggestions require local usage tracking; poorly timed suggestions feel like nagging, so frequency must be strictly limited.
 
@@ -531,3 +533,29 @@ Share configurations (profiles, rules, layout) as files without personal data.
   - Reversible
 - **Origin:** R52-33 · **Duplicate of:** —
 - **Limitations / notes:** Validating that a recipe contains no personal data is hard (URLs, names in rules); applying third-party recipes can weaken privacy settings.
+
+<a id="ui-022"></a>
+
+## UI-022 — Quiet New Tab page
+
+`Essential` · `Planned` · **P1** · Impact High · Complexity S · Phase 2 (Internal Alpha) · Pillar Everyday Tools · Epic EP-UI-01 (UI shell, design system and progressive discovery)
+
+A calm New Tab page with a search box, the user's own shortcuts and an optional resume strip, with no feed, no sponsored tiles and no remote content by default.
+
+- **Problem:** Mainstream New Tab pages carry news feeds, sponsored tiles and remote content that add noise and network requests.
+- **Use case:** A user opens a new tab and sees only the search box and the sites they pinned; nothing loads from the network until they type.
+- **Segments:** Everyday users, Power users
+- **Dependencies:** [UI-001](#ui-001), [UI-018](#ui-018)
+- **Platforms:** Windows Planned · Linux Planned · macOS Deferred · Android Deferred
+- **AI:** None · **Resource cost:** Low — must respect GPU/battery budgets (animations, transparency). · **Infrastructure cost:** None
+- **Security risk:** Low
+- **Privacy risk:** Low
+- **Competitors / precedents:** Chrome, Edge, Brave, Vivaldi, Firefox
+- **Evidence:** Competitor precedent: Firefox and Brave let users turn off New Tab content; Edge and Chrome ship feeds by default.
+- **Acceptance criteria:**
+  - No network request is made by the New Tab page itself until the user acts
+  - No sponsored or remote content, on by default or otherwise
+  - Every element can be hidden, including the shortcuts
+  - Meets the design-system accessibility baseline in light, dark and forced-colours modes
+- **Origin:** H · **Duplicate of:** —
+- **Limitations / notes:** Upstream Chromium's New Tab page is tied to Google services; Brumel replaces it with its own WebUI page, which is a larger patch than restyling.

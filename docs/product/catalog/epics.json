@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "epics": [
     {
       "id": "EP-CORE-01",
@@ -800,7 +800,8 @@
         "UI-017",
         "UI-018",
         "UI-019",
-        "UI-020"
+        "UI-020",
+        "UI-022"
       ],
       "depends_on": [
         "EP-CORE-02"

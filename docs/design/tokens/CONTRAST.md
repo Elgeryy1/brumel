@@ -1,0 +1,104 @@
+<!-- GENERATED FILE: do not edit by hand. Source: docs/design/tokens/brumel.tokens.json. Regenerate: python3 scripts/design/render_tokens.py -->
+
+# Token contrast
+
+Every pair below is measured with the WCAG 2.x relative-luminance formula by
+`scripts/design/render_tokens.py`. The script fails if any pair falls below its
+minimum, so this table is always true for the committed tokens. Text pairs need
+4.5:1; focus rings and control borders need 3:1 (WCAG 2.2 SC 1.4.11 and 2.4.13).
+
+| Theme | Foreground | Background | Ratio | Minimum | Result |
+|---|---|---|---|---|---|
+| light | `ink` | `frame` | 15.16 | 4.5 | Pass |
+| light | `ink` | `toolbar` | 18.29 | 4.5 | Pass |
+| light | `ink` | `surface` | 16.91 | 4.5 | Pass |
+| light | `ink` | `raised` | 18.29 | 4.5 | Pass |
+| light | `ink` | `hover` | 15.58 | 4.5 | Pass |
+| light | `ink` | `selected` | 15.13 | 4.5 | Pass |
+| dark | `ink` | `frame` | 17.86 | 4.5 | Pass |
+| dark | `ink` | `toolbar` | 15.12 | 4.5 | Pass |
+| dark | `ink` | `surface` | 16.91 | 4.5 | Pass |
+| dark | `ink` | `raised` | 15.12 | 4.5 | Pass |
+| dark | `ink` | `hover` | 13.33 | 4.5 | Pass |
+| dark | `ink` | `selected` | 12.08 | 4.5 | Pass |
+| oled | `ink` | `frame` | 19.41 | 4.5 | Pass |
+| oled | `ink` | `toolbar` | 17.97 | 4.5 | Pass |
+| oled | `ink` | `surface` | 19.41 | 4.5 | Pass |
+| oled | `ink` | `raised` | 17.97 | 4.5 | Pass |
+| oled | `ink` | `hover` | 15.96 | 4.5 | Pass |
+| oled | `ink` | `selected` | 14.08 | 4.5 | Pass |
+| light | `ink-muted` | `frame` | 4.78 | 4.5 | Pass |
+| light | `ink-muted` | `toolbar` | 5.77 | 4.5 | Pass |
+| light | `ink-muted` | `surface` | 5.33 | 4.5 | Pass |
+| light | `ink-muted` | `raised` | 5.77 | 4.5 | Pass |
+| light | `ink-muted` | `hover` | 4.91 | 4.5 | Pass |
+| light | `ink-muted` | `selected` | 4.77 | 4.5 | Pass |
+| dark | `ink-muted` | `frame` | 6.84 | 4.5 | Pass |
+| dark | `ink-muted` | `toolbar` | 5.79 | 4.5 | Pass |
+| dark | `ink-muted` | `surface` | 6.47 | 4.5 | Pass |
+| dark | `ink-muted` | `raised` | 5.79 | 4.5 | Pass |
+| dark | `ink-muted` | `hover` | 5.10 | 4.5 | Pass |
+| dark | `ink-muted` | `selected` | 4.62 | 4.5 | Pass |
+| oled | `ink-muted` | `frame` | 7.43 | 4.5 | Pass |
+| oled | `ink-muted` | `toolbar` | 6.88 | 4.5 | Pass |
+| oled | `ink-muted` | `surface` | 7.43 | 4.5 | Pass |
+| oled | `ink-muted` | `raised` | 6.88 | 4.5 | Pass |
+| oled | `ink-muted` | `hover` | 6.11 | 4.5 | Pass |
+| oled | `ink-muted` | `selected` | 5.39 | 4.5 | Pass |
+| light | `accent` | `toolbar` | 6.45 | 4.5 | Pass |
+| light | `accent` | `surface` | 5.96 | 4.5 | Pass |
+| light | `accent` | `raised` | 6.45 | 4.5 | Pass |
+| light | `accent` | `selected` | 5.33 | 4.5 | Pass |
+| dark | `accent` | `toolbar` | 8.16 | 4.5 | Pass |
+| dark | `accent` | `surface` | 9.13 | 4.5 | Pass |
+| dark | `accent` | `raised` | 8.16 | 4.5 | Pass |
+| dark | `accent` | `selected` | 6.52 | 4.5 | Pass |
+| oled | `accent` | `toolbar` | 9.70 | 4.5 | Pass |
+| oled | `accent` | `surface` | 10.48 | 4.5 | Pass |
+| oled | `accent` | `raised` | 9.70 | 4.5 | Pass |
+| oled | `accent` | `selected` | 7.60 | 4.5 | Pass |
+| light | `on-accent` | `accent-fill` | 6.45 | 4.5 | Pass |
+| dark | `on-accent` | `accent-fill` | 9.13 | 4.5 | Pass |
+| oled | `on-accent` | `accent-fill` | 9.13 | 4.5 | Pass |
+| light | `focus` | `frame` | 5.34 | 3.0 | Pass |
+| light | `focus` | `toolbar` | 6.45 | 3.0 | Pass |
+| light | `focus` | `surface` | 5.96 | 3.0 | Pass |
+| light | `focus` | `raised` | 6.45 | 3.0 | Pass |
+| light | `focus` | `hover` | 5.49 | 3.0 | Pass |
+| dark | `focus` | `frame` | 9.65 | 3.0 | Pass |
+| dark | `focus` | `toolbar` | 8.16 | 3.0 | Pass |
+| dark | `focus` | `surface` | 9.13 | 3.0 | Pass |
+| dark | `focus` | `raised` | 8.16 | 3.0 | Pass |
+| dark | `focus` | `hover` | 7.20 | 3.0 | Pass |
+| oled | `focus` | `frame` | 10.48 | 3.0 | Pass |
+| oled | `focus` | `toolbar` | 9.70 | 3.0 | Pass |
+| oled | `focus` | `surface` | 10.48 | 3.0 | Pass |
+| oled | `focus` | `raised` | 9.70 | 3.0 | Pass |
+| oled | `focus` | `hover` | 8.62 | 3.0 | Pass |
+| light | `control-border` | `toolbar` | 3.92 | 3.0 | Pass |
+| light | `control-border` | `surface` | 3.62 | 3.0 | Pass |
+| light | `control-border` | `raised` | 3.92 | 3.0 | Pass |
+| dark | `control-border` | `toolbar` | 3.89 | 3.0 | Pass |
+| dark | `control-border` | `surface` | 4.35 | 3.0 | Pass |
+| dark | `control-border` | `raised` | 3.89 | 3.0 | Pass |
+| oled | `control-border` | `toolbar` | 4.62 | 3.0 | Pass |
+| oled | `control-border` | `surface` | 4.99 | 3.0 | Pass |
+| oled | `control-border` | `raised` | 4.62 | 3.0 | Pass |
+| light | `danger` | `surface` | 6.08 | 4.5 | Pass |
+| light | `danger` | `raised` | 6.57 | 4.5 | Pass |
+| dark | `danger` | `surface` | 8.99 | 4.5 | Pass |
+| dark | `danger` | `raised` | 8.04 | 4.5 | Pass |
+| oled | `danger` | `surface` | 10.32 | 4.5 | Pass |
+| oled | `danger` | `raised` | 9.56 | 4.5 | Pass |
+| light | `warning` | `surface` | 5.85 | 4.5 | Pass |
+| light | `warning` | `raised` | 6.33 | 4.5 | Pass |
+| dark | `warning` | `surface` | 10.95 | 4.5 | Pass |
+| dark | `warning` | `raised` | 9.79 | 4.5 | Pass |
+| oled | `warning` | `surface` | 12.57 | 4.5 | Pass |
+| oled | `warning` | `raised` | 11.64 | 4.5 | Pass |
+| light | `success` | `surface` | 5.99 | 4.5 | Pass |
+| light | `success` | `raised` | 6.48 | 4.5 | Pass |
+| dark | `success` | `surface` | 9.49 | 4.5 | Pass |
+| dark | `success` | `raised` | 8.48 | 4.5 | Pass |
+| oled | `success` | `surface` | 10.89 | 4.5 | Pass |
+| oled | `success` | `raised` | 10.09 | 4.5 | Pass |
