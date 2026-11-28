@@ -33,6 +33,12 @@ jobs:
       - name: Check generated FEATURES.md is up to date
         run: python3 scripts/catalog/render_features.py --check
 
+      - name: Check the UI inventory, design tokens and mockup icons
+        run: |
+          python3 scripts/design/render_surfaces.py --check
+          python3 scripts/design/render_tokens.py --check
+          python3 scripts/design/inline_icons.py --check
+
       - name: Check the patch series
         run: python3 scripts/patches.py check
 

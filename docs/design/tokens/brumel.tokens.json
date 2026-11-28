@@ -24,6 +24,7 @@
     "ink-muted": "Secondary text and inactive icons",
     "accent": "Links, current state and the primary action as text or icon",
     "accent-fill": "Primary button and on-state of switches",
+    "accent-fill-hover": "Hover fill of the primary button",
     "on-accent": "Text and icons on accent-fill",
     "focus": "Keyboard focus ring",
     "control-border": "Borders that identify a control (inputs, switches, checkboxes)",
@@ -44,6 +45,7 @@
       "ink-muted": "{slate}",
       "accent": "{mist-700}",
       "accent-fill": "{mist-700}",
+      "accent-fill-hover": "#30507F",
       "on-accent": "{white}",
       "focus": "{mist-700}",
       "control-border": "#71829A",
@@ -63,6 +65,7 @@
       "ink-muted": "{slate-300}",
       "accent": "{mist}",
       "accent-fill": "{mist}",
+      "accent-fill-hover": "#B0C8EE",
       "on-accent": "{graphite}",
       "focus": "{mist}",
       "control-border": "#6B7D95",
@@ -82,6 +85,7 @@
       "ink-muted": "{slate-300}",
       "accent": "{mist}",
       "accent-fill": "{mist}",
+      "accent-fill-hover": "#B0C8EE",
       "on-accent": "{graphite}",
       "focus": "{mist}",
       "control-border": "#6B7D95",
@@ -92,33 +96,148 @@
     }
   },
   "checks": [
-    {"fg": "ink", "bg": ["frame", "toolbar", "surface", "raised", "hover", "selected"], "min": 4.5},
-    {"fg": "ink-muted", "bg": ["frame", "toolbar", "surface", "raised", "hover", "selected"], "min": 4.5},
-    {"fg": "accent", "bg": ["toolbar", "surface", "raised", "selected"], "min": 4.5},
-    {"fg": "on-accent", "bg": ["accent-fill"], "min": 4.5},
-    {"fg": "focus", "bg": ["frame", "toolbar", "surface", "raised", "hover"], "min": 3.0},
-    {"fg": "control-border", "bg": ["toolbar", "surface", "raised"], "min": 3.0},
-    {"fg": "danger", "bg": ["surface", "raised"], "min": 4.5},
-    {"fg": "warning", "bg": ["surface", "raised"], "min": 4.5},
-    {"fg": "success", "bg": ["surface", "raised"], "min": 4.5}
+    {
+      "fg": "ink",
+      "bg": [
+        "frame",
+        "toolbar",
+        "surface",
+        "raised",
+        "hover",
+        "selected"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "ink-muted",
+      "bg": [
+        "frame",
+        "toolbar",
+        "surface",
+        "raised",
+        "hover",
+        "selected"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "accent",
+      "bg": [
+        "toolbar",
+        "surface",
+        "raised",
+        "selected"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "on-accent",
+      "bg": [
+        "accent-fill",
+        "accent-fill-hover"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "focus",
+      "bg": [
+        "frame",
+        "toolbar",
+        "surface",
+        "raised",
+        "hover"
+      ],
+      "min": 3.0
+    },
+    {
+      "fg": "control-border",
+      "bg": [
+        "toolbar",
+        "surface",
+        "raised"
+      ],
+      "min": 3.0
+    },
+    {
+      "fg": "danger",
+      "bg": [
+        "surface",
+        "raised"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "warning",
+      "bg": [
+        "surface",
+        "raised"
+      ],
+      "min": 4.5
+    },
+    {
+      "fg": "success",
+      "bg": [
+        "surface",
+        "raised"
+      ],
+      "min": 4.5
+    }
   ],
   "scale": {
     "font": {
       "ui": "\"Segoe UI Variable Text\", \"Segoe UI\", system-ui, -apple-system, \"Cantarell\", \"Noto Sans\", sans-serif",
       "mono": "ui-monospace, \"Cascadia Mono\", \"Consolas\", \"DejaVu Sans Mono\", monospace"
     },
-    "text": {"xs": "12px", "sm": "13px", "md": "14px", "lg": "16px", "xl": "20px", "2xl": "24px", "3xl": "32px"},
-    "leading": {"ui": "1.4", "prose": "1.6"},
-    "weight": {"regular": "400", "medium": "500", "strong": "600"},
-    "space": {"1": "2px", "2": "4px", "3": "8px", "4": "12px", "5": "16px", "6": "24px", "7": "32px", "8": "48px", "9": "64px"},
-    "radius": {"sm": "4px", "md": "8px", "lg": "12px", "xl": "16px", "full": "9999px"},
-    "control": {"height": "32px", "height-lg": "40px", "hit": "44px"},
+    "text": {
+      "xs": "12px",
+      "sm": "13px",
+      "md": "14px",
+      "lg": "16px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "32px"
+    },
+    "leading": {
+      "ui": "1.4",
+      "prose": "1.6"
+    },
+    "weight": {
+      "regular": "400",
+      "medium": "500",
+      "strong": "600"
+    },
+    "space": {
+      "1": "2px",
+      "2": "4px",
+      "3": "8px",
+      "4": "12px",
+      "5": "16px",
+      "6": "24px",
+      "7": "32px",
+      "8": "48px",
+      "9": "64px"
+    },
+    "radius": {
+      "sm": "4px",
+      "md": "8px",
+      "lg": "12px",
+      "xl": "16px",
+      "full": "9999px"
+    },
+    "control": {
+      "height": "32px",
+      "height-lg": "40px",
+      "hit": "44px"
+    },
     "motion": {
       "quick": "120ms",
       "standard": "200ms",
       "gentle": "320ms",
       "ease": "cubic-bezier(0.2, 0, 0, 1)",
       "ease-gentle": "cubic-bezier(0.3, 0, 0, 1)"
+    },
+    "shadow": {
+      "raised": "0 1px 2px oklch(20% 0.016 262 / 0.08)"
     }
   }
 }

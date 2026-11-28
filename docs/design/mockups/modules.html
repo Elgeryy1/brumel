@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brumel modules page mockup | Brumel design</title>
+  <meta name="description" content="The chrome://brumel page that lists Brumel modules, their gates and whether each one is running.">
+  <link rel="stylesheet" href="mockups.css">
+  <script src="mockups.js" defer></script>
+</head>
+<body>
+<!--ICONS-->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-back" viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></symbol>
+  <symbol id="i-forward" viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></symbol>
+  <symbol id="i-reload" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.46-3.54"/><path d="M13 2.5v3h-3"/></symbol>
+  <symbol id="i-tune" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 16 16"><path d="M8 1.8 13 3.6v4c0 3.2-2.1 5.4-5 6.6-2.9-1.2-5-3.4-5-6.6v-4z"/></symbol>
+  <symbol id="i-extensions" viewBox="0 0 16 16"><path d="M3 5h3V3.5a1.5 1.5 0 0 1 3 0V5h3v3h-1.5a1.5 1.5 0 0 0 0 3H12v2.5H3z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2.5V10M4.5 7 8 10.5 11.5 7M3 13.5h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><circle cx="8" cy="3.5" r="0.6"/><circle cx="8" cy="8" r="0.6"/><circle cx="8" cy="12.5" r="0.6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="m4.5 4.5 7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 16 16"><path d="M2.5 11.5a5.5 5.5 0 1 1 11 0"/><path d="m8 11.5 2.5-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.2 14 13H2z"/><path d="M8 6.5v3M8 11.3v.2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 7.5v4M8 4.8v.2"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="10" rx="1.5"/><path d="M6.5 3v10"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 16 16"><path d="M8 2 13.5 5v6L8 14 2.5 11V5z"/><path d="M2.5 5 8 8l5.5-3M8 8v6"/></symbol>
+  <symbol id="i-muted" viewBox="0 0 16 16"><path d="M2.5 6h2l3-2.5v9l-3-2.5h-2z"/><path d="m10.5 6 3 4M13.5 6l-3 4"/></symbol>
+  <symbol id="i-import" viewBox="0 0 16 16"><path d="M8 2.5v7M5 6.5l3 3 3-3"/><path d="M2.5 10v2.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V10"/></symbol>
+  <symbol id="i-person" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 13.5c.8-2.2 2.7-3.5 5-3.5s4.2 1.3 5 3.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M6 2.5h4l-.5 4 2 2H4.5l2-2z"/><path d="M8 8.5v5"/></symbol>
+</svg>
+<!--/ICONS-->
+<main class="mock">
+  <header class="mock-head">
+    <div>
+      <h1>Brumel modules (chrome://brumel)</h1>
+      <p>The first Brumel WebUI page (CORE-005, surface S-WEB-18). It shows the three gates of each module from MODULE_SYSTEM.md and whether an instance exists.</p>
+    </div>
+    <fieldset class="segmented" aria-label="Mockup theme">
+      <label><input type="radio" name="mock-theme" value="system" checked>System</label>
+      <label><input type="radio" name="mock-theme" value="light">Light</label>
+      <label><input type="radio" name="mock-theme" value="dark">Dark</label>
+      <label><input type="radio" name="mock-theme" value="oled">OLED</label>
+    </fieldset>
+  </header>
+
+  <div class="window window--page window--fit" role="group" aria-label="Modules page mockup">
+    <div class="viewport">
+      <div class="webui__main">
+        <div>
+          <h2 class="page-title">Brumel modules</h2>
+          <p class="page-lede">Each module is compiled in or out, available or not, and on or off. A module that is off creates nothing and runs nothing.</p>
+        </div>
+        <div class="panel empty">
+          <svg class="icon icon--20 muted" aria-hidden="true"><use href="#i-cube"/></svg>
+          <p><strong>No optional modules in this build.</strong> This is a Technical Foundation build: branding, de-Googling and the module host only. Modules arrive in Internal Alpha.</p>
+          <a class="btn btn--quiet" href="../../architecture/MODULE_SYSTEM.md">How modules work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="mock-note">This is the state a Phase 1 build shows today: no module is compiled in. The populated table below uses sample rows to fix the layout.</p>
+
+  <section class="mock-section" aria-labelledby="states-modules">
+    <h2 id="states-modules">With modules (sample rows)</h2>
+    <div class="panel table-wrap">
+      <table class="table table--stack">
+        <thead><tr><th scope="col">Module</th><th scope="col">Catalog</th><th scope="col">Compiled</th><th scope="col">Available</th><th scope="col">On</th><th scope="col">Instance</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Module">Tab lifecycle</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-ENG-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Running</span></td></tr>
+          <tr><td data-label="Module">Clean Web</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-SHD-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">Yes</td><td data-label="Instance"><span class="badge">Dormant</span></td></tr>
+          <tr><td data-label="Module">Brumel Store</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-MEM-01</a></td><td data-label="Compiled">Yes</td><td data-label="Available">Yes</td><td data-label="On">No</td><td class="muted" data-label="Instance">Not created</td></tr>
+          <tr><td data-label="Module">Nano runtime</td><td data-label="Catalog"><a href="../../product/FEATURES.md">EP-NANO-01</a></td><td data-label="Compiled">No</td><td class="muted" data-label="Available">n/a</td><td class="muted" data-label="On">n/a</td><td class="muted" data-label="Instance">Not created</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mock-grid">
+      <div class="mock-state">
+        <h3>Loading</h3>
+        <div class="panel" aria-busy="true" aria-label="Loading modules">
+          <div class="row"><span class="skeleton skeleton--w40"></span><span class="skeleton skeleton--w40"></span></div>
+          <div class="row"><span class="skeleton skeleton--w60"></span><span class="skeleton skeleton--w40"></span></div>
+        </div>
+      </div>
+      <div class="mock-state">
+        <h3>Registry mismatch</h3>
+        <div class="panel"><div class="row"><div class="status status--danger" role="status"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><p><strong>A module points to a catalog ID that does not exist.</strong> This is a build error; the registry test should have caught it.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

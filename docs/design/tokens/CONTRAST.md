@@ -58,8 +58,11 @@ minimum, so this table is always true for the committed tokens. Text pairs need
 | oled | `accent` | `raised` | 9.70 | 4.5 | Pass |
 | oled | `accent` | `selected` | 7.60 | 4.5 | Pass |
 | light | `on-accent` | `accent-fill` | 6.45 | 4.5 | Pass |
+| light | `on-accent` | `accent-fill-hover` | 8.14 | 4.5 | Pass |
 | dark | `on-accent` | `accent-fill` | 9.13 | 4.5 | Pass |
+| dark | `on-accent` | `accent-fill-hover` | 10.75 | 4.5 | Pass |
 | oled | `on-accent` | `accent-fill` | 9.13 | 4.5 | Pass |
+| oled | `on-accent` | `accent-fill-hover` | 10.75 | 4.5 | Pass |
 | light | `focus` | `frame` | 5.34 | 3.0 | Pass |
 | light | `focus` | `toolbar` | 6.45 | 3.0 | Pass |
 | light | `focus` | `surface` | 5.96 | 3.0 | Pass |

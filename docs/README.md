@@ -66,6 +66,9 @@ Public documentation is written in English. Corrections are welcome through pull
 | [CHROMIUM_BASES.md](research/CHROMIUM_BASES.md) | Chromium vs ungoogled-chromium vs Brave vs Helium vs Thorium |
 | [NAME_CHECK.md](research/NAME_CHECK.md) | Preliminary name check and its limits |
 | [DESIGN_SYSTEM.md](design/DESIGN_SYSTEM.md) | Identity, tokens, typography, UI principles |
+| [INTERFACE.md](design/INTERFACE.md) | Interface design: shell, pages, Chromium patch plan |
+| [UI_INVENTORY.md](design/UI_INVENTORY.md) | Every screen and surface, linked to the feature catalog (generated) |
+| [Mockups](design/mockups/README.md) | HTML mockups of the first screens |
 | [COMMUNITY.md](community/COMMUNITY.md) | Build-in-public approach and channels |
 | [LAUNCH_PLAN.md](community/LAUNCH_PLAN.md) | Launch strategy and demo ideas |
 | [Devlog](community/devlog/0001-pre-development.md) | Development log |
